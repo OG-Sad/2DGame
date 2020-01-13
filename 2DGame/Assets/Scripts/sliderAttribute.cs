@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class sliderAttribute : MonoBehaviour
 {
     public bool visible = false;
-
+    Rigidbody2D PlanetRB;
     // Gets the slider and which planet
     public Slider slider;
     public GameObject planet;
@@ -21,6 +21,7 @@ public class sliderAttribute : MonoBehaviour
 
     void Start()
     {
+        PlanetRB = GetComponent<Rigidbody2D>();
         // Fetch the SpriteRenderer from the Circle
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -39,9 +40,14 @@ public class sliderAttribute : MonoBehaviour
         // Red if gameObject name is "bigPlanet(Clone)" and green if it is "smallPlanet(Clone)"
         if (planet.name == "bigPlanet(Clone)") {
             m_NewColor = new Color(slider.value, 0, 0);
+            PlanetRB.mass = slider.value * 100;
         }
+
+        
+
         else {
             m_NewColor = new Color(0, slider.value, 0);
+            PlanetRB.mass = slider.value * 50;
             // Debug.Log(planet.name);
         }
         m_SpriteRenderer.color = m_NewColor;
