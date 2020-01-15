@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781cce23e9e086543b07168c7f682d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planet: {fileID: 2580745651921559551}
 --- !u!50 &8589634520090629300
 Rigidbody2D:
   serializedVersion: 4
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c96459e6ae72b549be5abd252ecac60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visible: 1
+  visible: 0
   slider: {fileID: 3795086487303264602}
   planet: {fileID: 1115593165521293927}
 --- !u!114 &7018588484151031948
@@ -419,7 +420,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 40, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9185438267460459546
 CanvasRenderer:
@@ -493,7 +494,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &167901553306405200
 CanvasRenderer:

@@ -29,8 +29,8 @@ public class Attractor : MonoBehaviour
         //Debug.Log("Mass of Player:" + PlayerRB.mass);
         Vector2 force = direction.normalized * forceMagnitude;
         orbitVel = Mathf.Sqrt(PlanetRB.mass/distance);
-        Debug.Log("force: " + force);
-        Debug.Log("Orbit Velocity: " + orbitVel);
+        //Debug.Log("force: " + force);
+        //Debug.Log("Orbit Velocity: " + orbitVel);
 
         //Mathf.Sqrt(PlanetRB.mass*((2/distance)-1))
         //float angle = Mathf.Atan2(force.y, force.x);
@@ -39,7 +39,7 @@ public class Attractor : MonoBehaviour
 
         Vector2 force1 = new Vector2(3.527748f, 2);
         PlayerRB.AddForce(force);
-        Debug.Log("Velocity: "+ PlayerRB.velocity.magnitude);
+        //Debug.Log("Velocity: "+ PlayerRB.velocity.magnitude);
     }
 
 

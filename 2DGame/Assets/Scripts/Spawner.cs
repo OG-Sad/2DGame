@@ -13,8 +13,13 @@ public class Spawner : MonoBehaviour
 
     Transform item, item2 = null;
     public int numberOfPlanets = 4;
+    public float distanceBetweenPlanets = 2.5f;
     private float timer = 0.0f;
-    private float timeBetweenSpawn;
+    private float timeBetweenSpawn, lastYPos;
+    private bool firstSpawn;
+    public float minTimeBetweenSpawn = .5f;
+    public float maxTimeBetweenSpawn = 2.5f;
+
 
     planetCollision world;
 
@@ -39,18 +44,26 @@ public class Spawner : MonoBehaviour
         if (timer >= timeBetweenSpawn) {
             SpawnPlanet();
             timer = 0;
-            timeBetweenSpawn = Random.Range(.5f, 1.5f);
+            timeBetweenSpawn = Random.Range(minTimeBetweenSpawn, maxTimeBetweenSpawn);
         }
 
     }
 
     void SpawnPlanet () {
         if (planets.Count < numberOfPlanets) {
+            float yPos = Random.Range(-4.5f, 4.5f);
+            while (Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f)) < distanceBetweenPlanets || firstSpawn == true) {
+                yPos = Random.Range(-4.5f, 4.5f);
+            }
+            //Debug.Log("Difference of last two Y Positions: " + Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f)));
+            lastYPos = yPos;
+            firstSpawn = false;
             int odds = Random.Range(0, 4);
             //Debug.Log(odds);
+            //Debug.Log("Y Position of planet: " + yPos);
             Transform planet = odds <= 2 ? smallPlanet : bigPlanet;
             Transform t = Instantiate(planet);
-            t.localPosition = new Vector2(player.position.x + 20f, Random.Range(-5.5f, 5.5f));
+            t.localPosition = new Vector2(player.position.x + 20f, yPos);
             planets.Add(t);
         }
     }
@@ -61,6 +74,18 @@ public class Spawner : MonoBehaviour
         Destroy(item2.gameObject);
         SpawnPlanet();
         timer = 0.0f;
+    }
+
+    public void DestroyPlanet(Transform colPlanet) {
+        int j = 0;
+        for (int i = 0; i < planets.Count; i++) {
+            if (planets[i] == colPlanet) {
+                j = i;
+            }    
+        }
+        item2 = planets[j];
+        planets.Remove(item2);
+        Destroy(item2.gameObject);
     }
 
 }
