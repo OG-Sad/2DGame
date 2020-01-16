@@ -42,9 +42,6 @@ public class sliderAttribute : MonoBehaviour
             m_NewColor = new Color(slider.value, 0, 0);
             PlanetRB.mass = slider.value * 100;
         }
-
-        
-
         else {
             m_NewColor = new Color(0, slider.value, 0);
             PlanetRB.mass = slider.value * 50;

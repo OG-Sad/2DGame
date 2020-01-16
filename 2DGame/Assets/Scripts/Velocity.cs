@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Velocity : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class Velocity : MonoBehaviour
     {
         if (testing == true) {
             player.localPosition = new Vector2(player.position.x + .1f, 0);   
+        }
+        if (Mathf.Abs(player.position.y) >= 20) {
+            SceneManager.LoadScene("PlanetSpawningTest");
         }
     }
 }
