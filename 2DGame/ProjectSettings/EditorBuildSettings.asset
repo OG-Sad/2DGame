@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlanetSpawningTest.unity
     guid: a472534c70002c84f96acf4e7b32dc92
+  - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: 6aacbf8e08178814681c317d61e42ec2
   m_configObjects: {}
