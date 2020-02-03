@@ -8,8 +8,8 @@ public class changeGravity : MonoBehaviour
     public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f, ringSize = 2.5f;
     public bool test = false;
     private Vector3 startPos;
-    private bool directionDetermined = false, direction, isBeingHeld = false, gravityRate = false;
-    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, lastPosition, mouseDir, planetMassCheck;
+    private bool directionDetermined = false, direction, isBeingHeld = false, gravityRate = false, startTimer = false, taps = false;
+    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck;
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
     SpriteRenderer m_SpriteRenderer;
@@ -93,6 +93,15 @@ public class changeGravity : MonoBehaviour
 
             }
         }
+
+        // if (startTimer == true && doubleTapTimer < 0.25f) {
+        //     doubleTapTimer += timer.deltaTime;
+        //     taps = true;
+        // }
+        // else {
+        //     doubleTapTimer = 0;
+        //     taps = false;
+        // }
     }
 
     private void OnMouseDown() {
@@ -105,12 +114,14 @@ public class changeGravity : MonoBehaviour
             cameraStartPos = camera.transform.position;
 
             isBeingHeld = true;
+            startTimer = true;
         }
     }
 
     private void OnMouseUp() {
         // Resets values, doesn't reset mass of planet or color
         isBeingHeld = false;
+        startTimer = false;
         directionDetermined = false;
         displacement = 0;
         timer = 0;
@@ -142,6 +153,10 @@ public class changeGravity : MonoBehaviour
         //Debug.Log(planetRB.mass);
     }
 
+    public void doubleTap(bool tapped) {
+
+    }
+
     // Decides the rate the the gravity changes at. |
     // | Works by getting passed a previous position of the mouse(PPM), the current position...
     // ... of the mouse(CPM), the time passed since the previous position was updated, and...
@@ -152,7 +167,7 @@ public class changeGravity : MonoBehaviour
 
         if (time > 0.05f && distanceLastToCurrent > 0.01f) {
             float holder = Mathf.Abs(distanceLastToCurrent / time);
-            Debug.Log(holder);
+            //Debug.Log(holder);
             if (holder > divisionDecider) {
                 gravRate = true;
             }

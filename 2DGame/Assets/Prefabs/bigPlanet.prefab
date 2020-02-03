@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 5313872429079858814}
   - component: {fileID: 1695513123766934551}
   - component: {fileID: 7018588484151031948}
+  - component: {fileID: 3807747112987617530}
   m_Layer: 0
   m_Name: bigPlanet
   m_TagString: Planet
@@ -251,6 +252,7 @@ MonoBehaviour:
   massMultiplier: 6
   slightMassMultiplier: 2
   divisionDecider: 0.1
+  ringSize: 2.5
   test: 0
 --- !u!114 &7018588484151031948
 MonoBehaviour:
@@ -264,6 +266,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009103199ff01534282c32aa826c7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3807747112987617530
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115593165521293927}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.12
 --- !u!1 &1279386016702984664
 GameObject:
   m_ObjectHideFlags: 0

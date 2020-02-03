@@ -803,6 +803,7 @@ GameObject:
   - component: {fileID: 7171260321517100823}
   - component: {fileID: 2562634240376784906}
   - component: {fileID: 2601183047293698730}
+  - component: {fileID: 91579321234210771}
   m_Layer: 0
   m_Name: smallPlanet
   m_TagString: Planet
@@ -978,6 +979,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009103199ff01534282c32aa826c7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &91579321234210771
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562011318171360487}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.13
 --- !u!1 &4736409279403375891
 GameObject:
   m_ObjectHideFlags: 0
