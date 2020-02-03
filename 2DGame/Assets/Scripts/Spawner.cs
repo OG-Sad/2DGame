@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour
     }
 
     void ReadyToSpawn () {
-        if (planets.Count < numberOfPlanets && planets[planets.Count-1].localPosition.x < player.position.x + 8f) { 
+        if (planets.Count < numberOfPlanets && planets[planets.Count-1].localPosition.x < player.position.x + 10f) { 
             while (Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f)) < distanceBetweenPlanets || firstSpawn == true) {
                 yPos = Random.Range(-4.5f, 4.5f);
             }
