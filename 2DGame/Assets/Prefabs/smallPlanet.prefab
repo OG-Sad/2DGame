@@ -242,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5516485663202278078
 RectTransform:
   m_ObjectHideFlags: 0
@@ -415,7 +415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1906932501504396214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -940,6 +940,11 @@ MonoBehaviour:
   visible: 0
   slider: {fileID: 3780823939788328202}
   planet: {fileID: 4562011318171360487}
+  ring1: {fileID: 0}
+  ring2: {fileID: 0}
+  ring3: {fileID: 0}
+  ring4: {fileID: 0}
+  ring5: {fileID: 0}
 --- !u!114 &2562634240376784906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,17 +958,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: {fileID: 4562011318171360487}
+  ring1: {fileID: 5981964116646101964}
   threshold: 0.2
   timerThreshold: 0.5
   massMultiplier: 5
   slightMassMultiplier: 2
   divisionDecider: 0.1
+  ringSize: 2.5
   test: 0
-  ring1: {fileID: 5981964116646101964}
-  ring2: {fileID: 8221119392073280545}
-  ring3: {fileID: 5778616266966939086}
-  ring4: {fileID: 1471142764073438490}
-  ring5: {fileID: 2507689058090881165}
 --- !u!114 &2601183047293698730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,7 +1242,7 @@ Transform:
   m_GameObject: {fileID: 5981964116646101964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 6879874355757733644}
   m_RootOrder: 0

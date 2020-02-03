@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class changeGravity : MonoBehaviour
 {
-    public GameObject planet;
-    GameObject camera = null;
-    public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f;
+    public GameObject planet, ring1;//, ring2, ring3, ring4, ring5;
+    public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f, ringSize = 2.5f;
     public bool test = false;
     private Vector3 startPos;
     private bool directionDetermined = false, direction, isBeingHeld = false, gravityRate = false;
@@ -14,6 +13,7 @@ public class changeGravity : MonoBehaviour
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
     SpriteRenderer m_SpriteRenderer;
+    GameObject camera = null;
 
     
     void Awake() {
@@ -27,6 +27,11 @@ public class changeGravity : MonoBehaviour
         m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(.5f, 0f, 0f) : new Color(0, .5f, 0);
 
         planetMassCheck = planet.name == "bigPlanet(Clone)" ? 100 : 50;
+
+        ring1.SetActive(true);
+        DisplayRings(planetRB.mass);
+
+        //GameObject g = tranform.GetChild(TouchRange).gameObject;
     }
 
     // Update is called once per frame
@@ -88,8 +93,6 @@ public class changeGravity : MonoBehaviour
 
             }
         }
-
-        
     }
 
     private void OnMouseDown() {
@@ -131,15 +134,19 @@ public class changeGravity : MonoBehaviour
             planetRB.mass = newMass;
         }
 
+        DisplayRings(newMass); 
+        
         float color = newMass / planetMassCheck;
-        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(color, 0f, 0f) : new Color(0, color, 0);
+        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(color, 0f, 0f) : new Color(0,color, 0);
+
         //Debug.Log(planetRB.mass);
     }
 
     // Decides the rate the the gravity changes at. |
-    // | Works by getting passed a previous position of the mouse, the current position...
-    // ... of the mouse, the time passed since the previous position was updated, and...
-    // ... the gravity rate.  
+    // | Works by getting passed a previous position of the mouse(PPM), the current position...
+    // ... of the mouse(CPM), the time passed since the previous position was updated, and...
+    // ... the gravity rate. (1) Then, the distance from the PPM and the CPM is calculated. ...
+    // ... (2) 
     public bool changeSpeedCheck (float prePosition, float mousePosition, float time, bool gravRate) {
         float distanceLastToCurrent = Mathf.Abs(prePosition - mousePosition);                
 
@@ -155,5 +162,67 @@ public class changeGravity : MonoBehaviour
         }
 
         return gravRate;
+    }
+
+    private void DisplayRings(float mass) {
+        float fraction = mass / planetMassCheck;
+
+        if (mass <= 0) {
+            ring1.transform.localScale = new Vector3(0.0001f, 0.0001f, 1);
+        }
+        else if (mass >= planetMassCheck) {
+            ring1.transform.localScale = new Vector3(ringSize, ringSize, 1);
+        }
+        else {
+            ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
+        }
+        //ring1.transform.localScale = (mass / planetMassCheck) * 5;
+        // if (mass == planetMassCheck)
+        // {
+        //     ring1.SetActive(true);
+        //     ring2.SetActive(true);
+        //     ring3.SetActive(true);
+        //     ring4.SetActive(true);
+        //     ring5.SetActive(true);
+        // }
+        // else if (mass >= (planetMassCheck / 5) * 4)
+        // {
+        //     ring1.SetActive(true);
+        //     ring2.SetActive(true);
+        //     ring3.SetActive(true);
+        //     ring4.SetActive(true);
+        //     ring5.SetActive(false);
+        // }
+        // else if (mass >= (planetMassCheck / 5) * 3)
+        // {
+        //     ring1.SetActive(true);
+        //     ring2.SetActive(true);
+        //     ring3.SetActive(true);
+        //     ring4.SetActive(false);
+        //     ring5.SetActive(false);
+        // }
+        // else if (mass >= (planetMassCheck / 5) * 2)
+        // {
+        //     ring1.SetActive(true);
+        //     ring2.SetActive(true);
+        //     ring3.SetActive(false);
+        //     ring4.SetActive(false);
+        //     ring5.SetActive(false);
+        // }
+        // else if (mass >= (planetMassCheck / 5) * 1)
+        // {
+        //     ring1.SetActive(true);
+        //     ring2.SetActive(false);
+        //     ring3.SetActive(false);
+        //     ring4.SetActive(false);
+        //     ring5.SetActive(false);
+        // }
+        // else {
+        //     ring1.SetActive(false);
+        //     ring2.SetActive(false);
+        //     ring3.SetActive(false);
+        //     ring4.SetActive(false);
+        //     ring5.SetActive(false);
+        // }
     }
 }
