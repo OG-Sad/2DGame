@@ -18,6 +18,13 @@ public class sliderAttribute : MonoBehaviour
     // The Color to be assigned to the Renderer's Material
     Color m_NewColor;
 
+    //the rings around each planet that display how intense the gravity is; they are set to inactive by default
+    public GameObject ring1;
+    public GameObject ring2;
+    public GameObject ring3;
+    public GameObject ring4;
+    public GameObject ring5;
+
 
     void Start()
     {
@@ -49,5 +56,59 @@ public class sliderAttribute : MonoBehaviour
         }
         m_SpriteRenderer.color = m_NewColor;
         //Debug.Log(m_NewColor);
-    }   
+
+        DisplayRings(slider.value);
+    }
+
+    //displays rings based on the slider valie
+    private void DisplayRings(float sliderValue) {
+
+        if (sliderValue >= 0.8f)
+        {
+            ring1.SetActive(true);
+            ring2.SetActive(true);
+            ring3.SetActive(true);
+            ring4.SetActive(true);
+            ring5.SetActive(true);
+        }
+        else if (sliderValue >= 0.6f)
+        {
+            ring1.SetActive(true);
+            ring2.SetActive(true);
+            ring3.SetActive(true);
+            ring4.SetActive(true);
+            ring5.SetActive(false);
+        }
+        else if (sliderValue >= 0.4f)
+        {
+            ring1.SetActive(true);
+            ring2.SetActive(true);
+            ring3.SetActive(true);
+            ring4.SetActive(false);
+            ring5.SetActive(false);
+        }
+        else if (sliderValue >= 0.2f)
+        {
+            ring1.SetActive(true);
+            ring2.SetActive(true);
+            ring3.SetActive(false);
+            ring4.SetActive(false);
+            ring5.SetActive(false);
+        }
+        else if (sliderValue > 0f)
+        {
+            ring1.SetActive(true);
+            ring2.SetActive(false);
+            ring3.SetActive(false);
+            ring4.SetActive(false);
+            ring5.SetActive(false);
+        }
+        else {
+            ring1.SetActive(false);
+            ring2.SetActive(false);
+            ring3.SetActive(false);
+            ring4.SetActive(false);
+            ring5.SetActive(false);
+        }
+    }
 }

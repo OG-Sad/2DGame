@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     public Transform bigPlanet;
     public Transform player;
     public int numberOfPlanets = 4;
-    public float distanceBetweenPlanets = 2.5f;
+    public float vertDistanceBetweenPlanets = 2.5f;
     public float minTimeBetweenSpawn = .5f;
     public float maxTimeBetweenSpawn = 2.5f;
     
@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
 
     void Awake () {
         planets = new List<Transform>();
-        yPos = Random.Range(-4.5f, 4.5f);
+        yPos = Random.Range(0, 10) < 5 ? Random.Range(3, 4.5f) : Random.Range(-3, -4.5f);;
         lastYPos = yPos;
         SpawnPlanet(yPos);
     }
@@ -43,15 +43,19 @@ public class Spawner : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= timeBetweenSpawn && firstSpawn == false) {
             ReadyToSpawn();
-            //timer = 0;
             timeBetweenSpawn = Random.Range(minTimeBetweenSpawn, maxTimeBetweenSpawn);
         }
     }
 
     void ReadyToSpawn () {
-        if (planets.Count < numberOfPlanets && planets[planets.Count-1].localPosition.x < player.position.x + 8f) { 
-            while (Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f)) < distanceBetweenPlanets || firstSpawn == true) {
-                yPos = Random.Range(-4.5f, 4.5f);
+        if (planets.Count < numberOfPlanets && planets[planets.Count-1].localPosition.x < player.position.x + 18f) { 
+            while (Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f)) < vertDistanceBetweenPlanets || firstSpawn == true) {
+                // if (firstSpawn) {
+                //     yPos = Random.Range(0, 10) < 5 ? Random.Range(3, 4.5f) : Random.Range(-3, -4.5f);
+                // }
+                // else {
+                    yPos = Random.Range(-4.5f, 4.5f);
+                // }
             }
             lastYPos = yPos;
             timer = 0;
