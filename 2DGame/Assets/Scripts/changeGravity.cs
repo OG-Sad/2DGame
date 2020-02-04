@@ -13,10 +13,11 @@ public class changeGravity : MonoBehaviour
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
     SpriteRenderer m_SpriteRenderer;
-    GameObject camera = null;
+    GameObject camera;
 
     
     void Awake() {
+
         planetRB = GetComponent<Rigidbody2D>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -95,14 +96,11 @@ public class changeGravity : MonoBehaviour
         }
 
         if ((startTimer == true || (doubleTapTimer > 0.01f && doubleTapTimer < 0.25f)) && taps == false) {
-            Debug.Log("1");
             doubleTapTimer += Time.deltaTime;
             if (isBeingHeld == false) {
-                Debug.Log("2");
                 firstTap = true;
             }
             if (isBeingHeld == true && firstTap == true) {
-                Debug.Log("3");
                 firstDoubleTap = !firstDoubleTap;
                 if (firstDoubleTap == true) {
                     massHolder = planetRB.mass;
@@ -122,7 +120,10 @@ public class changeGravity : MonoBehaviour
         }
     }
 
+
+
     private void OnMouseDown() {
+
         if (Input.GetMouseButtonDown(0) && isBeingHeld == false) {
             // Start position of the mouse
             startPos = Input.mousePosition;
@@ -136,6 +137,8 @@ public class changeGravity : MonoBehaviour
         }
     }
 
+
+
     private void OnMouseUp() {
         // Resets values, doesn't reset mass of planet or color
         isBeingHeld = false;
@@ -144,6 +147,8 @@ public class changeGravity : MonoBehaviour
         displacement = 0;
         timer = 0;
     }
+
+
 
     // Gravity control
     public void gravity(float displace, float originalMass, bool gravRate) {
@@ -164,9 +169,9 @@ public class changeGravity : MonoBehaviour
         }
 
         DisplayRings(newMass); 
-
-        //Debug.Log(planetRB.mass);
     }
+
+
 
     // Decides the rate the the gravity changes at. |
     // | Works by getting passed a previous position of the mouse(PPM), the current position...
@@ -188,6 +193,8 @@ public class changeGravity : MonoBehaviour
 
         return gravRate;
     }
+
+
 
     private void DisplayRings(float mass) {
         float fraction = mass / planetMassCheck;
