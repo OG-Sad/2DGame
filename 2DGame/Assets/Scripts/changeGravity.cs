@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class changeGravity : MonoBehaviour
 {
-    public GameObject planet, ring1;//, ring2, ring3, ring4, ring5;
+    public GameObject planet, ring1;
     public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f, ringSize = 2.5f;
     public bool test = false;
     private Vector3 startPos;
-    private bool directionDetermined = false, direction, isBeingHeld = false, gravityRate = false, startTimer = false, taps = false;
-    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck;
+    private bool directionDetermined, direction, isBeingHeld, gravityRate, startTimer, taps, firstTap, firstDoubleTap;
+    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck, massHolder;
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
     SpriteRenderer m_SpriteRenderer;
@@ -22,16 +22,10 @@ public class changeGravity : MonoBehaviour
 
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
-        planetMass = planetRB.mass;
-
-        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(.5f, 0f, 0f) : new Color(0, .5f, 0);
-
         planetMassCheck = planet.name == "bigPlanet(Clone)" ? 100 : 50;
 
         ring1.SetActive(true);
         DisplayRings(planetRB.mass);
-
-        //GameObject g = tranform.GetChild(TouchRange).gameObject;
     }
 
     // Update is called once per frame
@@ -65,10 +59,16 @@ public class changeGravity : MonoBehaviour
             // ... Until then, gravity function isn't called.
             if ((Mathf.Abs(xDisplacement) > threshold || Mathf.Abs(yDisplacement) > threshold) || directionDetermined == true) {
                 
+                taps = false;
+                firstDoubleTap = false;
+                //massHolder = planetRB.mass;
+
                 if (directionDetermined == false) {
                     // Determines if direction is horizontal or vertical (X: true, Y: false).
                     direction = Mathf.Abs(xDisplacement) >= Mathf.Abs(yDisplacement) ? true : false; 
+                    
                     startMass = planetRB.mass;
+
                     //gravityRate = timer < timerThreshold ? true : false;
                     //timer = 0;
                     //Debug.Log(gravityRate);
@@ -94,14 +94,32 @@ public class changeGravity : MonoBehaviour
             }
         }
 
-        // if (startTimer == true && doubleTapTimer < 0.25f) {
-        //     doubleTapTimer += timer.deltaTime;
-        //     taps = true;
-        // }
-        // else {
-        //     doubleTapTimer = 0;
-        //     taps = false;
-        // }
+        if ((startTimer == true || (doubleTapTimer > 0.01f && doubleTapTimer < 0.25f)) && taps == false) {
+            Debug.Log("1");
+            doubleTapTimer += Time.deltaTime;
+            if (isBeingHeld == false) {
+                Debug.Log("2");
+                firstTap = true;
+            }
+            if (isBeingHeld == true && firstTap == true) {
+                Debug.Log("3");
+                firstDoubleTap = !firstDoubleTap;
+                if (firstDoubleTap == true) {
+                    massHolder = planetRB.mass;
+                    planetRB.mass = 0;
+                }
+                else {
+                    planetRB.mass = massHolder;
+                }
+                taps = true;
+                DisplayRings(planetRB.mass);
+            }
+        }
+        else {
+            doubleTapTimer = 0;
+            firstTap = false;
+            taps = false;
+        }
     }
 
     private void OnMouseDown() {
@@ -146,22 +164,14 @@ public class changeGravity : MonoBehaviour
         }
 
         DisplayRings(newMass); 
-        
-        float color = newMass / planetMassCheck;
-        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(color, 0f, 0f) : new Color(0,color, 0);
 
         //Debug.Log(planetRB.mass);
-    }
-
-    public void doubleTap(bool tapped) {
-
     }
 
     // Decides the rate the the gravity changes at. |
     // | Works by getting passed a previous position of the mouse(PPM), the current position...
     // ... of the mouse(CPM), the time passed since the previous position was updated, and...
-    // ... the gravity rate. (1) Then, the distance from the PPM and the CPM is calculated. ...
-    // ... (2) 
+    // ... the gravity rate. 
     public bool changeSpeedCheck (float prePosition, float mousePosition, float time, bool gravRate) {
         float distanceLastToCurrent = Mathf.Abs(prePosition - mousePosition);                
 
@@ -191,53 +201,7 @@ public class changeGravity : MonoBehaviour
         else {
             ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
         }
-        //ring1.transform.localScale = (mass / planetMassCheck) * 5;
-        // if (mass == planetMassCheck)
-        // {
-        //     ring1.SetActive(true);
-        //     ring2.SetActive(true);
-        //     ring3.SetActive(true);
-        //     ring4.SetActive(true);
-        //     ring5.SetActive(true);
-        // }
-        // else if (mass >= (planetMassCheck / 5) * 4)
-        // {
-        //     ring1.SetActive(true);
-        //     ring2.SetActive(true);
-        //     ring3.SetActive(true);
-        //     ring4.SetActive(true);
-        //     ring5.SetActive(false);
-        // }
-        // else if (mass >= (planetMassCheck / 5) * 3)
-        // {
-        //     ring1.SetActive(true);
-        //     ring2.SetActive(true);
-        //     ring3.SetActive(true);
-        //     ring4.SetActive(false);
-        //     ring5.SetActive(false);
-        // }
-        // else if (mass >= (planetMassCheck / 5) * 2)
-        // {
-        //     ring1.SetActive(true);
-        //     ring2.SetActive(true);
-        //     ring3.SetActive(false);
-        //     ring4.SetActive(false);
-        //     ring5.SetActive(false);
-        // }
-        // else if (mass >= (planetMassCheck / 5) * 1)
-        // {
-        //     ring1.SetActive(true);
-        //     ring2.SetActive(false);
-        //     ring3.SetActive(false);
-        //     ring4.SetActive(false);
-        //     ring5.SetActive(false);
-        // }
-        // else {
-        //     ring1.SetActive(false);
-        //     ring2.SetActive(false);
-        //     ring3.SetActive(false);
-        //     ring4.SetActive(false);
-        //     ring5.SetActive(false);
-        // }
+
+        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(fraction, 0f, 0f) : new Color(0, fraction, 0);
     }
 }
