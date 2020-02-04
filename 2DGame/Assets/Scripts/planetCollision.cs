@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class planetCollision : MonoBehaviour
 {
     public Transform planet;
+    public bool restartOnCollision;
 
     void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Planet") {
@@ -14,6 +16,10 @@ public class planetCollision : MonoBehaviour
         if (coll.gameObject.tag == "Player" && FindObjectOfType<Velocity>().testing == true) {
             // Debug.Log("Testing: We're in...");
             FindObjectOfType<Spawner>().DestroyPlanet(planet);
+        }
+        else if (coll.gameObject.tag == "Player" && restartOnCollision) {
+            // Debug.Log("Testing: We're in...");
+            SceneManager.LoadScene("PlanetSpawningTest");   
         }
         // Debug.Log("Collision");
     }

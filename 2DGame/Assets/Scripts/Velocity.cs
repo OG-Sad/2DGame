@@ -8,7 +8,7 @@ public class Velocity : MonoBehaviour
     public bool testing = false;
     public Transform player;
     Rigidbody2D PlayerRB;
-    Vector2 forceVector = new Vector2(180, 0);
+    Vector2 forceVector = new Vector2(240, 0);
     float timer;
 
     // Start is called before the first frame update

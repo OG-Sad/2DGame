@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: {fileID: 2580745651921559551}
+  restartOnCollision: 0
 --- !u!50 &8589634520090629300
 Rigidbody2D:
   serializedVersion: 4
