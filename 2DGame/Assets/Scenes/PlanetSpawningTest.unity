@@ -328,7 +328,7 @@ MonoBehaviour:
   numberOfPlanets: 4
   vertDistanceBetweenPlanets: 4
   minTimeBetweenSpawn: 0.5
-  maxTimeBetweenSpawn: 1.5
+  maxTimeBetweenSpawn: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

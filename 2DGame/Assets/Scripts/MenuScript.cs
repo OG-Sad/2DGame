@@ -10,8 +10,6 @@ public class MenuScript : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
-    bool Check = false;
-
     public static void Restart()
     {
         GamePaused = false;
@@ -46,6 +44,13 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 0f;
         GamePaused = true;
         Debug.Log("Paused");
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("PlanetSpawningTest");
+        GamePaused = false;
     }
 
     public void StartGame()
