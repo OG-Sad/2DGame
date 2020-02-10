@@ -13,7 +13,7 @@ public class changeGravity : MonoBehaviour
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
     SpriteRenderer m_SpriteRenderer;
-    GameObject camera;
+    new GameObject camera;
 
     
     void Awake() {

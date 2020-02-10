@@ -6,8 +6,9 @@ using UnityEngine;
 public class PowerUps : MonoBehaviour
 {
     public Transform StandardPowerup, Player;
+    public GameObject Up;
     public static Transform PowerUp;
-    float yPos = 0, PowerUpGo = 0;
+    float yPos = 0, PowerUpGo = 0, timer = 0;
     public static bool PowerUpTrue = false, PlayerPoweredUp = false;
     float seconds = 0;
 
@@ -21,18 +22,24 @@ public class PowerUps : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PowerUpGo = Random.Range(0, 5);
+        timer += Time.deltaTime;
+        if (timer >= 10)
+        {
+            PowerUpGo = Random.Range(0, 5);
+            timer = 0;
+            if (PowerUpGo == 4)// && PowerUpTrue == false)
+            {
+                //EditorApplication.isPaused = true;
+                SpawnPowerUp();
+            }
+        }
+            
         //Debug.Log(PowerUpGo);
         
-        if (PowerUpGo == 4 && PowerUpTrue == false)
+        
+        if(Up.transform.position.x <= Player.position.x - 10f)
         {
-            //EditorApplication.isPaused = true;
-            SpawnPowerUp();
-        }
-        if(StandardPowerup.position.x <= Player.position.x + 10f)
-        {
-            Destroy(PowerUp);
-            PowerUpTrue = false;
+            Destroy(Up);
         }
         if (PlayerPoweredUp == true)
         {
@@ -51,8 +58,7 @@ public class PowerUps : MonoBehaviour
         PowerUp = Instantiate(StandardPowerup);
         //yPos = Random.Range(-4.5f, 4.5f);
         yPos = 0;
-        PowerUp.localPosition = new Vector2(Player.position.x + 10f, yPos);
-        PowerUpTrue = true;
+        PowerUp.localPosition = new Vector2(Player.position.x + 20f, yPos);
         
     }
 }
