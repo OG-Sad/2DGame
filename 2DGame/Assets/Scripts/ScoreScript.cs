@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
+    public Transform Test;
     public Transform PlayerPos;
-    private float Score = 0;
+    private float Score = 0 ,OldScore, NewScore;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class ScoreScript : MonoBehaviour
     void Update()
     {
         
-        Score = Mathf.Round(PlayerPos.position.x);
+        Score = Mathf.Round(PlayerPos.position.x) > Score ? Mathf.Round(PlayerPos.position.x) : Score;
         ScoreText.text = Score.ToString();
     }
 }
