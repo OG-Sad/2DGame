@@ -9,8 +9,6 @@ public class ScoreScript : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
     public Transform PlayerPos;
-    float timer = 1;
-
     private float Score = 0;
 
     // Start is called before the first frame update
