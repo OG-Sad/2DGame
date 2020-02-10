@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 public class Velocity : MonoBehaviour
 {
     public bool testing = false;
+    public CircleCollider2D Col;
     public Transform player;
     Rigidbody2D PlayerRB;
     Vector2 forceVector = new Vector2(250, 0);
     float timer;
+    
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +22,7 @@ public class Velocity : MonoBehaviour
             PlayerRB = GetComponent<Rigidbody2D>();
             PlayerRB.AddForce(forceVector);
         }
+        
     }
 
     // Update is called once per frame
@@ -36,5 +41,6 @@ public class Velocity : MonoBehaviour
         else {
             timer = 0;
         }
+      
     }
 }
