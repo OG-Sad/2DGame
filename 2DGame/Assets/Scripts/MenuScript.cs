@@ -58,6 +58,16 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(sceneName: "PlanetSpawningTest");
     }
 
+    public void LevelSelect()
+    {
+        SceneManager.LoadScene(sceneName: "LevelSelect");
+    }
+
+    public void Level1Select()
+    {
+        SceneManager.LoadScene(sceneName: "Level1");
+    }
+
     public void QuitGame()
     {
         SceneManager.LoadScene(sceneName: "MenuScene");
