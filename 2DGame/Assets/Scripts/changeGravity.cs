@@ -23,7 +23,7 @@ public class changeGravity : MonoBehaviour
 
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
-        planetMassCheck = planet.name == "bigPlanet(Clone)" ? 100 : 50;
+        planetMassCheck = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 100 : 50;
 
         ring1.SetActive(true);
         DisplayRings(planetRB.mass);
@@ -154,7 +154,7 @@ public class changeGravity : MonoBehaviour
     public void gravity(float displace, float originalMass, bool gravRate) {
         // gravRate is true = normal, false = sligt
         float multiplier = gravRate ? massMultiplier : slightMassMultiplier;
-        multiplier = planet.name == "bigPlanet(Clone)" ? 2 * multiplier : 1 * multiplier; 
+        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 2 * multiplier : 1 * multiplier; 
         float newMass = originalMass + (displace * multiplier);
         
         // Gravity Parameters
@@ -209,6 +209,6 @@ public class changeGravity : MonoBehaviour
             ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
         }
 
-        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(fraction, 0f, 0f) : new Color(0, fraction, 0);
+        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(fraction, 0f, 0f) : new Color(0, fraction, 0);
     }
 }
