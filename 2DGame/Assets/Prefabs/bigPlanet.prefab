@@ -249,9 +249,9 @@ MonoBehaviour:
   planet: {fileID: 1115593165521293927}
   ring1: {fileID: 5095794467396420209}
   threshold: 0.3
-  timerThreshold: 0.3
+  timerThreshold: 0.5
   massMultiplier: 6
-  slightMassMultiplier: 2
+  slightMassMultiplier: 3
   divisionDecider: 0.1
   ringSize: 2.5
   test: 0
