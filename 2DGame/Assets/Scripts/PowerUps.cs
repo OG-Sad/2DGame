@@ -6,7 +6,6 @@ using UnityEngine;
 public class PowerUps : MonoBehaviour
 {
     public Transform StandardPowerup, Player;
-    public GameObject Up;
     public static Transform PowerUp;
     float yPos = 0, PowerUpGo = 0, timer = 0;
     public static bool PowerUpTrue = false, PlayerPoweredUp = false;
@@ -36,11 +35,7 @@ public class PowerUps : MonoBehaviour
             
         //Debug.Log(PowerUpGo);
         
-        
-        if(Up.transform.position.x <= Player.position.x - 10f)
-        {
-            Destroy(Up);
-        }
+
         if (PlayerPoweredUp == true)
         {
             seconds += Time.deltaTime;
