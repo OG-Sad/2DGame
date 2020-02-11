@@ -13,8 +13,6 @@ public class Velocity : MonoBehaviour
     float timer;
     
 
-
-
     // Start is called before the first frame update
     void Start()
     {

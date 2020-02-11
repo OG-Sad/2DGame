@@ -906,6 +906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 4710415129638209576}
   restartOnCollision: 1
+  test: {fileID: 0}
 --- !u!50 &7963338318259330557
 Rigidbody2D:
   serializedVersion: 4
@@ -995,7 +996,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.17
 --- !u!1 &4736409279403375891
 GameObject:
   m_ObjectHideFlags: 0

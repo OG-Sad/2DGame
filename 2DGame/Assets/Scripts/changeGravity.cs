@@ -62,24 +62,16 @@ public class changeGravity : MonoBehaviour
                 
                 taps = false;
                 firstDoubleTap = false;
-                //massHolder = planetRB.mass;
 
                 if (directionDetermined == false) {
                     // Determines if direction is horizontal or vertical (X: true, Y: false).
                     direction = Mathf.Abs(xDisplacement) >= Mathf.Abs(yDisplacement) ? true : false; 
                     
                     startMass = planetRB.mass;
-
-                    //gravityRate = timer < timerThreshold ? true : false;
-                    //timer = 0;
-                    //Debug.Log(gravityRate);
-                    //Debug.Log(timer);
                 }
 
                 displacement = direction == true ? xDisplacement : yDisplacement;
                 mouseDir = direction == true ? mousePos.x : mousePos.y;
-
-                // More control over gravity of planet if distance between last and current mouse position
                 
                 gravity(displacement, startMass, gravityRate);
 
