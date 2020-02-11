@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 52000057}
   - component: {fileID: 52000056}
   - component: {fileID: 52000055}
+  - component: {fileID: 52000059}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -211,6 +212,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &52000059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52000054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc86e30a864f8d4c8a7224028a62366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meteror: {fileID: 4566005924424042726, guid: 99563fd821bf112489134c8a408acc4b, type: 3}
+  warning: {fileID: 1269876062609552699, guid: edf8c8029b8eb804eb6ad646eaaf663a, type: 3}
+  canvas: {fileID: 52000054}
+  meteorsActive: 1
 --- !u!1 &175846291
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +362,7 @@ MonoBehaviour:
   StandardPowerup: {fileID: 74289749497113516, guid: 0fd3ef6a2f0f94483bac4ddf8913118c,
     type: 3}
   Player: {fileID: 779139463}
+  Up: {fileID: 0}
 --- !u!1 &363811046
 GameObject:
   m_ObjectHideFlags: 0
