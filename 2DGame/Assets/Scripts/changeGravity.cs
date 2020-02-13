@@ -201,6 +201,6 @@ public class changeGravity : MonoBehaviour
             ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
         }
 
-        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(fraction, 0f, 0f) : new Color(0, fraction, 0);
+        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(1f - fraction, 1f, 1f) : new Color(1f, 1f - fraction, 1f);
     }
 }

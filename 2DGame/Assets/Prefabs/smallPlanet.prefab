@@ -965,7 +965,7 @@ MonoBehaviour:
   threshold: 0.2
   timerThreshold: 0.5
   massMultiplier: 5
-  slightMassMultiplier: 2
+  slightMassMultiplier: 4
   divisionDecider: 0.1
   ringSize: 2.5
   test: 0
@@ -981,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009103199ff01534282c32aa826c7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zeroRepelForce: -6
 --- !u!58 &91579321234210771
 CircleCollider2D:
   m_ObjectHideFlags: 0

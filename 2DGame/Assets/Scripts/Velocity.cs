@@ -30,7 +30,7 @@ public class Velocity : MonoBehaviour
             player.localPosition = new Vector2(player.position.x + .1f, 0);   
         }
 
-        if (Mathf.Abs(player.position.y) >= 5f) {
+        if (Mathf.Abs(player.position.y) >= 6f) {
             timer += Time.deltaTime;
             if (timer >= 5f || Mathf.Abs(player.position.y) >= 15f) {
                 SceneManager.LoadScene("PlanetSpawningTest");

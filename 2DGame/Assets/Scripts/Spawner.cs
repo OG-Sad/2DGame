@@ -48,16 +48,16 @@ public class Spawner : MonoBehaviour
     }
 
     void ReadyToSpawn () {
-        if (planets.Count < numberOfPlanets && planets[planets.Count-1].localPosition.x < player.position.x + 17f) { 
-            while (Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f)) < vertDistanceBetweenPlanets || firstSpawn == true) {
-                
-                // Note for the future:
-                // Here is where Karsten will make planet spawning better
-                yPos = Random.Range(-4.5f, 4.5f);
+        // Checks to if the number of planets is less than the number you specified and checks if the last planet is less than...
+        // ... the player position + 14 (in order for the planets not to spawn too close together).
+        if (planets.Count < numberOfPlanets && planets[planets.Count-1].localPosition.x < player.position.x + 14f) { 
+            
+            // Goes to Better Spawning function 
+            yPos = BetterSpawning(lastYPos, yPos);
 
-            }
             lastYPos = yPos;
             timer = 0;
+
             SpawnPlanet(yPos); 
             //Debug.Log("Difference of last two Y Positions: " + Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f))); 
         }
@@ -93,4 +93,19 @@ public class Spawner : MonoBehaviour
         Destroy(item2.gameObject);
         ReadyToSpawn();
     }
+
+    // Note for future Karsten:
+    // Change the 'Y' Pos of the next planet to spawn here
+    public float BetterSpawning(float lastYPosition, float yPosition) {
+    
+        while (Mathf.Abs( Mathf.Abs(lastYPosition + 4.5f) - Mathf.Abs(yPosition + 4.5f) ) < vertDistanceBetweenPlanets || firstSpawn == true) {
+                
+            
+            yPosition = Random.Range(-4.5f, 4.5f);
+
+        }
+
+        return yPosition;
+    }
+
 }

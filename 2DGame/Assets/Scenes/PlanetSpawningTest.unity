@@ -344,9 +344,9 @@ MonoBehaviour:
     type: 3}
   player: {fileID: 779139463}
   numberOfPlanets: 4
-  vertDistanceBetweenPlanets: 4
+  vertDistanceBetweenPlanets: 5
   minTimeBetweenSpawn: 0.5
-  maxTimeBetweenSpawn: 1.5
+  maxTimeBetweenSpawn: 1.25
 --- !u!114 &197384495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +362,6 @@ MonoBehaviour:
   StandardPowerup: {fileID: 74289749497113516, guid: 0fd3ef6a2f0f94483bac4ddf8913118c,
     type: 3}
   Player: {fileID: 779139463}
-  Up: {fileID: 0}
 --- !u!1 &363811046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,6 +2301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: testing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8815068754899549952, guid: 1d8e3573fef15164b83898c113929395,
         type: 3}
