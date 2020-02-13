@@ -11,11 +11,12 @@ public class Spawner : MonoBehaviour
     public Transform player;
     public int numberOfPlanets = 4;
     public float vertDistanceBetweenPlanets = 2.5f;
-    public float minTimeBetweenSpawn = .5f;
-    public float maxTimeBetweenSpawn = 2.5f;
+    public float minXBetweenSpawn = 14f;
+    public float maxXBetweenSpawn = 20f;
+    public float xConstraint = 18f;
     
     Transform item, item2 = null;
-    private float timer = 0.0f;
+    //private float timer = 0.0f;
     private float timeBetweenSpawn, lastYPos, yPos;
     private bool firstSpawn;
     
@@ -24,7 +25,7 @@ public class Spawner : MonoBehaviour
 
     void Awake () {
         planets = new List<Transform>();
-        yPos = Random.Range(0, 10) < 5 ? Random.Range(3, 4.5f) : Random.Range(-3, -4.5f);;
+        yPos = Random.Range(0, 10) < 5 ? Random.Range(3, 4.5f) : Random.Range(-3, -4.5f);
         lastYPos = yPos;
         SpawnPlanet(yPos);
     }
@@ -40,32 +41,19 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        timer += Time.deltaTime;
-        if (timer >= timeBetweenSpawn && firstSpawn == false) {
-            ReadyToSpawn();
-            timeBetweenSpawn = Random.Range(minTimeBetweenSpawn, maxTimeBetweenSpawn);
-        }
-    }
-
-    void ReadyToSpawn () {
-        // Checks to if the number of planets is less than the number you specified and checks if the last planet is less than...
-        // ... the player position + 14 (in order for the planets not to spawn too close together).
-        if (planets.Count < numberOfPlanets && planets[planets.Count-1].localPosition.x < player.position.x + 14f) { 
-            
-            // Goes to Better Spawning function 
+        if (planets[planets.Count-1].localPosition.x < player.position.x + xConstraint && firstSpawn == false && planets.Count < numberOfPlanets) {
             yPos = BetterSpawning(lastYPos, yPos);
-
             lastYPos = yPos;
-            timer = 0;
 
             SpawnPlanet(yPos); 
-            //Debug.Log("Difference of last two Y Positions: " + Mathf.Abs(Mathf.Abs(lastYPos + 4.5f) - Mathf.Abs(yPos + 4.5f))); 
+
+            xConstraint = Random.Range(minXBetweenSpawn, maxXBetweenSpawn);
         }
     }
 
     void SpawnPlanet (float yPos) {     
         firstSpawn = false;
-        timer = 0;
+        //timer = 0;
         int odds = Random.Range(0, 4);
         Transform planet = odds <= 2 ? smallPlanet : bigPlanet;
         Transform t = Instantiate(planet);
@@ -77,8 +65,8 @@ public class Spawner : MonoBehaviour
         item2 = planets[planets.Count-1];
         planets.Remove(item2);
         Destroy(item2.gameObject);
-        ReadyToSpawn();
-        timer = 0.0f;
+        BetterSpawning(lastYPos, yPos);
+        //timer = 0.0f;
     }
 
     public void DestroyPlanet(Transform colPlanet) {
@@ -91,7 +79,7 @@ public class Spawner : MonoBehaviour
         item2 = planets[j];
         planets.Remove(item2);
         Destroy(item2.gameObject);
-        ReadyToSpawn();
+        BetterSpawning(lastYPos, yPos);
     }
 
     // Note for future Karsten:
