@@ -68,6 +68,36 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(sceneName: "Level1");
     }
 
+    public void Level_1Select()
+    {
+        SceneManager.LoadScene(sceneName: "Level 1");
+    }
+
+    public void Level_2Select()
+    {
+        SceneManager.LoadScene(sceneName: "Level 2");
+    }
+
+    public void Level_3Select()
+    {
+        SceneManager.LoadScene(sceneName: "Level 3");
+    }
+
+    public void Level_4Select()
+    {
+        SceneManager.LoadScene(sceneName: "Level 4");
+    }
+
+    public void Level_5Select()
+    {
+        SceneManager.LoadScene(sceneName: "Level 5");
+    }
+
+    public void Level_CowSelect()
+    {
+        SceneManager.LoadScene(sceneName: "Cow Level");
+    }
+
     public void QuitGame()
     {
         SceneManager.LoadScene(sceneName: "MenuScene");
