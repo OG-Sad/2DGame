@@ -6,10 +6,10 @@ public class changeGravity : MonoBehaviour
 {
     public GameObject planet, ring1;
     public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f, ringSize = 2.5f;
-    public bool test = false;
+    public bool test = false, doubleTapGrav;
     private Vector3 startPos;
     private bool directionDetermined, direction, isBeingHeld, gravityRate, startTimer, taps, firstTap, firstDoubleTap;
-    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck, massHolder;
+    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck, massHolder, secondSecondCounter;
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
     SpriteRenderer m_SpriteRenderer;
@@ -31,6 +31,28 @@ public class changeGravity : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+
+         if((isBeingHeld || (secondSecondCounter > 0 && secondSecondCounter < .2f)) && !doubleTapGrav && !directionDetermined) {
+            secondSecondCounter += Time.deltaTime;
+            if(!isBeingHeld && secondSecondCounter < .2f) {
+                //taps = true;
+                secondSecondCounter = 0;
+                firstDoubleTap = !firstDoubleTap;
+                if (firstDoubleTap == true) {
+                    massHolder = planetRB.mass;
+                    planetRB.mass = 0;
+                }
+                else {
+                    planetRB.mass = massHolder;
+                }
+                DisplayRings(planetRB.mass);
+            }
+        }
+        else {
+            secondSecondCounter = 0;
+            taps = false;
+        }
+
 
         if (isBeingHeld == true) {
             Vector3 mousePos;
@@ -86,8 +108,9 @@ public class changeGravity : MonoBehaviour
 
             }
         }
-
-        if ((startTimer == true || (doubleTapTimer > 0.01f && doubleTapTimer < 0.25f)) && taps == false) {
+        
+        
+        if (((startTimer == true || (doubleTapTimer > 0.01f && doubleTapTimer < 0.25f)) && taps == false) && doubleTapGrav) {
             doubleTapTimer += Time.deltaTime;
             if (isBeingHeld == false) {
                 firstTap = true;
@@ -110,6 +133,7 @@ public class changeGravity : MonoBehaviour
             firstTap = false;
             taps = false;
         }
+        
     }
 
 

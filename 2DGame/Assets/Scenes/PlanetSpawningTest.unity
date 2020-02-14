@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc86e30a864f8d4c8a7224028a62366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meteor: {fileID: 0}
+  meteror: {fileID: 4566005924424042726, guid: 99563fd821bf112489134c8a408acc4b, type: 3}
   warning: {fileID: 1269876062609552699, guid: edf8c8029b8eb804eb6ad646eaaf663a, type: 3}
   canvas: {fileID: 52000054}
   meteorsActive: 1
@@ -1060,6 +1060,7 @@ MonoBehaviour:
   testing: 0
   Col: {fileID: 779139462}
   player: {fileID: 779139463}
+  MaxSpeed: 30
 --- !u!50 &779139465
 Rigidbody2D:
   serializedVersion: 4
@@ -1072,7 +1073,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -2307,6 +2308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: testing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: MaxSpeed
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8815068754899549952, guid: 1d8e3573fef15164b83898c113929395,
         type: 3}

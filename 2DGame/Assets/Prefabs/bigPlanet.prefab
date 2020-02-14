@@ -256,6 +256,7 @@ MonoBehaviour:
   divisionDecider: 0.1
   ringSize: 2.5
   test: 0
+  doubleTapGrav: 0
 --- !u!114 &7018588484151031948
 MonoBehaviour:
   m_ObjectHideFlags: 0
