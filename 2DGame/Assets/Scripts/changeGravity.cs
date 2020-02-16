@@ -15,7 +15,6 @@ public class changeGravity : MonoBehaviour
     SpriteRenderer m_SpriteRenderer;
     new GameObject camera;
 
-    
     void Awake() {
 
         planetRB = GetComponent<Rigidbody2D>();
@@ -32,7 +31,7 @@ public class changeGravity : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
-         if((isBeingHeld || (secondSecondCounter > 0 && secondSecondCounter < .2f)) && !doubleTapGrav && !directionDetermined) {
+        if ((isBeingHeld || (secondSecondCounter > 0 && secondSecondCounter < .2f)) && !doubleTapGrav && !directionDetermined) {
             secondSecondCounter += Time.deltaTime;
             if(!isBeingHeld && secondSecondCounter < .2f) {
                 //taps = true;

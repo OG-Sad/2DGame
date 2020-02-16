@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, Player;
+    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player;
     public static Transform PowerUp;
     float yPos = 0, timer = 0, seconds = 0;
     public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false;
@@ -19,6 +19,7 @@ public class PowerUps : MonoBehaviour
         //Every 10 seconds a power up can spawn
         timer += Time.deltaTime;
         if (timer >= 10)
+
         {
             //1/5 times a power up can spawn, it will spawn
             PowerUpGo = Random.Range(0, 5);
@@ -48,7 +49,7 @@ public class PowerUps : MonoBehaviour
 
     void SpawnPowerUp()
     {
-        ChoosePowerUp = Random.Range(0, 3);
+        ChoosePowerUp = Random.Range(0, 4);
         if (ChoosePowerUp == 1)
         {
             //EditorApplication.isPaused = true;
@@ -69,6 +70,12 @@ public class PowerUps : MonoBehaviour
             //yPos = Random.Range(-4.5f, 4.5f);
             yPos = 0;
             PowerUp = Instantiate(StarPowerUp);
+            PowerUp.localPosition = new Vector2(Player.position.x + 20f, yPos);
+        }
+        if(ChoosePowerUp == 4)
+        {
+            yPos = 0;
+            PowerUp = Instantiate(BoostPowerUp);
             PowerUp.localPosition = new Vector2(Player.position.x + 20f, yPos);
         }
     }
@@ -99,6 +106,19 @@ public class PowerUps : MonoBehaviour
         {
 
             PlayerPoweredUp = false;
+            seconds = 0;
+
+        }
+
+        if (seconds >= 6 && ChoosePowerUp == 4)
+        {
+            GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
+            foreach (GameObject Plan in BoostPoweredUp.Planets)
+            {
+                Plan.GetComponent<Attractor>().enabled = false;
+            }
+            PlayerPoweredUp = false;
+            Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
 
         }

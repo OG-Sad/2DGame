@@ -11,7 +11,7 @@ public class PowerUpCollision : MonoBehaviour
     //public Renderer rend;
     void Update ()
     {
-        PowerUps.ChoosePowerUp = 3;
+        PowerUps.ChoosePowerUp = 4;
         if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
         {
             Destroy(gameObject);
@@ -28,7 +28,7 @@ public class PowerUpCollision : MonoBehaviour
             
         }
 
-        if(other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
         {
             PowerUps.PlayerPoweredUp = true;
             Destroy(gameObject);
@@ -40,6 +40,11 @@ public class PowerUpCollision : MonoBehaviour
             PowerUps.PlayerPotentialPowerUp = true;
             Destroy(gameObject);
 
+        }
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
+        {
+            PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
         }
 
     }

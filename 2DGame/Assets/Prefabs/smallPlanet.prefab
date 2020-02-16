@@ -804,6 +804,7 @@ GameObject:
   - component: {fileID: 2562634240376784906}
   - component: {fileID: 2601183047293698730}
   - component: {fileID: 91579321234210771}
+  - component: {fileID: 2387465257084042045}
   m_Layer: 0
   m_Name: smallPlanet
   m_TagString: Planet
@@ -906,7 +907,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 4710415129638209576}
   restartOnCollision: 1
-  test: {fileID: 0}
 --- !u!50 &7963338318259330557
 Rigidbody2D:
   serializedVersion: 4
@@ -999,6 +999,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.19
+--- !u!114 &2387465257084042045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562011318171360487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc3b7fe81af143f7bfd528cf6e603d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Planets: []
 --- !u!1 &4736409279403375891
 GameObject:
   m_ObjectHideFlags: 0

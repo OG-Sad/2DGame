@@ -9,16 +9,16 @@ public class planetCollision : MonoBehaviour
     
     public Transform planet;
     public bool restartOnCollision;
-    public Transform test;
     void OnCollisionEnter2D(Collision2D coll) {
 
 
-        if (coll.gameObject.tag == "Player" && PowerUps.PlayerPoweredUp == true)
+        if (coll.gameObject.tag == "Player" && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
         {
 
             GameObject.FindGameObjectWithTag("Planet").GetComponent<Attractor>().enabled = false;
 
         }
+
         else
         {
             if (coll.gameObject.tag == "Planet")
