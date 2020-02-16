@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player;
-    public static Transform PowerUp;
+    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star;
+    public static Transform PowerUp, StarSpawning;
     float yPos = 0, timer = 0, seconds = 0;
     public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false;
-    public static int ChoosePowerUp = 0, PowerUpGo = 0;
+    public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo;
+    public static bool RespawnStar = false;
     
 
 
@@ -30,9 +31,23 @@ public class PowerUps : MonoBehaviour
                 SpawnPowerUp();
             }
         }
+        //Every 20 seconds a Star can spawn
+        
+        if (timer >= 20)
+        {
+            //1/5 times chance a Star can spawn
+            StarGo = Random.Range(0, 4);
+            timer = 0;
+
+            if (StarGo == 1)
+            {
+                //EditorApplication.isPaused = true;
+                SpawnStar();
+            }
+        }
 
         //Debug.Log(PowerUpGo);
-        if(PlayerPotentialPowerUp == true && Input.touchCount > 1)
+        if (PlayerPotentialPowerUp == true && Input.touchCount > 1)
         {
             PlayerPoweredUp = true;
             
@@ -43,6 +58,10 @@ public class PowerUps : MonoBehaviour
 
             DuringPowerUp();
 
+        }
+        if (RespawnStar)
+        {
+            SpawnStar();
         }
         Debug.Log(Input.touchCount);
     }
@@ -122,6 +141,16 @@ public class PowerUps : MonoBehaviour
             seconds = 0;
 
         }
+    }
+
+     void SpawnStar()
+    {
+        var yPoss = 0;
+        //EditorApplication.isPaused = true;
+        StarSpawning = Instantiate(Star);
+        //yPos = Random.Range(-4.5f, 4.5f);
+        StarSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, yPoss);
+
     }
 }
 
