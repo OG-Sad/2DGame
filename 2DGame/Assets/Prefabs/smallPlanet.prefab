@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc3b7fe81af143f7bfd528cf6e603d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Planets: []
+  PlanetPrefabs: {fileID: 4710415129638209576}
 --- !u!1 &4736409279403375891
 GameObject:
   m_ObjectHideFlags: 0

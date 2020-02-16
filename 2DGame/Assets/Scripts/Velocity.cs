@@ -10,7 +10,7 @@ public class Velocity : MonoBehaviour
     public Transform player;
     public static float MaxSpeed = 5f, speed;
     public static Rigidbody2D PlayerRB;
-    public static Vector2 forceVector = new Vector2(250, 0);
+    public static Vector2 forceVector = new Vector2(300, 0);
     float timer;
     
 

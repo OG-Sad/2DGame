@@ -6,6 +6,7 @@ public class BoostPoweredUp : MonoBehaviour
 {
     public static float OldSpeed;
     public static GameObject[] Planets;
+    public Transform  PlanetPrefabs;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +16,11 @@ public class BoostPoweredUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Velocity.speed);
+        
         Planets = GameObject.FindGameObjectsWithTag("Planet");
         if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
         {
-            foreach (GameObject Plan in Planets)
-            {
-               Plan.GetComponent<Attractor>().enabled = false;
-            }
+            PlanetPrefabs.GetComponent < Attractor >().enabled = false;
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = false;
             //Velocity.MaxSpeed = 30f;
             Velocity.forceVector = new Vector2(500, 0);
