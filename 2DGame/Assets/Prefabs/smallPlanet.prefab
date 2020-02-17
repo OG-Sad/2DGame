@@ -982,7 +982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009103199ff01534282c32aa826c7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zeroRepelForce: -6
+  zeroRepelForce: -4.5
 --- !u!58 &91579321234210771
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -998,7 +998,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.19
+  m_Radius: 0.22
 --- !u!1 &4736409279403375891
 GameObject:
   m_ObjectHideFlags: 0

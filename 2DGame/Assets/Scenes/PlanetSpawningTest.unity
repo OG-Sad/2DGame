@@ -343,7 +343,7 @@ MonoBehaviour:
   bigPlanet: {fileID: 2580745651921559551, guid: 8d86c9a9a7cd33b4388245a6edbdf710,
     type: 3}
   player: {fileID: 779139463}
-  numberOfPlanets: 4
+  numberOfPlanets: 5
   vertDistanceBetweenPlanets: 5
   minXBetweenSpawn: 17
   maxXBetweenSpawn: 20
@@ -2160,6 +2160,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 7873620128938103229, guid: d79f510bf79324c4eb47e9911d746472,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 779139461}
     - target: {fileID: 7873620128938103107, guid: d79f510bf79324c4eb47e9911d746472,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2215,11 +2220,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7873620128938103229, guid: d79f510bf79324c4eb47e9911d746472,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 779139461}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d79f510bf79324c4eb47e9911d746472, type: 3}
 --- !u!1001 &8815068755196249738
@@ -2298,31 +2298,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
-        type: 3}
-      propertyPath: testing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
-        type: 3}
-      propertyPath: MaxSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8815068754899549952, guid: 1d8e3573fef15164b83898c113929395,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8815068754899549952, guid: 1d8e3573fef15164b83898c113929395,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8815068754956772232, guid: 1d8e3573fef15164b83898c113929395,
         type: 3}
@@ -2448,6 +2423,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[3].inWeight
       value: 0.536626
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: testing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: MaxSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549952, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549952, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d8e3573fef15164b83898c113929395, type: 3}
