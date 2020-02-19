@@ -345,9 +345,8 @@ MonoBehaviour:
   player: {fileID: 779139463}
   numberOfPlanets: 5
   vertDistanceBetweenPlanets: 5
-  minXBetweenSpawn: 17
-  maxXBetweenSpawn: 20
-  xConstraint: 18
+  minXBetweenSpawn: 13
+  maxXBetweenSpawn: 16
 --- !u!114 &197384495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,6 +767,9 @@ MonoBehaviour:
   ScoreText: {fileID: 687961314}
   Test: {fileID: 0}
   PlayerPos: {fileID: 779139463}
+  Score: 0
+  OldScore: 0
+  NewScore: 0
 --- !u!114 &687961314
 MonoBehaviour:
   m_ObjectHideFlags: 0
