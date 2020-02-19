@@ -169,7 +169,7 @@ public class changeGravity : MonoBehaviour
     public void gravity(float displace, float originalMass, bool gravRate) {
         // gravRate is true = normal, false = sligt
         float multiplier = gravRate ? massMultiplier : slightMassMultiplier;
-        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 2 * multiplier : 1 * multiplier; 
+        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 1.5f * multiplier : 1 * multiplier; 
         float newMass = originalMass + (displace * multiplier);
         
         // Gravity Parameters
