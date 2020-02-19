@@ -10,6 +10,7 @@ public class Velocity : MonoBehaviour
     public Transform player;
     public float MinSpeed;
     public float MaxSpeed;
+    public bool isLevel;
 
     Rigidbody2D PlayerRB;
     Vector2 forceVector = new Vector2(250, 0);
@@ -43,7 +44,7 @@ public class Velocity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        float score = GameObject.Find("Score").GetComponent<ScoreScript>().Score;
+        float score = isLevel ? 0 : GameObject.Find("Score").GetComponent<ScoreScript>().Score;
 
         MinSpeed = MinSpeed >= MaxSpeed ? MaxSpeed : MinSpeed + (score / 40);
 
