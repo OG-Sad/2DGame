@@ -85,7 +85,7 @@ public class Spawner : MonoBehaviour
                     // Checks to see if PlanetTan1 falls in a range of +/- 'n' amount from playerTan, does the same thing again,...
                     // ... but this time comparing PlanetTan1 with a range around PlanetTan2. If true, change the position of...
                     // ... planets[j].
-                    if (PlanetTan1 < playerTan + 0.03f && PlanetTan1 > playerTan - 0.03f && planets[j].localPosition.x > player.position.x + 15) {
+                    if (PlanetTan1 < playerTan + 0.05f && PlanetTan1 > playerTan - 0.05f && planets[j].localPosition.x > player.position.x + 15) {
                         if (PlanetTan1 < PlanetTan2 + 0.03f && PlanetTan1 > PlanetTan2 - 0.03f) {
                             
                             Debug.Log("P1 Tan: " + PlanetTan1);

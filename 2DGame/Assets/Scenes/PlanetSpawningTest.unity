@@ -345,8 +345,6 @@ MonoBehaviour:
   player: {fileID: 779139463}
   numberOfPlanets: 5
   vertDistanceBetweenPlanets: 5
-  minXBetweenSpawn: 13
-  maxXBetweenSpawn: 16
 --- !u!114 &197384495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,7 +1060,8 @@ MonoBehaviour:
   testing: 0
   Col: {fileID: 779139462}
   player: {fileID: 779139463}
-  MaxSpeed: 30
+  MinSpeed: 30
+  MaxSpeed: 40
 --- !u!50 &779139465
 Rigidbody2D:
   serializedVersion: 4
@@ -2439,6 +2438,11 @@ PrefabInstance:
     - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
         type: 3}
       propertyPath: MaxSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815068754899549953, guid: 1d8e3573fef15164b83898c113929395,
+        type: 3}
+      propertyPath: MinSpeed
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8815068754899549952, guid: 1d8e3573fef15164b83898c113929395,

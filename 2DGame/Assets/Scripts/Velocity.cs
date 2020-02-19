@@ -8,7 +8,9 @@ public class Velocity : MonoBehaviour
     public bool testing = false;
     public CircleCollider2D Col;
     public Transform player;
-    public float MaxSpeed = 5f;
+    public float MinSpeed;
+    public float MaxSpeed;
+
     Rigidbody2D PlayerRB;
     Vector2 forceVector = new Vector2(250, 0);
     float timer;
@@ -40,7 +42,11 @@ public class Velocity : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {
+    {   
+        float score = GameObject.Find("Score").GetComponent<ScoreScript>().Score;
+
+        MinSpeed = MinSpeed >= MaxSpeed ? MaxSpeed : MinSpeed + (score / 40);
+
         if (testing == true) {
             player.localPosition = new Vector2(player.position.x + .1f, 0);   
         }
