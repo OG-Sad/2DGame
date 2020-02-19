@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     Transform item, item2 = null;
     //private float timer = 0.0f;
     private float lastYPos, yPos, timer, minXBetweenSpawn = 14, maxXBetweenSpawn = 17,  xConstraint = 15;
-    private bool firstSpawn, scored;
+    private bool firstSpawn = true, scored;
     private Vector2 prePosition;
     
     List<Transform> planets;
@@ -81,19 +81,20 @@ public class Spawner : MonoBehaviour
                     // Finds the Tan inverse of the planetTwoDiff and playerVPlayerDiff
                     float PlanetTan2 = Mathf.Atan(planetTwoDiff.y / planetTwoDiff.x);
                     float playerTan = Mathf.Atan(playerVPlayerDiff.y / playerVPlayerDiff.x);
-                    Debug.Log("Planet Tan: " + Mathf.Abs(PlanetTan2 - PlanetTan1));
-                    Debug.Log("Play Tan: " + playerTan);
 
                     // Checks to see if PlanetTan1 falls in a range of +/- 'n' amount from playerTan, does the same thing again,...
                     // ... but this time comparing PlanetTan1 with a range around PlanetTan2. If true, change the position of...
                     // ... planets[j].
-                    if (PlanetTan1 < playerTan + 0.05f && PlanetTan1 > playerTan - 0.05f && planets[j].localPosition.x > player.position.x + 15) {
-                        if (PlanetTan1 < PlanetTan2 + 0.05f && PlanetTan1 > PlanetTan2 - 0.05f) {
-
+                    if (PlanetTan1 < playerTan + 0.03f && PlanetTan1 > playerTan - 0.03f && planets[j].localPosition.x > player.position.x + 15) {
+                        if (PlanetTan1 < PlanetTan2 + 0.03f && PlanetTan1 > PlanetTan2 - 0.03f) {
+                            
+                            Debug.Log("P1 Tan: " + PlanetTan1);
+                            Debug.Log("P2 Tan: " + PlanetTan2);
+                            Debug.Log("Player Tan: " + playerTan);
+                            //Time.timeScale = 0;
+                            
                             float newYDisplace = planets[j].localPosition.y + 4.5f > 4.5f ? -4.5f : 4.5f;
                             planets[j].position += new Vector3(0, newYDisplace, 0);
-
-                            Debug.Break();
                         }
                     }
                 }
@@ -112,14 +113,17 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    void SpawnPlanet (float yPos) {   
+    void SpawnPlanet (float yPos) {  
+
+        float playerPosPlus = firstSpawn ? 15 : 25;
 
         firstSpawn = false;
         // Doesn't spawn big planets until score reaches 75
         int odds = scored ? Random.Range(0, 4) : 0;
         Transform planet = odds <= 2 ? smallPlanet : bigPlanet;
         Transform t = Instantiate(planet);
-        t.localPosition = new Vector2(player.position.x + 25f, yPos);
+        // Debug.Log(playerPosPlus);
+        t.localPosition = new Vector2(player.position.x + playerPosPlus, yPos);
         planets.Add(t);   
     }
 
