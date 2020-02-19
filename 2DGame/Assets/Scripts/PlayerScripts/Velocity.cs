@@ -8,7 +8,7 @@ public class Velocity : MonoBehaviour
     public bool testing = false;
     public CircleCollider2D Col;
     public Transform player;
-    public static float MaxSpeed = 10f, speed;
+    public static float MaxSpeed = 20f, speed;
     public static Rigidbody2D PlayerRB;
     public static Vector2 forceVector = new Vector2(150, 0);
     float timer;

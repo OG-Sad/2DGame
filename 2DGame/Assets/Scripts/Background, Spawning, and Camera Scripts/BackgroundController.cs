@@ -50,7 +50,7 @@ public class BackgroundController : MonoBehaviour
     void ReadyToSpawn() {
 
         Transform t = Instantiate(BackgroundType);
-        t.localPosition = new Vector2(Backgrounds[0].position.x + 35f, 0f);
+        t.localPosition = new Vector2(Backgrounds[0].position.x + 15f, 0f);
         Backgrounds.Add(t);
         //Debug.Log(Backgrounds.Count);
 
