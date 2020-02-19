@@ -7,6 +7,8 @@ public class Attractor : MonoBehaviour
     Rigidbody2D PlanetRB;
     float orbitVel;
 
+    public float zeroRepelForce = -5f;
+
     private void Start()
     {
         PlanetRB = GetComponent<Rigidbody2D>();
@@ -24,7 +26,17 @@ public class Attractor : MonoBehaviour
         Vector2 direction = PlanetRB.position - PlayerRB.position;
         float distance = direction.magnitude;
 
-        float forceMagnitude =  ( (PlanetRB.mass * PlayerRB.mass) / Mathf.Pow(distance, 2));
+        // Added a repelling force if planet mass is 0 if planet mass is 0
+        float planetMass = PlanetRB.mass > 1f ? PlanetRB.mass : zeroRepelForce; // <-- Repel force
+        // Could add future stuff when planet is at 0 mass here
+        if (planetMass < 0) {
+            //Debug.Log("Success!");
+        }
+
+        // Changed the planetRB.mass to planetMass to incorporate the slight repel force when...
+        // ... the mass of the planet is less than 1f
+        float forceMagnitude =  ( (planetMass * PlayerRB.mass) / Mathf.Pow(distance, 2));
+
         //Debug.Log("Mass of Planet: "+ PlanetRB.mass);
         //Debug.Log("Mass of Player:" + PlayerRB.mass);
         Vector2 force = direction.normalized * forceMagnitude;

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Planet
   - gravitySlider
+  - Background
+  - PowerUp
   layers:
   - Default
   - TransparentFX

@@ -107,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 1115593165521293927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12, y: 12, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 7884484865768948134}
   - {fileID: 3710719894561590109}
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 2580745651921559551}
   restartOnCollision: 1
+  test: {fileID: 0}
 --- !u!50 &8589634520090629300
 Rigidbody2D:
   serializedVersion: 4
@@ -249,12 +250,13 @@ MonoBehaviour:
   planet: {fileID: 1115593165521293927}
   ring1: {fileID: 5095794467396420209}
   threshold: 0.3
-  timerThreshold: 0.3
+  timerThreshold: 0.5
   massMultiplier: 6
-  slightMassMultiplier: 2
+  slightMassMultiplier: 4.5
   divisionDecider: 0.1
   ringSize: 2.5
   test: 0
+  doubleTapGrav: 0
 --- !u!114 &7018588484151031948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009103199ff01534282c32aa826c7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zeroRepelForce: -6
 --- !u!58 &3807747112987617530
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -282,7 +285,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.14
+  m_Radius: 0.22
 --- !u!1 &1279386016702984664
 GameObject:
   m_ObjectHideFlags: 0

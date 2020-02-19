@@ -6,14 +6,14 @@ public class changeGravity : MonoBehaviour
 {
     public GameObject planet, ring1;
     public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f, ringSize = 2.5f;
-    public bool test = false;
+    public bool test = false, doubleTapGrav;
     private Vector3 startPos;
     private bool directionDetermined, direction, isBeingHeld, gravityRate, startTimer, taps, firstTap, firstDoubleTap;
-    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck, massHolder;
+    private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck, massHolder, secondSecondCounter;
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
     SpriteRenderer m_SpriteRenderer;
-    GameObject camera;
+    new GameObject camera;
 
     
     void Awake() {
@@ -23,7 +23,7 @@ public class changeGravity : MonoBehaviour
 
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
-        planetMassCheck = planet.name == "bigPlanet(Clone)" ? 100 : 50;
+        planetMassCheck = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 100 : 50;
 
         ring1.SetActive(true);
         DisplayRings(planetRB.mass);
@@ -31,6 +31,28 @@ public class changeGravity : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+
+         if((isBeingHeld || (secondSecondCounter > 0 && secondSecondCounter < .2f)) && !doubleTapGrav && !directionDetermined) {
+            secondSecondCounter += Time.deltaTime;
+            if(!isBeingHeld && secondSecondCounter < .2f) {
+                //taps = true;
+                secondSecondCounter = 0;
+                firstDoubleTap = !firstDoubleTap;
+                if (firstDoubleTap == true) {
+                    massHolder = planetRB.mass;
+                    planetRB.mass = 0;
+                }
+                else {
+                    planetRB.mass = massHolder;
+                }
+                DisplayRings(planetRB.mass);
+            }
+        }
+        else {
+            secondSecondCounter = 0;
+            taps = false;
+        }
+
 
         if (isBeingHeld == true) {
             Vector3 mousePos;
@@ -62,24 +84,16 @@ public class changeGravity : MonoBehaviour
                 
                 taps = false;
                 firstDoubleTap = false;
-                //massHolder = planetRB.mass;
 
                 if (directionDetermined == false) {
                     // Determines if direction is horizontal or vertical (X: true, Y: false).
                     direction = Mathf.Abs(xDisplacement) >= Mathf.Abs(yDisplacement) ? true : false; 
                     
                     startMass = planetRB.mass;
-
-                    //gravityRate = timer < timerThreshold ? true : false;
-                    //timer = 0;
-                    //Debug.Log(gravityRate);
-                    //Debug.Log(timer);
                 }
 
                 displacement = direction == true ? xDisplacement : yDisplacement;
                 mouseDir = direction == true ? mousePos.x : mousePos.y;
-
-                // More control over gravity of planet if distance between last and current mouse position
                 
                 gravity(displacement, startMass, gravityRate);
 
@@ -94,8 +108,9 @@ public class changeGravity : MonoBehaviour
 
             }
         }
-
-        if ((startTimer == true || (doubleTapTimer > 0.01f && doubleTapTimer < 0.25f)) && taps == false) {
+        
+        
+        if (((startTimer == true || (doubleTapTimer > 0.01f && doubleTapTimer < 0.25f)) && taps == false) && doubleTapGrav) {
             doubleTapTimer += Time.deltaTime;
             if (isBeingHeld == false) {
                 firstTap = true;
@@ -118,6 +133,7 @@ public class changeGravity : MonoBehaviour
             firstTap = false;
             taps = false;
         }
+        
     }
 
 
@@ -154,7 +170,7 @@ public class changeGravity : MonoBehaviour
     public void gravity(float displace, float originalMass, bool gravRate) {
         // gravRate is true = normal, false = sligt
         float multiplier = gravRate ? massMultiplier : slightMassMultiplier;
-        multiplier = planet.name == "bigPlanet(Clone)" ? 2 * multiplier : 1 * multiplier; 
+        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 1.5f * multiplier : 1 * multiplier; 
         float newMass = originalMass + (displace * multiplier);
         
         // Gravity Parameters
@@ -209,6 +225,6 @@ public class changeGravity : MonoBehaviour
             ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
         }
 
-        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" ? new Color(fraction, 0f, 0f) : new Color(0, fraction, 0);
+        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(1f - fraction, 1f, 1f) : new Color(1f, 1f - fraction, 1f);
     }
 }
