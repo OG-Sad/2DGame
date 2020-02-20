@@ -23,7 +23,7 @@ public class BoostPoweredUp : MonoBehaviour
             PlanetPrefabs.GetComponent < Attractor >().enabled = false;
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = false;
             OldSpeed = Velocity.speed;
-            //Velocity.MaxSpeed = 30f;
+            Velocity.MaxSpeed = 30f;
             Velocity.forceVector = new Vector2(500, 0);
             Velocity.PlayerRB.AddForce(Velocity.forceVector);
             Debug.Log("Yet");
