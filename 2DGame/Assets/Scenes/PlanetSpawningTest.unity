@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 197384495}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,8 +363,9 @@ MonoBehaviour:
     type: 3}
   StarPowerUp: {fileID: 8863700124932930357, guid: fd2e696d844904045a30b96680e3975e,
     type: 3}
-  BoostPowerUp: {fileID: 0}
-  Player: {fileID: 0}
+  BoostPowerUp: {fileID: 4281787717800110470, guid: 4f00f087601734805b76165483e54845,
+    type: 3}
+  Player: {fileID: 973401848}
   Star: {fileID: 6280082290849730344, guid: 5d9e283d1ebd9417f9f19bc94800b7ac, type: 3}
 --- !u!1 &519420028
 GameObject:
@@ -741,7 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreText: {fileID: 687961314}
-  PlayerPos: {fileID: 0}
+  PlayerPos: {fileID: 973401848}
   Score: 0
   OldScore: 0
   NewScore: 0
@@ -1225,35 +1226,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947221314}
   m_CullTransparentMesh: 0
---- !u!1 &973401843 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8978138889128852596, guid: 0a7c00a2ccbfc418c9112e084d73b931,
-    type: 3}
-  m_PrefabInstance: {fileID: 6088020315070722719}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &973401848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8978138889128852598, guid: 0a7c00a2ccbfc418c9112e084d73b931,
     type: 3}
   m_PrefabInstance: {fileID: 6088020315070722719}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &973401849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973401843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d40c3ef54124cbdaf3307f1ec43097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScoreText: {fileID: 0}
-  PlayerPos: {fileID: 973401848}
-  Score: 0
-  OldScore: 0
-  NewScore: 0
 --- !u!1 &981522686
 GameObject:
   m_ObjectHideFlags: 0
