@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1695513123766934551}
   - component: {fileID: 7018588484151031948}
   - component: {fileID: 3807747112987617530}
+  - component: {fileID: 8936636046037337309}
   m_Layer: 0
   m_Name: bigPlanet
   m_TagString: Planet
@@ -193,7 +194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 2580745651921559551}
   restartOnCollision: 1
-  test: {fileID: 0}
 --- !u!50 &8589634520090629300
 Rigidbody2D:
   serializedVersion: 4
