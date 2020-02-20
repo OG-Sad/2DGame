@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
-    public Transform Test;
     public Transform PlayerPos;
     public float Score = 0 , OldScore, NewScore;
 

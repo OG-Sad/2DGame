@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8978138889128852598}
   - component: {fileID: 8978138889128852605}
-  - component: {fileID: 8978138889128852601}
   - component: {fileID: 8978138889128852599}
   - component: {fileID: 8978138889128852600}
+  - component: {fileID: 1155038227741802697}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -83,23 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8978138889128852601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978138889128852596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26113d64a07200642abcb5495c4b3376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testing: 0
-  Col: {fileID: 8978138889128852599}
-  player: {fileID: 8978138889128852598}
-  MinSpeed: 30
-  MaxSpeed: 40
 --- !u!58 &8978138889128852599
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,6 +120,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1155038227741802697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978138889128852596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d7be06ed8014e1991c73f941981d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testing: 0
+  Col: {fileID: 8978138889128852599}
+  player: {fileID: 8978138889128852598}
+  MinSpeed: 10
+  isLevel: 0
 --- !u!1 &8978138889243514135
 GameObject:
   m_ObjectHideFlags: 0

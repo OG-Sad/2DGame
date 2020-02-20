@@ -8,12 +8,12 @@ public class Velocity : MonoBehaviour
     public bool testing = false;
     public CircleCollider2D Col;
     public Transform player;
-    public float MinSpeed;
-    public float MaxSpeed;
+    public float MinSpeed = 5f;
+    public static float MaxSpeed = 20f, speed;
     public bool isLevel;
 
-    Rigidbody2D PlayerRB;
-    Vector2 forceVector = new Vector2(250, 0);
+    public static Rigidbody2D PlayerRB;
+    public static Vector2 forceVector = new Vector2(300, 0);
     float timer;
     
 
@@ -29,7 +29,7 @@ public class Velocity : MonoBehaviour
     void FixedUpdate()
     {
         var v = PlayerRB.velocity;
-        float speed = v.sqrMagnitude;// (PlayerRB.velocity);  // test current object speed
+        speed = v.sqrMagnitude;// (PlayerRB.velocity);  // test current object speed
       
         if (speed > MaxSpeed)
         {
