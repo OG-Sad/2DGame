@@ -34,9 +34,7 @@ public class planetCollision : MonoBehaviour
 
             else if (coll.gameObject.tag == "Player" && restartOnCollision)
             {
-
-                // Debug.Log("Testing: We're in...");
-                SceneManager.LoadScene("PlanetSpawningTest");
+                Database.planetCollision = true;
             }
             // Debug.Log("Collision");
         }
