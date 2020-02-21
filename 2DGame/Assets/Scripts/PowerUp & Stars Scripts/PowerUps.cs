@@ -134,7 +134,7 @@ public class PowerUps : MonoBehaviour
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
             foreach (GameObject Plan in BoostPoweredUp.Planets)
             {
-                Plan.GetComponent<Attractor>().enabled = false;
+               Plan.GetComponent<Attractor>().enabled = true;
             }
             PlayerPoweredUp = false;
             Velocity.speed = BoostPoweredUp.OldSpeed;
