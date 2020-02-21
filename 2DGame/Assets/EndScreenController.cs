@@ -20,18 +20,21 @@ public class EndScreenController : MonoBehaviour
     void Update()
     {
         if (Database.planetCollision == true) {
+            Time.timeScale = 0f;
             endScreen.SetActive(true);
             distanceText.GetComponent<Text>().text = "Distance: " + Database.finalScore;
         }
     }
 
     public void MainMenu() {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MenuScene");
         Database.planetCollision = false;
     }
 
     public void PlayAgain()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("PlanetSpawningTest");
         Database.planetCollision = false;
     }
