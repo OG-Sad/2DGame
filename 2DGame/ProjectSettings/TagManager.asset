@@ -8,6 +8,7 @@ TagManager:
   - gravitySlider
   - Background
   - PowerUp
+  - Star
   layers:
   - Default
   - TransparentFX

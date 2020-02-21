@@ -25,7 +25,8 @@ sysinfo.txt
 
 *.pidb.meta
 
-
+#Ignore all .meta file
+*.meta
 
 ###
 
