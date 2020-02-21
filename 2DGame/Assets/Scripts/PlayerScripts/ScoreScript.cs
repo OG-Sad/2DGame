@@ -22,5 +22,9 @@ public class ScoreScript : MonoBehaviour
     {  
         Score = Mathf.Round(PlayerPos.position.x) > Score ? Mathf.Round(PlayerPos.position.x) : Score;
         ScoreText.text = Score.ToString();
+
+        if (Database.planetCollision == true) {
+            Database.finalScore = Score;
+        }
     }
 }

@@ -9,4 +9,8 @@ public class Database : MonoBehaviour
     //the highest level the player has achieved; starts at 0
     public static int highestCurrentLevel = PlayerPrefs.GetInt("highestCurrentLevel");
     public static bool currentLevelEnded;
+
+    public static bool planetCollision = false;
+    //the score when the player dies
+    public static float finalScore = 0;
 }
