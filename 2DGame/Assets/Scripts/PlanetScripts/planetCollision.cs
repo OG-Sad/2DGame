@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class planetCollision : MonoBehaviour
 {
-    
     public Transform planet;
     public bool restartOnCollision;
     void OnCollisionEnter2D(Collision2D coll) {
@@ -36,7 +35,7 @@ public class planetCollision : MonoBehaviour
             {
 
                 // Debug.Log("Testing: We're in...");
-                SceneManager.LoadScene("PlanetSpawningTest");
+                Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
             }
             // Debug.Log("Collision");
         }
