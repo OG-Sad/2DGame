@@ -37,7 +37,7 @@ public class MeteorController : MonoBehaviour
         }
         else if (coll.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("PlanetSpawningTest");
+            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
         }
     }
 }

@@ -58,7 +58,7 @@ public class Velocity : MonoBehaviour
             timer += Time.deltaTime;
             
             if (timer >= 5f || Mathf.Abs(player.position.y) >= 15f) {
-                SceneManager.LoadScene("PlanetSpawningTest");
+                Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
             }
             
             // Adds a little bit force to push the player back into the screen when out of it so the pleyer...
