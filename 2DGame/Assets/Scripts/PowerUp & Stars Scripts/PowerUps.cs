@@ -7,8 +7,8 @@ public class PowerUps : MonoBehaviour
 {
     public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO;
     public static Transform PowerUp, StarSpawning, UFOSpawning;
-    float yPos = 0, timer = 0, seconds = 0;
-    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false ,RespawnUFO = false;
+    float yPos = 0, timer = 0, seconds = 0, timerForStars;
+    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, OnePowerUp = true;
     public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo;
     public static bool RespawnStar = false;
     
@@ -19,13 +19,14 @@ public class PowerUps : MonoBehaviour
     {
         //Every 10 seconds a power up can spawn
         timer += Time.deltaTime;
+        timerForStars += Time.deltaTime;
         if (timer >= 10)
 
         {
             //1/5 times a power up can spawn, it will spawn
             PowerUpGo = Random.Range(0, 5);
             timer = 0;
-            if (PowerUpGo == 4)// && PowerUpTrue == false)
+            if (PowerUpGo == 4 && OnePowerUp == false && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
             {
                 //EditorApplication.isPaused = true;
                 SpawnPowerUp();
@@ -33,13 +34,13 @@ public class PowerUps : MonoBehaviour
         }
         //Every 20 seconds a Star can spawn
         
-        if (timer >= 20)
+        if (timerForStars >= 20)
         {
+            
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
-            UFOGo = Random.Range(0, 3);
-            timer = 0;
-
+            UFOGo = Random.Range(0, 1);
+            timerForStars = 0;
             if (StarGo == 1)
             {
                 //EditorApplication.isPaused = true;
@@ -77,6 +78,7 @@ public class PowerUps : MonoBehaviour
 
     void SpawnPowerUp()
     {
+        OnePowerUp = false;
         ChoosePowerUp = Random.Range(0, 4);
         if (ChoosePowerUp == 1)
         {
@@ -114,7 +116,7 @@ public class PowerUps : MonoBehaviour
 
         if (seconds >= 6 && ChoosePowerUp == 1)
         {
-
+            OnePowerUp = false;
             PlayerPoweredUp = false;
             seconds = 0;
 
@@ -122,7 +124,7 @@ public class PowerUps : MonoBehaviour
 
         if (seconds >= 6 &&  ChoosePowerUp == 2)
         {
-
+            OnePowerUp = false;
             Time.timeScale = 1f;
             PlayerPoweredUp = false;
             seconds = 0;
@@ -132,7 +134,7 @@ public class PowerUps : MonoBehaviour
         
         if (seconds >= 6 && ChoosePowerUp == 3)
         {
-
+            OnePowerUp = false;
             PlayerPoweredUp = false;
             seconds = 0;
 
@@ -148,6 +150,7 @@ public class PowerUps : MonoBehaviour
             PlayerPoweredUp = false;
             Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
+            OnePowerUp = false;
 
         }
     }
