@@ -14,7 +14,7 @@ public class planetCollision : MonoBehaviour
 
         if (coll.gameObject.tag == "Player" && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
         {
-
+            Debug.Log("yet");
             GameObject.FindGameObjectWithTag("Planet").GetComponent<Attractor>().enabled = false;
 
         }

@@ -11,7 +11,6 @@ public class PowerUpCollision : MonoBehaviour
     //public Renderer rend;
     void Update ()
     {
-        PowerUps.ChoosePowerUp = 4;
         if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
         {
             Destroy(gameObject);

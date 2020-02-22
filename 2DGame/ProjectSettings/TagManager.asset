@@ -9,6 +9,8 @@ TagManager:
   - Background
   - PowerUp
   - Star
+  - Spawner
+  - UFO
   layers:
   - Default
   - TransparentFX
