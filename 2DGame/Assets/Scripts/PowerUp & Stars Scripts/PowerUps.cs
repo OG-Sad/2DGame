@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star;
-    public static Transform PowerUp, StarSpawning;
+    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO;
+    public static Transform PowerUp, StarSpawning, UFOSpawning;
     float yPos = 0, timer = 0, seconds = 0;
-    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false;
-    public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo;
+    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false ,RespawnUFO = false;
+    public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo;
     public static bool RespawnStar = false;
     
 
@@ -37,12 +37,17 @@ public class PowerUps : MonoBehaviour
         {
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
+            UFOGo = Random.Range(0, 3);
             timer = 0;
 
             if (StarGo == 1)
             {
                 //EditorApplication.isPaused = true;
                 SpawnStar();
+            }
+            if(UFOGo == 1)
+            {
+                SpawnUFO();
             }
         }
 
@@ -64,6 +69,10 @@ public class PowerUps : MonoBehaviour
             SpawnStar();
         }
         Debug.Log(Input.touchCount);
+        if (RespawnUFO == true)
+        {
+            SpawnUFO();
+        }
     }
 
     void SpawnPowerUp()
@@ -151,6 +160,14 @@ public class PowerUps : MonoBehaviour
         //yPos = Random.Range(-4.5f, 4.5f);
         StarSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, yPoss);
 
+    }
+    public void SpawnUFO()
+    {
+        float UFOCor = 0;
+        //EditorApplication.isPaused = true;
+        UFOSpawning = Instantiate(UFO);
+        UFOCor = Random.Range(0, 4.5f);
+        UFOSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, UFOCor);
     }
 }
 
