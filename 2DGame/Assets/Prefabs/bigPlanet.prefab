@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 7018588484151031948}
   - component: {fileID: 3807747112987617530}
   - component: {fileID: 2623115596980814307}
+  - component: {fileID: 6422777313740979784}
   m_Layer: 0
   m_Name: bigPlanet
   m_TagString: Planet
@@ -299,6 +300,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlanetPrefabs: {fileID: 2580745651921559551}
+--- !u!114 &6422777313740979784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115593165521293927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7d333ceec966744bf67b124b2369df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1279386016702984664
 GameObject:
   m_ObjectHideFlags: 0

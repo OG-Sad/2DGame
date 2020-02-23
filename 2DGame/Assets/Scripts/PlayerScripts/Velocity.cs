@@ -13,7 +13,7 @@ public class Velocity : MonoBehaviour
     public bool isLevel;
 
     public static Rigidbody2D PlayerRB;
-    public static Vector2 forceVector = new Vector2(300, 0);
+    public static Vector2 forceVector = new Vector2(0, -300);
     float timer;
     
 
