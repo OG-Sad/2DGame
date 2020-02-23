@@ -13,4 +13,6 @@ public class Database : MonoBehaviour
     public static bool planetCollision = false;
     //the score when the player dies
     public static float finalScore = 0;
+    public static bool isOrbiting = false;
+    public static Vector2 orbitPlanetPos;
 }
