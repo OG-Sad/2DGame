@@ -8,7 +8,7 @@ public class planetCollision : MonoBehaviour
 {
     
     public Transform planet;
-    public bool restartOnCollision;
+
     void OnCollisionEnter2D(Collision2D coll) {
 
 
@@ -31,12 +31,6 @@ public class planetCollision : MonoBehaviour
                 // Debug.Log("Testing: We're in...");
                 FindObjectOfType<Spawner>().DestroyPlanet(planet);
             }
-
-            else if (coll.gameObject.tag == "Player" && restartOnCollision)
-            {
-                Database.planetCollision = true;
-            }
-            // Debug.Log("Collision");
         }
     }
      void OnCollisionExit2D(Collision2D coll)

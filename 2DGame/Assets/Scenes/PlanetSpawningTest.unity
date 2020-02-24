@@ -244,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endScreen: {fileID: 1353137177}
   distanceText: {fileID: 6525557834484461835}
+  highScoreText: {fileID: 6525557834105435966}
 --- !u!1 &175846291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,6 +1819,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447090870}
   m_CullTransparentMesh: 0
+--- !u!1 &1804026373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8978138889128852596, guid: 0a7c00a2ccbfc418c9112e084d73b931,
+    type: 3}
+  m_PrefabInstance: {fileID: 6088020315070722719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1804026378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804026373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a6360674d3d0c44b9b921ab9307783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2020602794
 GameObject:
   m_ObjectHideFlags: 0

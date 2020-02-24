@@ -10,7 +10,7 @@ public class Database : MonoBehaviour
     public static int highestCurrentLevel = PlayerPrefs.GetInt("highestCurrentLevel");
     public static bool currentLevelEnded;
 
-    public static bool planetCollision = false;
+    public static bool gameEnd = false;
     //the score when the player dies
     public static float finalScore = 0;
     public static bool isOrbiting = false;

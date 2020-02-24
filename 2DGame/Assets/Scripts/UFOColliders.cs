@@ -48,7 +48,7 @@ public class UFOColliders : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(other.gameObject);
-            Database.planetCollision = true;
+            Database.gameEnd = true;
         }
 
         else if (other.gameObject.tag == "Planet")
