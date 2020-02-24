@@ -7,7 +7,6 @@ public class StarScript : MonoBehaviour
     public Transform Star;
     public static Transform StarSpawning;
     GameObject[] currentStars;
-    public static int GameStarCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +48,8 @@ public class StarScript : MonoBehaviour
             Debug.Log("Star Col");
             if (other.gameObject.name == "Player")
             {
-                GameStarCounter++;
+                //adds 1 star to the current number of stars
+                PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 1);
                 Destroy(gameObject);
 
             }

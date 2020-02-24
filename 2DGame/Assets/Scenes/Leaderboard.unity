@@ -272,7 +272,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 332347655}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1495890588}
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &332347655
@@ -563,9 +574,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1495890587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3cf0df022fa4c24291d3df27f808952, type: 3}
+  m_Script: {fileID: 11500000, guid: 901a7493b6ff16045af98bfc226987d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScoreText: {fileID: 355009999}
 --- !u!114 &1495890589
 MonoBehaviour:
   m_ObjectHideFlags: 0

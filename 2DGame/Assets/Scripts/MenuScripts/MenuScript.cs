@@ -106,6 +106,16 @@ public class MenuScript : MonoBehaviour
 
     }
 
+    public void Leaderboard()
+    {
+        SceneManager.LoadScene(sceneName: "Leaderboard");
+    }
+
+    public void Shop()
+    {
+        SceneManager.LoadScene(sceneName: "Shop");
+    }
+
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);

@@ -9,6 +9,7 @@ public class EndScreenController : MonoBehaviour
 
     public GameObject endScreen;
     public GameObject distanceText;
+    public GameObject highScoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -19,23 +20,26 @@ public class EndScreenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Database.planetCollision == true) {
+        if (Database.gameEnd == true) {
             Time.timeScale = 0f;
             endScreen.SetActive(true);
             distanceText.GetComponent<Text>().text = "Distance: " + Database.finalScore;
+            highScoreText.GetComponent<Text>().text = "High Score: " + PlayerPrefs.GetFloat("High Score");
         }
     }
 
     public void MainMenu() {
+        endScreen.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("MenuScene");
-        Database.planetCollision = false;
+        Database.gameEnd = false;
     }
 
     public void PlayAgain()
     {
+        endScreen.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("PlanetSpawningTest");
-        Database.planetCollision = false;
+        Database.gameEnd = false;
     }
 }
