@@ -44,7 +44,7 @@ public class Attractor : MonoBehaviour
         //Debug.Log("force: " + force);
         //Debug.Log("Orbit Velocity: " + orbitVel);
 
-        if (Mathf.Abs(PlayerRB.velocity.normalized.x + -direction.normalized.y) <= 1 && Mathf.Abs(PlayerRB.velocity.magnitude - orbitVelNum) <= .5)
+        if (Mathf.Abs(PlayerRB.velocity.normalized.x + -direction.normalized.y) <= .5 && Mathf.Abs(PlayerRB.velocity.magnitude - orbitVelNum) <= .5)
         {
             Database.isOrbiting = true;
             Database.orbitPlanetPos = PlanetRB.position;
