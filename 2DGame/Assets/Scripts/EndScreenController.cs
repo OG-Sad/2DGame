@@ -29,17 +29,17 @@ public class EndScreenController : MonoBehaviour
     }
 
     public void MainMenu() {
+        Database.gameEnd = false;
         endScreen.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("MenuScene");
-        Database.gameEnd = false;
     }
 
     public void PlayAgain()
     {
+        Database.gameEnd = false;
         endScreen.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("PlanetSpawningTest");
-        Database.gameEnd = false;
     }
 }
