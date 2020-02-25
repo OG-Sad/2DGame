@@ -70,7 +70,7 @@ public class ShopController : MonoBehaviour
     }
 
     public void PowerUpInvincibility() {
-        if (currentStars >= 0) {
+        if (currentStars >= 10) {
             PlayerPrefs.SetInt("stars", currentStars - 10);
             stars.text = PlayerPrefs.GetInt("stars").ToString();
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/Invincibility/Cost");
