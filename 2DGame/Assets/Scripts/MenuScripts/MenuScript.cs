@@ -49,7 +49,7 @@ public class MenuScript : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("PlanetSpawningTest");
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
         GamePaused = false;
     }
 
@@ -106,16 +106,6 @@ public class MenuScript : MonoBehaviour
 
     }
 
-    public void Leaderboard()
-    {
-        SceneManager.LoadScene(sceneName: "Leaderboard");
-    }
-
-    public void Shop()
-    {
-        SceneManager.LoadScene(sceneName: "Shop");
-    }
-
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
@@ -130,5 +120,15 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 0f;
         GamePaused = true;
         Debug.Log("Paused");
+    }
+
+    public void Shop()
+    {
+        SceneManager.LoadScene(sceneName: "Shop");
+    }
+
+    public void Leaderboard()
+    {
+        SceneManager.LoadScene(sceneName: "Leaderboard");
     }
 }
