@@ -8,27 +8,27 @@ public class BoostPoweredUp : MonoBehaviour
     public static GameObject[] Planets;
     public Transform  PlanetPrefabs;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        //find all planets
         Planets = GameObject.FindGameObjectsWithTag("Planet");
+        // if the boost power up is true and the player is powered up
         if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
         {
+            // turn gravity off on all planets and spawning
             PlanetPrefabs.GetComponent < Attractor >().enabled = false;
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = false;
+            //store old velocity
             OldSpeed = Velocity.speed;
+            //change max speed for boost
             Velocity.MaxSpeed = 30f;
+            //add big boost in the x direction
             Velocity.forceVector = new Vector2(500, 0);
             Velocity.PlayerRB.AddForce(Velocity.forceVector);
-            Debug.Log("Yet");
-           // Velocity.speed = 30f;
-            Debug.Log(Velocity.speed);
+           
 
         }
     }

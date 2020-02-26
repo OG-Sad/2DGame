@@ -194,7 +194,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: {fileID: 2580745651921559551}
-  restartOnCollision: 1
 --- !u!50 &8589634520090629300
 Rigidbody2D:
   serializedVersion: 4
@@ -309,7 +308,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1115593165521293927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf7d333ceec966744bf67b124b2369df, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f8316864e2324b449125b37ab02d597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1279386016702984664

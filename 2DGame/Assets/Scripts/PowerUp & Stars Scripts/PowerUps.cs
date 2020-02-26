@@ -39,37 +39,40 @@ public class PowerUps : MonoBehaviour
             
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
-            UFOGo = Random.Range(0, 1);
+            UFOGo = Random.Range(0, 3);
             timerForStars = 0;
             if (StarGo == 1)
             {
                 //EditorApplication.isPaused = true;
                 SpawnStar();
             }
+            //UFO spawns 1/3 times every twenty seconds
             if(UFOGo == 1)
             {
                 SpawnUFO();
             }
+            timerForStars = 0;
         }
 
-        //Debug.Log(PowerUpGo);
+        // If the player has the star power up they can tap twice and get powered up
         if (PlayerPotentialPowerUp == true && Input.touchCount > 1)
         {
             PlayerPoweredUp = true;
             
         }
-
+        // If  the player is powered up, effect of the powerups is called
         if (PlayerPoweredUp == true)
         {
 
             DuringPowerUp();
 
         }
+        // If the star spawned touching a planet or in one
         if (RespawnStar)
         {
             SpawnStar();
         }
-        Debug.Log(Input.touchCount);
+        // If the UFO spawned touching a planet or in one
         if (RespawnUFO == true)
         {
             SpawnUFO();
@@ -78,11 +81,13 @@ public class PowerUps : MonoBehaviour
 
     void SpawnPowerUp()
     {
+        //makes sure only one power up can spawn at a time
         OnePowerUp = false;
+        //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(0, 4);
+        //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {
-            //EditorApplication.isPaused = true;
             PowerUp = Instantiate(InvinciblePowerUp);
             //yPos = Random.Range(-4.5f, 4.5f);
             yPos = 0;
@@ -111,11 +116,14 @@ public class PowerUps : MonoBehaviour
     }
      void DuringPowerUp()
     {
-        
+        //seconds are unscaled because of time power up
         seconds += Time.unscaledDeltaTime;
-
+        // after the power up, the game is restored to before presets
         if (seconds >= 6 && ChoosePowerUp == 1)
         {
+            //new power up can spawn
+            //player is not powered up
+            //seconds reset
             OnePowerUp = false;
             PlayerPoweredUp = false;
             seconds = 0;
@@ -124,6 +132,10 @@ public class PowerUps : MonoBehaviour
 
         if (seconds >= 6 &&  ChoosePowerUp == 2)
         {
+            //new power up can spawn
+            // time is set to normal
+            //player is not powered up
+            //seconds reset
             OnePowerUp = false;
             Time.timeScale = 1f;
             PlayerPoweredUp = false;
@@ -134,6 +146,9 @@ public class PowerUps : MonoBehaviour
         
         if (seconds >= 6 && ChoosePowerUp == 3)
         {
+            //new power up can spawn
+            //player is not powered up
+            //seconds reset
             OnePowerUp = false;
             PlayerPoweredUp = false;
             seconds = 0;
@@ -142,11 +157,15 @@ public class PowerUps : MonoBehaviour
 
         if (seconds >= 6 && ChoosePowerUp == 4)
         {
+            // finds all the planets and enables the gravity
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
             foreach (GameObject Plan in BoostPoweredUp.Planets)
             {
                Plan.GetComponent<Attractor>().enabled = true;
             }
+            // player not powered up
+            // velocity before boost set to the player
+            //seconds reset and power up can spawn
             PlayerPoweredUp = false;
             Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
@@ -157,8 +176,8 @@ public class PowerUps : MonoBehaviour
 
      void SpawnStar()
     {
+        // puts the star on screen
         var yPoss = 0;
-        //EditorApplication.isPaused = true;
         StarSpawning = Instantiate(Star);
         //yPos = Random.Range(-4.5f, 4.5f);
         StarSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, yPoss);
@@ -166,6 +185,7 @@ public class PowerUps : MonoBehaviour
     }
     public void SpawnUFO()
     {
+        // puts the ufo on screen
         float UFOCor = 0;
         //EditorApplication.isPaused = true;
         UFOSpawning = Instantiate(UFO);
