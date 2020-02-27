@@ -6,9 +6,9 @@ public class changeGravity : MonoBehaviour
 {
     public GameObject planet, ring1;
     public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f, ringSize = 2.5f;
-    public bool test = false, doubleTapGrav;
+    public bool test = false, doubleTapGrav, firstDoubleTap = false;
     private Vector3 startPos;
-    private bool directionDetermined, direction, isBeingHeld, gravityRate, startTimer, taps, firstTap, firstDoubleTap;
+    private bool directionDetermined, direction, isBeingHeld, gravityRate, startTimer, taps, firstTap;
     private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck, massHolder, secondSecondCounter;
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
@@ -223,7 +223,13 @@ public class changeGravity : MonoBehaviour
         else {
             ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
         }
+        if(firstDoubleTap){
+            m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(.5f, 1f, .5f) : new Color(1f, .5f, .5f);
+        }
+        else {
+            m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(1f - fraction, 1f, 1f) : new Color(1f, 1f - fraction, 1f);
 
-        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(1f - fraction, 1f, 1f) : new Color(1f, 1f - fraction, 1f);
+        }
+
     }
 }
