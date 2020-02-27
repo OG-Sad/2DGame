@@ -7,7 +7,7 @@ public class Attractor : MonoBehaviour
     Rigidbody2D PlanetRB;
     float orbitVelNum;
 
-    public float zeroRepelForce = -30f;
+    public float zeroRepelForce = -5f;
 
     private void Start()
     {

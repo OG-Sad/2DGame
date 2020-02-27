@@ -734,7 +734,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -757,14 +757,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 4562011318171360487}
   ring1: {fileID: 5981964116646101964}
-  threshold: 0.2
+  threshold: 0.1
   timerThreshold: 0.5
-  massMultiplier: 5
+  massMultiplier: 10
   slightMassMultiplier: 4
   divisionDecider: 0.1
   ringSize: 2.5
   test: 0
   doubleTapGrav: 0
+  firstDoubleTap: 0
 --- !u!114 &2601183047293698730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,7 +987,7 @@ Transform:
   m_GameObject: {fileID: 5981964116646101964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6879874355757733644}
   m_RootOrder: 0

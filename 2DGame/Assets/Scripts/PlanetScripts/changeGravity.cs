@@ -168,8 +168,9 @@ public class changeGravity : MonoBehaviour
     // Gravity control
     public void gravity(float displace, float originalMass, bool gravRate) {
         // gravRate is true = normal, false = sligt
-        float multiplier = gravRate ? massMultiplier : slightMassMultiplier;
-        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 1.5f * multiplier : 1 * multiplier; 
+        //float multiplier = gravRate ? massMultiplier : slightMassMultiplier;
+        float multiplier = massMultiplier;
+        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 1.5f * multiplier : multiplier; 
         float newMass = originalMass + (displace * multiplier);
         
         // Gravity Parameters
@@ -215,21 +216,16 @@ public class changeGravity : MonoBehaviour
         float fraction = mass / planetMassCheck;
 
         if (mass <= 0) {
-            ring1.transform.localScale = new Vector3(0.0001f, 0.0001f, 1);
+             ring1.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (mass >= planetMassCheck) {
             ring1.transform.localScale = new Vector3(ringSize, ringSize, 1);
         }
         else {
-            ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
+            ring1.transform.localScale = new Vector3(1 + 1.5f * fraction, 1 + 1.5f * fraction, 1);
         }
-        if(firstDoubleTap){
-            m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(.5f, 1f, .5f) : new Color(1f, .5f, .5f);
-        }
-        else {
-            m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(1f - fraction, 1f, 1f) : new Color(1f, 1f - fraction, 1f);
-
-        }
+        
+        m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(1f - fraction, 1f, 1f) : new Color(1f, 1f - fraction, 1f);
 
     }
 }
