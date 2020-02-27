@@ -19,7 +19,7 @@ public class BoostPoweredUp : MonoBehaviour
         if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
         {
             // turn gravity off on all planets and spawning
-            PlanetPrefabs.GetComponent < Attractor >().enabled = false;
+            PlanetPrefabs.GetComponent < CircleCollider2D >().enabled = false;
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = false;
             //store old velocity
             OldSpeed = Velocity.speed;
@@ -31,5 +31,12 @@ public class BoostPoweredUp : MonoBehaviour
            
 
         }
+       // if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
+        //{
+            // turn kill off
+            //PlanetPrefabs.GetComponent<CircleCollider2D>().enabled = false;
+                       
+        //}
+        
     }
 }
