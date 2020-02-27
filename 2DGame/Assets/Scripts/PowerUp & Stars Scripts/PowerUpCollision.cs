@@ -6,10 +6,7 @@ using UnityEngine;
 public class PowerUpCollision : MonoBehaviour
 {
 
-    //private static GameObject myPrefabInstances;
-    //public Transform player;
-
-    //public Renderer rend;
+   
     void Update()
     {
         // if any of the power ups are too far behind the player, destroy them
@@ -21,14 +18,16 @@ public class PowerUpCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         // power up the player on collision or potential and destroy the power up
         if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 1)
         {
             PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
 
+        }
 
-
-            if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
             {
                 PowerUps.PlayerPoweredUp = true;
                 Destroy(gameObject);
@@ -36,18 +35,19 @@ public class PowerUpCollision : MonoBehaviour
                 Time.timeScale = 0f;
             }
 
-            if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 3)
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 3)
             {
                 PowerUps.PlayerPotentialPowerUp = true;
                 Destroy(gameObject);
 
             }
-            if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
+         if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
             {
+                Debug.Log("Coll2");
                 PowerUps.PlayerPoweredUp = true;
                 Destroy(gameObject);
             }
 
-        }
+        
     }
 }
