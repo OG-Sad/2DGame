@@ -7,7 +7,7 @@ public class Attractor : MonoBehaviour
     Rigidbody2D PlanetRB;
     float orbitVelNum;
 
-    public float zeroRepelForce = -5f;
+    public float zeroRepelForce = -30f;
 
     private void Start()
     {
@@ -22,12 +22,16 @@ public class Attractor : MonoBehaviour
 
     void Attract(GameObject objToAttract)
     {
+        bool tapped = GetComponent<changeGravity>().firstDoubleTap;
         Rigidbody2D PlayerRB = objToAttract.GetComponent<Rigidbody2D>();
         Vector2 direction = PlanetRB.position - PlayerRB.position;
         float distance = direction.magnitude;
 
-        // Added a repelling force if planet mass is 0 if planet mass is 0
-        float planetMass = PlanetRB.mass > 1f ? PlanetRB.mass : zeroRepelForce; // <-- Repel force
+        // Added a repelling force if planet mass is 0
+        float planetMass = !tapped ? PlanetRB.mass : zeroRepelForce; // <-- Repel force
+        //float planetMass = PlanetRB.mass;
+        
+        
         // Could add future stuff when planet is at 0 mass here
         if (planetMass < 0) {
             //Debug.Log("Success!");
