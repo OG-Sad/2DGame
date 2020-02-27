@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Database : MonoBehaviour
+public static class Database
 {
     //if the data is reset, the PlayerPrefs default the values at 0
     public static int currentLevel = PlayerPrefs.GetInt("currentLevel");
@@ -15,4 +15,9 @@ public class Database : MonoBehaviour
     public static float finalScore = 0;
     public static bool isOrbiting = false;
     public static Vector2 orbitPlanetPos;
+
+    //list of all power ups
+    public static List<ShopItem> buildingsList = new List<ShopItem>() {
+        new ShopItem(){ name = "Invincibility", cost = 10, owned = false}
+    };
 }
