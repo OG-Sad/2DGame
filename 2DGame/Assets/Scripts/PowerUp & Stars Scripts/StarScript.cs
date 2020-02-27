@@ -16,6 +16,7 @@ public class StarScript : MonoBehaviour
         // if the star is too far behind the player, destroy it
         if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
         {
+            PowerUps.IsStarSpawned = false;
             Destroy(gameObject);
         }
         // if the star magnent is powered up, makes the star attract to the player
@@ -47,9 +48,11 @@ public class StarScript : MonoBehaviour
                 //adds 1 star to the current number of stars and destroys the star
                 PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 1);
                 Destroy(gameObject);
+                PowerUps.IsStarSpawned = false;
 
-            }
-            if (other.gameObject.tag == "Planet")
+
+        }
+        if (other.gameObject.tag == "Planet")
         {
             // if the star collides with the planet, then respawn the star
             Destroy(gameObject);

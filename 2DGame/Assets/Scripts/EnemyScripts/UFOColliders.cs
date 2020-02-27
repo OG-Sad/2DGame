@@ -12,7 +12,7 @@ public class UFOColliders : MonoBehaviour
     {
         if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
         {
-            Destroy(gameObject);
+            Database.gameEnd = true;
         }
         if (PlayerPulled == true)
         {

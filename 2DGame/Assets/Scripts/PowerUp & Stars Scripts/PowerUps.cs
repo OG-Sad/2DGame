@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO;
+    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO, BigPlanetPrefab, SmallPlanetPrefab;
     public static Transform PowerUp, StarSpawning, UFOSpawning;
     float yPos = 0, timer = 0, seconds = 0, timerForStars;
-    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, OnePowerUp = true;
+    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsPowerUp = false, IsStarSpawned = false;
     public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo;
     public static bool RespawnStar = false;
     
@@ -20,13 +20,13 @@ public class PowerUps : MonoBehaviour
         //Every 10 seconds a power up can spawn
         timer += Time.deltaTime;
         timerForStars += Time.deltaTime;
-        if (timer >= 10)
+        if (timer >= 5)
 
         {
-            //1/5 times a power up can spawn, it will spawn
-            PowerUpGo = Random.Range(0, 5);
+            //1/2 times a power up can spawn, it will spawn
+            PowerUpGo = Random.Range(0, 2);
             timer = 0;
-            if (PowerUpGo == 4 && OnePowerUp == false && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
+            if (PowerUpGo == 1 && IsPowerUp == false && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
             {
                 //EditorApplication.isPaused = true;
                 SpawnPowerUp();
@@ -39,9 +39,9 @@ public class PowerUps : MonoBehaviour
             
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
-            UFOGo = Random.Range(0, 3);
+            UFOGo = Random.Range(0, 2);
             timerForStars = 0;
-            if (StarGo == 1)
+            if (StarGo == 1 && IsStarSpawned == false)
             {
                 //EditorApplication.isPaused = true;
                 SpawnStar();
@@ -82,7 +82,7 @@ public class PowerUps : MonoBehaviour
     void SpawnPowerUp()
     {
         //makes sure only one power up can spawn at a time
-        OnePowerUp = false;
+        IsPowerUp = true;
         //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(0, 4);
         //Power Up Spawned with random y position or not depending on ypos
@@ -119,12 +119,13 @@ public class PowerUps : MonoBehaviour
         //seconds are unscaled because of time power up
         seconds += Time.unscaledDeltaTime;
         // after the power up, the game is restored to before presets
-        if (seconds >= 6 && ChoosePowerUp == 1)
+        if (seconds >= 10 && ChoosePowerUp == 1)
         {
             //new power up can spawn
             //player is not powered up
             //seconds reset
-            OnePowerUp = false;
+            BigPlanetPrefab.GetComponent<CircleCollider2D>().enabled = true;
+            SmallPlanetPrefab.GetComponent<CircleCollider2D>().enabled = true;
             PlayerPoweredUp = false;
             seconds = 0;
 
@@ -136,7 +137,7 @@ public class PowerUps : MonoBehaviour
             // time is set to normal
             //player is not powered up
             //seconds reset
-            OnePowerUp = false;
+            IsPowerUp = false;
             Time.timeScale = 1f;
             PlayerPoweredUp = false;
             seconds = 0;
@@ -149,19 +150,19 @@ public class PowerUps : MonoBehaviour
             //new power up can spawn
             //player is not powered up
             //seconds reset
-            OnePowerUp = false;
+            IsPowerUp = false;
             PlayerPoweredUp = false;
             seconds = 0;
 
         }
 
-        if (seconds >= 6 && ChoosePowerUp == 4)
+        if (seconds >= 2 && ChoosePowerUp == 4)
         {
             // finds all the planets and enables the gravity
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
             foreach (GameObject Plan in BoostPoweredUp.Planets)
             {
-               Plan.GetComponent<Attractor>().enabled = true;
+               Plan.GetComponent<CircleCollider2D>().enabled = true;
             }
             // player not powered up
             // velocity before boost set to the player
@@ -169,13 +170,14 @@ public class PowerUps : MonoBehaviour
             PlayerPoweredUp = false;
             Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
-            OnePowerUp = false;
+            IsPowerUp = false;
 
         }
     }
 
      void SpawnStar()
     {
+        IsStarSpawned = true;
         // puts the star on screen
         var yPoss = 0;
         StarSpawning = Instantiate(Star);
