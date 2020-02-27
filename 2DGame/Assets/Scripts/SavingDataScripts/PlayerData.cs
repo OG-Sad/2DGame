@@ -7,9 +7,9 @@ using UnityEngine;
 public class PlayerData
 {
     //list of all power ups
-    public List<ShopItem> buildingsList;
+    public List<ShopItem> itemList;
 
-    public PlayerData(List<ShopItem> bList) {
-        buildingsList = bList;
+    public PlayerData(List<ShopItem> iList) {
+        itemList = iList;
     }
 }

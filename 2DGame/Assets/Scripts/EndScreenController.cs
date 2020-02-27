@@ -40,6 +40,9 @@ public class EndScreenController : MonoBehaviour
         Database.gameEnd = false;
         endScreen.SetActive(false);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("PlanetSpawningTest");
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        SceneManager.LoadScene(currentScene);
     }
 }

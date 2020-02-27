@@ -18,9 +18,19 @@ public class ShopController : MonoBehaviour
     public GameObject powerUps;
     public GameObject skins;
     public GameObject backgorunds;
-    
+
+    //list of all power ups
+    List<ShopItem> itemList = new List<ShopItem>() {
+        new ShopItem(){ name = "Invincibility", cost = 10, owned = false},
+        new ShopItem(){ name = "Boost", cost = 10, owned = false},
+        new ShopItem(){ name = "Time", cost = 10, owned = false},
+        new ShopItem(){ name = "Magnet", cost = 10, owned = false}
+    };
+
     void Start()
     {
+        itemList = SaveSystem.LoadPlayer().itemList;
+
         currentStars = PlayerPrefs.GetInt("Stars");
         stars.text = currentStars.ToString();
         PowerUpsClicked();
@@ -69,7 +79,7 @@ public class ShopController : MonoBehaviour
         backgorunds.SetActive(true);
     }
 
-    public void PowerUpInvincibility() {
+    public void BuyShopItem() {
         if (currentStars >= 10) {
             PlayerPrefs.SetInt("stars", currentStars - 10);
             stars.text = PlayerPrefs.GetInt("stars").ToString();

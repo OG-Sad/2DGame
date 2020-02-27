@@ -15,9 +15,4 @@ public static class Database
     public static float finalScore = 0;
     public static bool isOrbiting = false;
     public static Vector2 orbitPlanetPos;
-
-    //list of all power ups
-    public static List<ShopItem> buildingsList = new List<ShopItem>() {
-        new ShopItem(){ name = "Invincibility", cost = 10, owned = false}
-    };
 }

@@ -6,13 +6,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
 
-    public static void SavePlayer(List<ShopItem> bList) {
+    public static void SavePlayer(List<ShopItem> iList) {
         BinaryFormatter formatter = new BinaryFormatter();
         //the location path for where the data will stay
         string path = Application.persistentDataPath + "/player.data";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(bList);
+        PlayerData data = new PlayerData(iList);
 
         //converts the data into binary
         formatter.Serialize(stream, data);
@@ -30,7 +30,7 @@ public static class SaveSystem
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
 
-            return data
+            return data;
         }
         else {
             Debug.LogError("Save file not found");
