@@ -75,6 +75,7 @@ public class PowerUps : MonoBehaviour
         // If the UFO spawned touching a planet or in one
         if (RespawnUFO == true)
         {
+            IsStarSpawned = true;
             SpawnUFO();
         }
     }
