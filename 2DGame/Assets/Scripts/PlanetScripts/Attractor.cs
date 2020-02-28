@@ -27,6 +27,10 @@ public class Attractor : MonoBehaviour
         Vector2 direction = PlanetRB.position - PlayerRB.position;
         float distance = direction.magnitude;
 
+
+        float timer = Time.deltaTime;
+        bool firstPlanet = true;
+
         // Added a repelling force if planet mass is 0
         float planetMass = !tapped ? PlanetRB.mass : zeroRepelForce; // <-- Repel force
         //float planetMass = PlanetRB.mass;
@@ -48,7 +52,7 @@ public class Attractor : MonoBehaviour
         //Debug.Log("force: " + force);
         //Debug.Log("Orbit Velocity: " + orbitVel);
 
-        if (Mathf.Abs(PlayerRB.velocity.normalized.x + -direction.normalized.y) <= .5 && Mathf.Abs(PlayerRB.velocity.magnitude - orbitVelNum) <= .5)
+        if (Mathf.Abs(PlayerRB.velocity.normalized.x + -direction.normalized.y) <= .5 && Mathf.Abs(PlayerRB.velocity.magnitude - orbitVelNum) <= .5 && firstPlanet)
         {
             Database.isOrbiting = true;
             Database.orbitPlanetPos = PlanetRB.position;
@@ -74,6 +78,10 @@ public class Attractor : MonoBehaviour
                     //Planet.GetComponent<Attractor>().enabled = true;
                 }
             }
+
+            // if (timer > 1) {
+            //     firstPlanet = false;
+            // }
         }
         Debug.Log(Database.isOrbiting);
         PlayerRB.AddForce(force);

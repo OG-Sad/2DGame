@@ -93,7 +93,7 @@ public class Spawner : MonoBehaviour
                             Debug.Log("Player Tan: " + playerTan);
                             //Time.timeScale = 0;
                             
-                            float newYDisplace = planets[j].localPosition.y + 4.5f > 4.5f ? -4.5f : 4.5f;
+                            float newYDisplace = planets[j].localPosition.y + 4.5f > 4.5f ? -4f : 4f;
                             planets[j].position += new Vector3(0, newYDisplace, 0);
                         }
                     }
