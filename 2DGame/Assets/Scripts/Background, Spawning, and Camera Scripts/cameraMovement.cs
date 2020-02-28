@@ -23,9 +23,17 @@ public class cameraMovement : MonoBehaviour
     // LateUpdate is called after Update each frame
     void LateUpdate () 
     {
-        float offsetY = offset.y + (player.transform.position.y * 0.15f);
-        // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        transform.position = new Vector3(player.transform.position.x + offset.x, offsetY, transform.position.z);
+        // if (Database.isOrbiting == false)
+        // {
+            float offsetY = offset.y + (player.transform.position.y * 0.15f);
+            // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
+            transform.position = new Vector3(player.transform.position.x + offset.x, offsetY, transform.position.z);
+        // }
+        // else
+        // {
+            
+            
+        // }
     }
 }
 

@@ -6,9 +6,9 @@ public class changeGravity : MonoBehaviour
 {
     public GameObject planet, ring1;
     public float threshold = .3f, timerThreshold = .15f, massMultiplier = 8, slightMassMultiplier = 3, divisionDecider = .1f, ringSize = 2.5f;
-    public bool test = false, doubleTapGrav;
+    public bool test = false, doubleTapGrav, firstDoubleTap = false;
     private Vector3 startPos;
-    private bool directionDetermined, direction, isBeingHeld, gravityRate, startTimer, taps, firstTap, firstDoubleTap;
+    private bool directionDetermined, direction, isBeingHeld, gravityRate, startTimer, taps, firstTap;
     private float planetMass, displacement, xDisplacement = 0, yDisplacement = 0, startMass, timer = 0, doubleTapTimer = 0, lastPosition, mouseDir, planetMassCheck, massHolder, secondSecondCounter;
     private Vector3 cameraStartPos;
     Rigidbody2D planetRB;
@@ -168,8 +168,9 @@ public class changeGravity : MonoBehaviour
     // Gravity control
     public void gravity(float displace, float originalMass, bool gravRate) {
         // gravRate is true = normal, false = sligt
-        float multiplier = gravRate ? massMultiplier : slightMassMultiplier;
-        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 1.5f * multiplier : 1 * multiplier; 
+        //float multiplier = gravRate ? massMultiplier : slightMassMultiplier;
+        float multiplier = massMultiplier;
+        multiplier = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? 1.5f * multiplier : multiplier; 
         float newMass = originalMass + (displace * multiplier);
         
         // Gravity Parameters
@@ -215,15 +216,16 @@ public class changeGravity : MonoBehaviour
         float fraction = mass / planetMassCheck;
 
         if (mass <= 0) {
-            ring1.transform.localScale = new Vector3(0.0001f, 0.0001f, 1);
+             ring1.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (mass >= planetMassCheck) {
             ring1.transform.localScale = new Vector3(ringSize, ringSize, 1);
         }
         else {
-            ring1.transform.localScale = new Vector3(ringSize * fraction, ringSize * fraction, 1);
+            ring1.transform.localScale = new Vector3(1 + 1.5f * fraction, 1 + 1.5f * fraction, 1);
         }
-
+        
         m_SpriteRenderer.color = planet.name == "bigPlanet(Clone)" || planet.name == "bigPlanet" ? new Color(1f - fraction, 1f, 1f) : new Color(1f, 1f - fraction, 1f);
+
     }
 }
