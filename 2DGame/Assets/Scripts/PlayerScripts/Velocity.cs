@@ -13,10 +13,12 @@ public class Velocity : MonoBehaviour
     public bool isLevel;
 
     public static Rigidbody2D PlayerRB;
-    public static Vector2 forceVector = new Vector2(0, -300);
+    public static Vector2 forceVector = new Vector2(100, 0);
     float timer;
     
-
+    void Awake() {
+        Physics.gravity = new Vector3(0f, 0f, 0f);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -44,9 +46,9 @@ public class Velocity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        float score = isLevel ? 0 : GameObject.Find("Score").GetComponent<ScoreScript>().Score;
+        //float score = isLevel ? 0 : GameObject.Find("Score").GetComponent<ScoreScript>().Score;
 
-        MinSpeed = MinSpeed >= MaxSpeed ? MaxSpeed : MinSpeed + (score / 40);
+        //MinSpeed = MinSpeed >= MaxSpeed ? MaxSpeed : MinSpeed + (score / 40);
 
         if (testing == true) {
             player.localPosition = new Vector2(player.position.x + .1f, 0);   

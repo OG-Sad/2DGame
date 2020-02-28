@@ -22,6 +22,8 @@ public class Spawner : MonoBehaviour
 
 
     void Awake () {
+        Physics.gravity = new Vector3(0F, -5.0F, 0F);
+
         planets = new List<Transform>();
 
         timer = 0;
