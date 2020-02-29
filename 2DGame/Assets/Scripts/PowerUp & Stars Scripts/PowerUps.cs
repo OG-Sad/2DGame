@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO, BigPlanetPrefab, SmallPlanetPrefab;
-    public static Transform PowerUp, StarSpawning, UFOSpawning;
+    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, BigPlanetPrefab, SmallPlanetPrefab;
+    public static Transform PowerUp, StarSpawning;
     float yPos = 0, timer = 0, seconds = 0, timerForStars;
-    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsPowerUp = false, IsStarSpawned = false;
+    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, IsPowerUp = false, IsStarSpawned = false;
     public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo;
     public static bool RespawnStar = false;
     
@@ -39,18 +39,13 @@ public class PowerUps : MonoBehaviour
             
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
-            UFOGo = Random.Range(0, 2);
-            timerForStars = 0;
             if (StarGo == 1 && IsStarSpawned == false)
             {
                 //EditorApplication.isPaused = true;
                 SpawnStar();
             }
             //UFO spawns 1/3 times every twenty seconds
-            if(UFOGo == 1)
-            {
-                SpawnUFO();
-            }
+            
             timerForStars = 0;
         }
 
@@ -70,14 +65,11 @@ public class PowerUps : MonoBehaviour
         // If the star spawned touching a planet or in one
         if (RespawnStar)
         {
+            IsStarSpawned = true;
             SpawnStar();
         }
         // If the UFO spawned touching a planet or in one
-        if (RespawnUFO == true)
-        {
-            IsStarSpawned = true;
-            SpawnUFO();
-        }
+        
     }
 
     void SpawnPowerUp()
@@ -85,7 +77,7 @@ public class PowerUps : MonoBehaviour
         //makes sure only one power up can spawn at a time
         IsPowerUp = true;
         //chooses which power up should spawn randomly
-        ChoosePowerUp = Random.Range(0, 4);
+        ChoosePowerUp = Random.Range(1, 5);
         //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {
@@ -186,14 +178,6 @@ public class PowerUps : MonoBehaviour
         StarSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, yPoss);
 
     }
-    public void SpawnUFO()
-    {
-        // puts the ufo on screen
-        float UFOCor = 0;
-        //EditorApplication.isPaused = true;
-        UFOSpawning = Instantiate(UFO);
-        UFOCor = Random.Range(0, 4.5f);
-        UFOSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, UFOCor);
-    }
+   
 }
 

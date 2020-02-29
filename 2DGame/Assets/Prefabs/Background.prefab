@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7348189083787433056}
   - component: {fileID: 7348189083787433071}
   - component: {fileID: 7348189083787433070}
+  - component: {fileID: 1793710306795204929}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -4698,3 +4699,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1793710306795204929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7348189083787433068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0753258291ecb4fc39cbf816d62b3af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 8978138889128852596, guid: 0a7c00a2ccbfc418c9112e084d73b931, type: 3}
+  BackgroundType: {fileID: 7348189083787433056}

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PowerUpCollision : MonoBehaviour
 {
-
    
     void Update()
     {

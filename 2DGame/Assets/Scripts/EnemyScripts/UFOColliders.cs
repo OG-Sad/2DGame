@@ -5,56 +5,80 @@ using UnityEngine;
 public class UFOColliders : MonoBehaviour
 {
     bool PlayerPulled = false;
-    GameObject Player, UFO;
-    
+   
     // Start is called before the first frame update
     void Update()
     {
-        if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+        if (Database.gameEnd == false)
         {
-            Database.gameEnd = true;
-        }
-        if (PlayerPulled == true)
-        {
+            if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+            {
+                Destroy(gameObject);
+                
+            }
+            if (PlayerPulled == true)
+            {
 
-            Vector2 Vector = new Vector2(0, 18);
-            Velocity.PlayerRB.AddForce(Vector);
-            Debug.Log(Velocity.PlayerRB);
+                Vector2 Vector = new Vector2(0, 18);
+                Velocity.PlayerRB.AddForce(Vector);
+                Debug.Log(Velocity.PlayerRB);
 
-            /*
-            Player = GameObject.FindGameObjectWithTag("Player");
-            UFO = GameObject.FindGameObjectWithTag("UFO");
-            Player.transform.Translate((UFO.transform.position - Player.transform.position).normalized * 5 * Time.deltaTime, Space.World);
-            */
+                /*
+                Player = GameObject.FindGameObjectWithTag("Player");
+                UFO = GameObject.FindGameObjectWithTag("UFO");
+                Player.transform.Translate((UFO.transform.position - Player.transform.position).normalized * 5 * Time.deltaTime, Space.World);
+                */
+            }
+
+            if (PowerUps.PlayerPoweredUp = true && PowerUps.ChoosePowerUp == 4)
+            {
+                Destroy(gameObject);
+               
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerPulled = true;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerPulled = true;
+        }
+
+        if (other.gameObject.CompareTag("Planet"))
+        {
+            Destroy(gameObject);
+            EnemySpawning.RespawnUFO = true;
+        }
+       
         
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
 
-        PlayerPulled = false;
-        float Xspeed = Velocity.PlayerRB.velocity.x;
-        Vector2 VectorTest = new Vector2(Xspeed, 2);
-        Velocity.PlayerRB.velocity = VectorTest;
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerPulled = false;
+            float Xspeed = Velocity.PlayerRB.velocity.x;
+            Vector2 VectorTest = new Vector2(Xspeed, 2);
+            Velocity.PlayerRB.velocity = VectorTest;
+        }
+        
 
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             Destroy(other.gameObject);
             Database.gameEnd = true;
         }
 
-        else if (other.gameObject.tag == "Planet")
+        else if (other.gameObject.CompareTag("Planet"))
         {
             Destroy(gameObject);
-            PowerUps.RespawnUFO = true;
+            EnemySpawning.RespawnUFO = true;
         }
 
     }
