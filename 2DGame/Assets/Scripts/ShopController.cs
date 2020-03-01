@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ShopController : MonoBehaviour
 {
@@ -31,6 +33,15 @@ public class ShopController : MonoBehaviour
     {
         itemList = SaveSystem.LoadPlayer().itemList;
 
+        for (int i = 0; i < itemList.Count; i++) {
+            if (itemList[i].owned == true)
+            {
+                string itemName = itemList[i].name;
+                GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
+                costText.GetComponent<Text>().text = "Owned";
+            }
+        }
+
         currentStars = PlayerPrefs.GetInt("Stars");
         stars.text = currentStars.ToString();
         PowerUpsClicked();
@@ -38,7 +49,13 @@ public class ShopController : MonoBehaviour
 
     void Update()
     {
-        
+
+    }
+
+    //saves the shop data when the game closes
+    private void OnApplicationQuit()
+    { 
+        SaveSystem.SavePlayer(itemList);
     }
 
     public void PowerUpsClicked() {
@@ -80,11 +97,59 @@ public class ShopController : MonoBehaviour
     }
 
     public void BuyShopItem() {
-        if (currentStars >= 10) {
+
+
+        //gets the name of the button that was clicked
+        string itemName = EventSystem.current.currentSelectedGameObject.name;
+        bool itemOwned = false;
+
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            if (itemList[i].name == itemName)
+            {
+                itemOwned = itemList[i].owned;
+            }
+        }
+
+        if (currentStars != 10 && itemOwned == false) {
+
             PlayerPrefs.SetInt("stars", currentStars - 10);
             stars.text = PlayerPrefs.GetInt("stars").ToString();
-            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/Invincibility/Cost");
+
+            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
             costText.GetComponent<Text>().text = "Owned";
+
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                if (itemList[i].name == itemName)
+                {
+                    itemList[i].owned = true;
+                }
+            }
         }
+    }
+
+    public void ResetData()
+    {
+        itemList = new List<ShopItem>() {
+            new ShopItem(){ name = "Invincibility", cost = 10, owned = false},
+            new ShopItem(){ name = "Boost", cost = 10, owned = false},
+            new ShopItem(){ name = "Time", cost = 10, owned = false},
+            new ShopItem(){ name = "Magnet", cost = 10, owned = false}
+        };
+
+        //redraws all of the items
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            string itemName = itemList[i].name;
+            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
+            costText.GetComponent<Text>().text = "10";
+        }
+    }
+
+    //goes back to main menu
+    public void MainMenu() {
+        SaveSystem.SavePlayer(itemList);
+        SceneManager.LoadScene("MenuScene");
     }
 }
