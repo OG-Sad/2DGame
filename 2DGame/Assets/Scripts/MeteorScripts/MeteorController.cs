@@ -31,13 +31,14 @@ public class MeteorController : MonoBehaviour
         {
             //do nothing for now
         }
-        if(coll.gameObject.tag == "Player" && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
+        if (coll.gameObject.tag == "Player" && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
         {
 
         }
         else if (coll.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("PlanetSpawningTest");
+            Database.gameEnd = true;
         }
     }
+   
 }

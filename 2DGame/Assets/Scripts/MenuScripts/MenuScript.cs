@@ -10,6 +10,10 @@ public class MenuScript : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    public Animator transition;
+
+    public float transitionTime = 1f;
+
     public static void Restart()
     {
         GamePaused = false;
@@ -17,6 +21,7 @@ public class MenuScript : MonoBehaviour
 
     void Update()
     {
+        //Checking to see if the player paused the game
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GamePaused == true)
@@ -30,6 +35,7 @@ public class MenuScript : MonoBehaviour
         }
     }
 
+    //Resume Game
     void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -38,6 +44,7 @@ public class MenuScript : MonoBehaviour
         Debug.Log("Resumed");
     }
 
+    //Pause Game
     void Pause()
     {
         pauseMenuUI.SetActive(true);
@@ -46,6 +53,7 @@ public class MenuScript : MonoBehaviour
         Debug.Log("Paused");
     }
 
+    //Restart the Game
     public void RestartGame()
     {
         Time.timeScale = 1f;
@@ -53,57 +61,161 @@ public class MenuScript : MonoBehaviour
         GamePaused = false;
     }
 
+    //Main Menu Buttons
     public void StartGame()
     {
-        SceneManager.LoadScene(sceneName: "PlanetSpawningTest");
+        StartCoroutine(LoadGame(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+    IEnumerator LoadGame(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
     public void LevelSelect()
     {
-        SceneManager.LoadScene(sceneName: "LevelSelect");
+        StartCoroutine(LoadLevelSelect(SceneManager.GetActiveScene().buildIndex + 2));
     }
 
+    IEnumerator LoadLevelSelect(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+    }
+
+    public void Leaderboard()
+    {
+        StartCoroutine(LoadLeaderboard(SceneManager.GetActiveScene().buildIndex + 4));
+    }
+
+    IEnumerator LoadLeaderboard(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+    }
+
+    public void Shop()
+    {
+        StartCoroutine(LoadShop(SceneManager.GetActiveScene().buildIndex + 3));
+    }
+
+    IEnumerator LoadShop(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+    }
+
+    //Level Select Buttons
     public void Tutorial()
     {
-        SceneManager.LoadScene(sceneName: "Tutorial");
+        StartCoroutine(LoadTutorial(SceneManager.GetActiveScene().buildIndex + 3));
+    }
+    IEnumerator LoadTutorial(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
     public void Level_1Select()
     {
-        SceneManager.LoadScene(sceneName: "Level 1");
+        StartCoroutine(LoadLevel1(SceneManager.GetActiveScene().buildIndex + 4));
+    }
+    IEnumerator LoadLevel1(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
     public void Level_2Select()
     {
-        SceneManager.LoadScene(sceneName: "Level 2");
+        StartCoroutine(LoadLevel2(SceneManager.GetActiveScene().buildIndex + 5));
     }
+    IEnumerator LoadLevel2(int levelIndex)
+    {
+        transition.SetTrigger("Start");
 
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+    }
+    
     public void Level_3Select()
     {
-        SceneManager.LoadScene(sceneName: "Level 3");
+        StartCoroutine(LoadLevel3(SceneManager.GetActiveScene().buildIndex + 6));
+    }
+    IEnumerator LoadLevel3(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
     public void Level_4Select()
     {
-        SceneManager.LoadScene(sceneName: "Level 4");
+        StartCoroutine(LoadLevel4(SceneManager.GetActiveScene().buildIndex + 7));
+    }
+    IEnumerator LoadLevel4(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
     public void Level_5Select()
     {
-        SceneManager.LoadScene(sceneName: "Level 5");
+        StartCoroutine(LoadLevel5(SceneManager.GetActiveScene().buildIndex + 8));
+    }
+    IEnumerator LoadLevel5(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
     public void Level_CowSelect()
     {
-        SceneManager.LoadScene(sceneName: "Cow Level");
+        StartCoroutine(LoadCow(SceneManager.GetActiveScene().buildIndex + 9));
+    }
+    IEnumerator LoadCow(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
     }
 
+    //Pause Menu Buttons
     public void QuitGame()
     {
         SceneManager.LoadScene(sceneName: "MenuScene");
         GamePaused = false;
         Time.timeScale = 1f;
-
     }
 
     public void ResumeGame()
@@ -122,13 +234,4 @@ public class MenuScript : MonoBehaviour
         Debug.Log("Paused");
     }
 
-    public void Shop()
-    {
-        SceneManager.LoadScene(sceneName: "Shop");
-    }
-
-    public void Leaderboard()
-    {
-        SceneManager.LoadScene(sceneName: "Leaderboard");
-    }
 }
