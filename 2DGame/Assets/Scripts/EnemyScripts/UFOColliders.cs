@@ -31,7 +31,11 @@ public class UFOColliders : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerPulled = true;
+        if(other.gameObject.CompareTag("Player"))
+        {
+            PlayerPulled = true;
+        }
+        
         
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -45,13 +49,13 @@ public class UFOColliders : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             Destroy(other.gameObject);
             Database.gameEnd = true;
         }
 
-        else if (other.gameObject.tag == "Planet")
+        else if (other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("PowerUp") | other.gameObject.CompareTag("Star"))
         {
             Destroy(gameObject);
             PowerUps.RespawnUFO = true;

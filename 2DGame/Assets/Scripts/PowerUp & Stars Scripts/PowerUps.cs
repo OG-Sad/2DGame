@@ -8,7 +8,7 @@ public class PowerUps : MonoBehaviour
     public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO, BigPlanetPrefab, SmallPlanetPrefab;
     public static Transform PowerUp, StarSpawning, UFOSpawning;
     float yPos = 0, timer = 0, seconds = 0, timerForStars;
-    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsPowerUp = false, IsStarSpawned = false;
+    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsStarSpawned = false;
     public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo;
     public static bool RespawnStar = false;
     
@@ -26,7 +26,7 @@ public class PowerUps : MonoBehaviour
             //1/2 times a power up can spawn, it will spawn
             PowerUpGo = Random.Range(0, 2);
             timer = 0;
-            if (PowerUpGo == 1 && IsPowerUp == false && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
+            if (PowerUpGo == 1 && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
             {
                 //EditorApplication.isPaused = true;
                 SpawnPowerUp();
@@ -70,20 +70,21 @@ public class PowerUps : MonoBehaviour
         // If the star spawned touching a planet or in one
         if (RespawnStar)
         {
+            RespawnStar = false;
             SpawnStar();
         }
         // If the UFO spawned touching a planet or in one
         if (RespawnUFO == true)
         {
-            IsStarSpawned = true;
+            RespawnUFO = false;
             SpawnUFO();
+            
         }
     }
 
     void SpawnPowerUp()
     {
         //makes sure only one power up can spawn at a time
-        IsPowerUp = true;
         //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(0, 4);
         //Power Up Spawned with random y position or not depending on ypos
@@ -138,7 +139,6 @@ public class PowerUps : MonoBehaviour
             // time is set to normal
             //player is not powered up
             //seconds reset
-            IsPowerUp = false;
             Time.timeScale = 1f;
             PlayerPoweredUp = false;
             seconds = 0;
@@ -151,7 +151,6 @@ public class PowerUps : MonoBehaviour
             //new power up can spawn
             //player is not powered up
             //seconds reset
-            IsPowerUp = false;
             PlayerPoweredUp = false;
             seconds = 0;
 
@@ -171,7 +170,7 @@ public class PowerUps : MonoBehaviour
             PlayerPoweredUp = false;
             Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
-            IsPowerUp = false;
+            
 
         }
     }
