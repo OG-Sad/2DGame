@@ -13,6 +13,7 @@ public class Orbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //turns gravity back on for the other planets once orbitting is finished
         if (Database.isOrbiting == false)
         {
             Orbit[] Planets = FindObjectsOfType<Orbit>();
