@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO, BigPlanetPrefab, SmallPlanetPrefab;
+    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO;
     public static Transform PowerUp, StarSpawning, UFOSpawning;
     float yPos = 0, timer = 0, seconds = 0, timerForStars;
     public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsStarSpawned = false;
@@ -126,8 +126,6 @@ public class PowerUps : MonoBehaviour
             //new power up can spawn
             //player is not powered up
             //seconds reset
-            BigPlanetPrefab.GetComponent<CircleCollider2D>().enabled = true;
-            SmallPlanetPrefab.GetComponent<CircleCollider2D>().enabled = true;
             PlayerPoweredUp = false;
             seconds = 0;
 

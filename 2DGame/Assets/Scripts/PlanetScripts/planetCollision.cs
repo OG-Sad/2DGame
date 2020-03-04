@@ -12,15 +12,10 @@ public class planetCollision : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll) {
 
         // if the player collides with a planet and has invicible power up they don't die
-        if (coll.gameObject.tag == "Player" && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
-        {
-            
-           // GameObject.FindGameObjectWithTag("Planet").GetComponent<Attractor>().enabled = false;
+      
 
-        }
-
-        else
-        {
+    
+        
             if (coll.gameObject.tag == "Planet")
             {
                 // Debug.Log("We're in...");
@@ -31,7 +26,7 @@ public class planetCollision : MonoBehaviour
                 // Debug.Log("Testing: We're in...");
                 FindObjectOfType<Spawner>().DestroyPlanet(planet);
             }
-        }
+        
     }
      void OnCollisionExit2D(Collision2D coll)
     {

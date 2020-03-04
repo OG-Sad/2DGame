@@ -12,31 +12,33 @@ public class StarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        // if the star is too far behind the player, destroy it
-        if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+        if (Database.gameEnd == false)
         {
-            PowerUps.IsStarSpawned = false;
-            Destroy(gameObject);
-        }
-        // if the star magnent is powered up, makes the star attract to the player
-        if (PowerUps.ChoosePowerUp == 3 && PowerUps.PlayerPoweredUp == true)
-        {
-            // finds the player and any stars on screen 
-            GameObject P = GameObject.FindGameObjectWithTag("Player");
-            currentStars = GameObject.FindGameObjectsWithTag("Star");
-            foreach (GameObject GameObjStar in currentStars)
+            // if the star is too far behind the player, destroy it
+            if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
             {
-                // if any of the stars is less than ten away, move them towards the player
-                if (Vector3.Distance(GameObjStar.transform.position, P.transform.position) < 10)
-                {
-
-                    GameObjStar.transform.Translate((P.transform.position - GameObjStar.transform.position).normalized * 5 * Time.deltaTime, Space.World);
-
-                }
+                PowerUps.IsStarSpawned = false;
+                Destroy(gameObject);
             }
-            
-            
+            // if the star magnent is powered up, makes the star attract to the player
+            if (PowerUps.ChoosePowerUp == 3 && PowerUps.PlayerPoweredUp == true)
+            {
+                // finds the player and any stars on screen 
+                GameObject P = GameObject.FindGameObjectWithTag("Player");
+                currentStars = GameObject.FindGameObjectsWithTag("Star");
+                foreach (GameObject GameObjStar in currentStars)
+                {
+                    // if any of the stars is less than ten away, move them towards the player
+                    if (Vector3.Distance(GameObjStar.transform.position, P.transform.position) < 10)
+                    {
+
+                        GameObjStar.transform.Translate((P.transform.position - GameObjStar.transform.position).normalized * 5 * Time.deltaTime, Space.World);
+
+                    }
+                }
+
+
+            }
         }
     }
     

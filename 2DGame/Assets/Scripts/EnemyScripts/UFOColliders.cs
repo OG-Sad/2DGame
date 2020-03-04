@@ -10,22 +10,25 @@ public class UFOColliders : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+        if (Database.gameEnd == false)
         {
-            Database.gameEnd = true;
-        }
-        if (PlayerPulled == true)
-        {
+            if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+            {
+                Database.gameEnd = true;
+            }
+            if (PlayerPulled == true)
+            {
 
-            Vector2 Vector = new Vector2(0, 18);
-            Velocity.PlayerRB.AddForce(Vector);
-            Debug.Log(Velocity.PlayerRB);
+                Vector2 Vector = new Vector2(0, 18);
+                Velocity.PlayerRB.AddForce(Vector);
+                Debug.Log(Velocity.PlayerRB);
 
-            /*
-            Player = GameObject.FindGameObjectWithTag("Player");
-            UFO = GameObject.FindGameObjectWithTag("UFO");
-            Player.transform.Translate((UFO.transform.position - Player.transform.position).normalized * 5 * Time.deltaTime, Space.World);
-            */
+                /*
+                Player = GameObject.FindGameObjectWithTag("Player");
+                UFO = GameObject.FindGameObjectWithTag("UFO");
+                Player.transform.Translate((UFO.transform.position - Player.transform.position).normalized * 5 * Time.deltaTime, Space.World);
+                */
+            }
         }
     }
 
@@ -34,6 +37,12 @@ public class UFOColliders : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             PlayerPulled = true;
+        }
+
+        if(other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("PowerUp") | other.gameObject.CompareTag("Star"))
+        {
+            Destroy(gameObject);
+            PowerUps.RespawnUFO = true;
         }
         
         

@@ -9,11 +9,15 @@ public class PowerUpCollision : MonoBehaviour
    
     void Update()
     {
-        // if any of the power ups are too far behind the player, destroy them
-        if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+        if(Database.gameEnd == false)
         {
-            Destroy(gameObject);
+            if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+            {
+                Destroy(gameObject);
+            }
         }
+        // if any of the power ups are too far behind the player, destroy them
+       
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,7 +47,6 @@ public class PowerUpCollision : MonoBehaviour
             }
          if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
             {
-                Debug.Log("Coll2");
                 PowerUps.PlayerPoweredUp = true;
                 Destroy(gameObject);
             }
