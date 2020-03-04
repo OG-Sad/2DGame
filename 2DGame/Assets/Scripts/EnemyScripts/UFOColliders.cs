@@ -14,14 +14,14 @@ public class UFOColliders : MonoBehaviour
         {
             if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
             {
-                Database.gameEnd = true;
+                Destroy(gameObject);
             }
+
             if (PlayerPulled == true)
             {
 
                 Vector2 Vector = new Vector2(0, 18);
                 Velocity.PlayerRB.AddForce(Vector);
-                Debug.Log(Velocity.PlayerRB);
 
                 /*
                 Player = GameObject.FindGameObjectWithTag("Player");
@@ -39,22 +39,29 @@ public class UFOColliders : MonoBehaviour
             PlayerPulled = true;
         }
 
-        if(other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("PowerUp") | other.gameObject.CompareTag("Star"))
+        // if the collider is polygon, then this should happen
+       /* else if (other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("PowerUp") | other.gameObject.CompareTag("Star"))
         {
             Destroy(gameObject);
             PowerUps.RespawnUFO = true;
         }
-        
-        
+        */
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+    
+
+    private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
 
-        PlayerPulled = false;
-        float Xspeed = Velocity.PlayerRB.velocity.x;
-        Vector2 VectorTest = new Vector2(Xspeed, 2);
-        Velocity.PlayerRB.velocity = VectorTest;
+            PlayerPulled = false;
+            float Xspeed = Velocity.PlayerRB.velocity.x;
+            Vector2 VectorTest = new Vector2(Xspeed, 2);
+            Velocity.PlayerRB.velocity = VectorTest;
+        }
 
+      
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

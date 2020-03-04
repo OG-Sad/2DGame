@@ -9,23 +9,25 @@ public class PowerUps : MonoBehaviour
     public static Transform PowerUp, StarSpawning, UFOSpawning;
     float yPos = 0, timer = 0, seconds = 0, timerForStars;
     public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsStarSpawned = false;
-    public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo;
+    public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo, ScorePower = 0, ScoreStar = 0;
     public static bool RespawnStar = false;
-    
+   
 
 
     // Update is called once per frame
     void Update()
     {
+        float score = GameObject.Find("Score").GetComponent<ScoreScript>().Score;
+
         //Every 10 seconds a power up can spawn
         timer += Time.deltaTime;
         timerForStars += Time.deltaTime;
-        if (timer >= 5)
-
+        if (timer >= 10 && ScorePower < score)
         {
             //1/2 times a power up can spawn, it will spawn
             PowerUpGo = Random.Range(0, 2);
             timer = 0;
+            ScorePower += 10;
             if (PowerUpGo == 1 && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
             {
                 //EditorApplication.isPaused = true;
@@ -34,13 +36,14 @@ public class PowerUps : MonoBehaviour
         }
         //Every 20 seconds a Star can spawn
         
-        if (timerForStars >= 20)
+        if (timerForStars >= 20 && score > ScoreStar)
         {
             
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
             UFOGo = Random.Range(0, 2);
             timerForStars = 0;
+            ScoreStar += 20;
             if (StarGo == 1 && IsStarSpawned == false)
             {
                 //EditorApplication.isPaused = true;
@@ -55,7 +58,7 @@ public class PowerUps : MonoBehaviour
         }
 
         // If the player has the star power up they can tap twice and get powered up
-        if (PlayerPotentialPowerUp == true && Input.touchCount > 1)
+        if (PlayerPotentialPowerUp == true && (Input.touchCount > 1 | Input.GetMouseButtonDown(1)))
         {
             PlayerPoweredUp = true;
             
