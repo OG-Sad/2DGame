@@ -251,9 +251,7 @@ MonoBehaviour:
     type: 3}
   Player: {fileID: 973401848}
   Star: {fileID: 6280082290849730344, guid: 5d9e283d1ebd9417f9f19bc94800b7ac, type: 3}
-  UFO: {fileID: 5393389505544444001, guid: de1056784883d4da89fb0b2de11793ca, type: 3}
-  BigPlanetPrefab: {fileID: 0}
-  SmallPlanetPrefab: {fileID: 0}
+  UFO: {fileID: 1445843135654381186, guid: dbdbf92535224664caf025cce2104bd8, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

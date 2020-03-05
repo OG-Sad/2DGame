@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UFOColliders : MonoBehaviour
 {
-    bool PlayerPulled = false;
+   public static bool PlayerPulled = false;
     GameObject Player, UFO;
     
     // Start is called before the first frame update
@@ -32,37 +32,8 @@ public class UFOColliders : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.CompareTag("Player"))
-        {
-            PlayerPulled = true;
-        }
+  
 
-        // if the collider is polygon, then this should happen
-       /* else if (other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("PowerUp") | other.gameObject.CompareTag("Star"))
-        {
-            Destroy(gameObject);
-            PowerUps.RespawnUFO = true;
-        }
-        */
-    }
-
-    
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-
-            PlayerPulled = false;
-            float Xspeed = Velocity.PlayerRB.velocity.x;
-            Vector2 VectorTest = new Vector2(Xspeed, 2);
-            Velocity.PlayerRB.velocity = VectorTest;
-        }
-
-      
-    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
