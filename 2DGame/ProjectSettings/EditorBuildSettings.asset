@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: 74fa796a868847d41b123cc3c5290699
   - enabled: 0
-    path: Assets/Scenes/Levels/Level1.unity
+    path: 
     guid: 8c1a3f5a0dc7a4c44ac8033e60d1bbeb
   - enabled: 1
     path: Assets/Scenes/Levels/Cow Level.unity
@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: 2321555a8ec668e44b7f4ac2eadb4979
+  - enabled: 1
+    path: Assets/Scenes/GravTesting.unity
+    guid: a34b349c1d39428418cfa89f27a0c6bf
   m_configObjects: {}
