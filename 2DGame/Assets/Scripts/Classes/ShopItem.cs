@@ -7,5 +7,5 @@ public class ShopItem
 {
     public string name { get; set; }
     public int cost { get; set; }
-    public bool owned { get; set; }
+    public int upgradeLevel { get; set; }
 }

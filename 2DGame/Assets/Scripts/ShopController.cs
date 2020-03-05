@@ -21,27 +21,43 @@ public class ShopController : MonoBehaviour
     public GameObject skins;
     public GameObject backgorunds;
 
-    //list of all power ups
+    //list of all power ups; itemList gets set back to this when data is reset
     List<ShopItem> itemList = new List<ShopItem>() {
-        new ShopItem(){ name = "Invincibility", cost = 10, owned = false},
-        new ShopItem(){ name = "Boost", cost = 10, owned = false},
-        new ShopItem(){ name = "Time", cost = 10, owned = false},
-        new ShopItem(){ name = "Magnet", cost = 10, owned = false}
+        new ShopItem(){ name = "Invincibility", cost = 30, upgradeLevel = 1},
+        new ShopItem(){ name = "Boost", cost = 30, upgradeLevel = 1},
+        new ShopItem(){ name = "Time", cost = 30, upgradeLevel = 1},
+        new ShopItem(){ name = "Magnet", cost = 30, upgradeLevel = 1}
+    };
+
+    //dictionary of costs of an item based on its upgrade level
+    Dictionary<int, int> costDict = new Dictionary<int, int>() {
+        {1,30},
+        {2,50},
+        {3,100},
+        {4,250}
     };
 
     void Start()
     {
-        itemList = SaveSystem.LoadPlayer().itemList;
-
-        for (int i = 0; i < itemList.Count; i++) {
-            if (itemList[i].owned == true)
-            {
-                string itemName = itemList[i].name;
-                GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
-                costText.GetComponent<Text>().text = "Owned";
-            }
+        //will load a save file if there is one
+        try
+        {
+            itemList = SaveSystem.LoadPlayer().itemList;
+        }
+        //if there's an error, the item list will just be the default base item list
+        catch (System.Exception ex)
+        {
+            print("No save file found");
         }
 
+        //loads the correct texts into the cost section of each item
+        for (int i = 0; i < itemList.Count; i++) {
+            string itemName = itemList[i].name;
+            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
+            costText.GetComponent<Text>().text = costDict[itemList[i].upgradeLevel].ToString();
+        }
+
+        PlayerPrefs.SetInt("Stars", 99999999);
         currentStars = PlayerPrefs.GetInt("Stars");
         stars.text = currentStars.ToString();
         PowerUpsClicked();
@@ -98,52 +114,54 @@ public class ShopController : MonoBehaviour
 
     public void BuyShopItem() {
 
-
         //gets the name of the button that was clicked
         string itemName = EventSystem.current.currentSelectedGameObject.name;
-        bool itemOwned = false;
+        int itemCost = 0;
+        int itemUpgradeLevel = 0;
+        int newItemCost = 0;
 
+        //finds whether or not the item is currently owned and the cost of the item
         for (int i = 0; i < itemList.Count; i++)
         {
             if (itemList[i].name == itemName)
             {
-                itemOwned = itemList[i].owned;
+                itemCost = costDict[itemList[i].upgradeLevel];
+                itemUpgradeLevel = itemList[i].upgradeLevel;
             }
         }
 
-        if (currentStars != 10 && itemOwned == false) {
+        if (currentStars >= itemCost && itemUpgradeLevel < 5) {
 
-            PlayerPrefs.SetInt("stars", currentStars - 10);
-            stars.text = PlayerPrefs.GetInt("stars").ToString();
-
-            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
-            costText.GetComponent<Text>().text = "Owned";
-
+            //sets the item's "owned" bool to true
             for (int i = 0; i < itemList.Count; i++)
             {
                 if (itemList[i].name == itemName)
                 {
-                    itemList[i].owned = true;
+                    itemList[i].upgradeLevel++;
+                    newItemCost = costDict[itemList[i].upgradeLevel];
                 }
             }
+
+            currentStars -= itemCost;
+            PlayerPrefs.SetInt("Stars", currentStars);
+            stars.text = PlayerPrefs.GetInt("Stars").ToString();
+
+            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
+            costText.GetComponent<Text>().text = newItemCost.ToString();
         }
     }
 
+    //resets all item ownership data
     public void ResetData()
     {
-        itemList = new List<ShopItem>() {
-            new ShopItem(){ name = "Invincibility", cost = 10, owned = false},
-            new ShopItem(){ name = "Boost", cost = 10, owned = false},
-            new ShopItem(){ name = "Time", cost = 10, owned = false},
-            new ShopItem(){ name = "Magnet", cost = 10, owned = false}
-        };
-
         //redraws all of the items
         for (int i = 0; i < itemList.Count; i++)
         {
+            itemList[i].upgradeLevel = 1;
+
             string itemName = itemList[i].name;
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
-            costText.GetComponent<Text>().text = "10";
+            costText.GetComponent<Text>().text = costDict[itemList[i].upgradeLevel].ToString();
         }
     }
 
