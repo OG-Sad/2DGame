@@ -4,28 +4,51 @@ using UnityEngine;
 
 public class Attractor : MonoBehaviour
 {
-    Rigidbody2D PlanetRB;
-    float orbitVelNum;
+
+    public float G = 1;
+
+    Rigidbody2D PlanetRB, PlayerRB;
+    float orbitVelNum, pi = Mathf.PI;
+    Vector2 lastVelocity, lastPlayerPos;
     bool firstPlanet = false;
+
+    GameObject Player;
 
     public float zeroRepelForce = -5f;
 
     private void Start()
     {
         PlanetRB = GetComponent<Rigidbody2D>();
+        
+        Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerRB = Player.GetComponent<Rigidbody2D>();
         firstPlanet = true;
     }
 
     private void FixedUpdate()
     {
-        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.FindGameObjectWithTag("Player");
+
+        float dist = Vector2.Distance(transform.position, Player.transform.position);
+
+        float playerTheta = Mathf.Atan2(Player.transform.position.y - lastPlayerPos.y, Player.transform.position.x - lastPlayerPos.x);
+
+        if (dist <= 4) {
+            //Debug.Log(true);
+
+            Vector2 acceleration = (PlayerRB.velocity - lastVelocity) / Time.fixedDeltaTime;
+            Orbiting(acceleration, playerTheta, g(PlanetRB.mass, dist));
+        }
+
         Attract(Player);
+    
+        lastVelocity = PlayerRB.velocity;
+        lastPlayerPos = Player.transform.position;
     }
 
     void Attract(GameObject objToAttract)
     {
         bool tapped = GetComponent<changeGravity>().firstDoubleTap;
-        Rigidbody2D PlayerRB = objToAttract.GetComponent<Rigidbody2D>();
         Vector2 direction = PlanetRB.position - PlayerRB.position;
         float distance = direction.magnitude;
 
@@ -33,6 +56,10 @@ public class Attractor : MonoBehaviour
         float planetMass = !tapped ? PlanetRB.mass : zeroRepelForce; // <-- Repel force
         //float planetMass = PlanetRB.mass;
         
+
+
+
+
         
         // Could add future stuff when planet is at 0 mass here
         if (planetMass < 0) {
@@ -71,9 +98,39 @@ public class Attractor : MonoBehaviour
             firstPlanet = false;
         }
 
-        Debug.Log(Database.isOrbiting);
+        //Debug.Log(Database.isOrbiting);
         PlayerRB.AddForce(force);
     }
+
+    void Orbiting (Vector2 acc, float playTan, float G) {
+
+
+        // Planet Pos
+        float m1X = transform.position.x;
+        float m1Y = transform.position.y;
+
+        // Player Pos
+        float m2X = Player.transform.position.x;
+        float m2Y = Player.transform.position.y;
+
+      
+        float playPlanTan = Mathf.Atan2(m2Y - m1Y, m2X - m1X);
+        float angleSum = Mathf.Abs(playTan - playPlanTan) / pi;
+
+        Debug.Log("Not Ready");
+
+        // Checks to see if the player's angle to the planet around 90 degrees
+        if((1.4 < angleSum && angleSum < 1.6) || (0.4 < angleSum && angleSum < 0.6)) {
+            Debug.Log("Ready to Orbit");
+        }
+       
+        
+    }
+
+    float g(float m1, float distance) {
+        return (G * m1) / (distance * distance);
+    }
+
 
 
 }
