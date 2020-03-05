@@ -52,6 +52,7 @@ public class PowerUps : MonoBehaviour
             //UFO spawns 1/3 times every twenty seconds
             if(UFOGo == 1)
             {
+                UFOGo = 0;
                 SpawnUFO();
             }
             timerForStars = 0;
