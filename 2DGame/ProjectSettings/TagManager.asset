@@ -11,6 +11,7 @@ TagManager:
   - Star
   - Spawner
   - UFO
+  - Target
   layers:
   - Default
   - TransparentFX
