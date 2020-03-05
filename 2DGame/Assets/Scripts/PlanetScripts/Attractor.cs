@@ -106,6 +106,7 @@ public class Attractor : MonoBehaviour
 
 
         // Planet Pos
+         // Planet Pos
         float m1X = transform.position.x;
         float m1Y = transform.position.y;
 
@@ -117,13 +118,38 @@ public class Attractor : MonoBehaviour
         float playPlanTan = Mathf.Atan2(m2Y - m1Y, m2X - m1X);
         float angleSum = Mathf.Abs(playTan - playPlanTan) / pi;
 
-        Debug.Log("Not Ready");
+
+        // Vector2 direction = PlanetRB.position - PlayerRB.position;
+
+        // float forceMagnitude =  ( (PlanetRB.mass * PlayerRB.mass) / Mathf.Pow(dist, 2));
+        // Vector2 force = direction.normalized * forceMagnitude;
+
+        // float xComponent = force.x;
+        // float yComponent = force.y;
+
+        //Debug.Log("Not Ready");
 
         // Checks to see if the player's angle to the planet around 90 degrees
         if((1.4 < angleSum && angleSum < 1.6) || (0.4 < angleSum && angleSum < 0.6)) {
-            Debug.Log("Ready to Orbit");
+            
+            // if (dist < lastDist) {
+            //     yComponent = Mathf.Cos(playPlanTan) * force.magnitude * 1.001f;
+            //     xComponent = Mathf.Sin(playPlanTan) * force.magnitude * 1.001f;
+            // }
+            // else if (dist > lastDist) {
+            //     yComponent = Mathf.Cos(playPlanTan) * force.magnitude * .999f;
+            //     xComponent = Mathf.Sin(playPlanTan) * force.magnitude * .999f;
         }
-       
+
+
+            // Vector2 forceApplied = new Vector2(xComponent, yComponent);
+            
+            
+            
+            
+            //PlayerRB.AddForce(forceApplied);
+            
+            //Debug.Log("Ready to Orbit");
         
     }
 
