@@ -8,7 +8,7 @@ public class Attractor : MonoBehaviour
     public float G = 1;
 
     Rigidbody2D PlanetRB, PlayerRB;
-    float orbitVelNum, pi = Mathf.PI;
+    float orbitVelNum, pi = Mathf.PI, lastPlayPlanTan = 0;
     Vector2 lastVelocity, lastPlayerPos;
     bool firstPlanet = false;
 
@@ -27,6 +27,8 @@ public class Attractor : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+
         Player = GameObject.FindGameObjectWithTag("Player");
 
         float dist = Vector2.Distance(transform.position, Player.transform.position);
@@ -37,7 +39,7 @@ public class Attractor : MonoBehaviour
             //Debug.Log(true);
 
             Vector2 acceleration = (PlayerRB.velocity - lastVelocity) / Time.fixedDeltaTime;
-            Orbiting(acceleration, playerTheta, g(PlanetRB.mass, dist), dist);
+            Orbiting(acceleration, playerTheta, dist);
 
         }
 
@@ -45,6 +47,7 @@ public class Attractor : MonoBehaviour
     
         lastVelocity = PlayerRB.velocity;
         lastPlayerPos = Player.transform.position;
+        lastPlayPlanTan = PlayerPlanetTheta();
     }
 
     void Attract(GameObject objToAttract)
@@ -103,20 +106,12 @@ public class Attractor : MonoBehaviour
         PlayerRB.AddForce(force);
     }
 
-    Vector2 Orbiting (Vector2 acc, float playTan, float G, float dister) {
+    Vector2 Orbiting (Vector2 acc, float playTan, float dister) {
 
         Vector2 vel = PlayerRB.velocity;
 
-        // Planet Pos
-        float m1X = transform.position.x;
-        float m1Y = transform.position.y;
-
-        // Player Pos
-        float m2X = Player.transform.position.x;
-        float m2Y = Player.transform.position.y;
-
       
-        float playPlanTan = Mathf.Atan2(m2Y - m1Y, m2X - m1X);
+        float playPlanTan = PlayerPlanetTheta();
         float angleSum = Mathf.Abs(playTan - playPlanTan) / pi;
 
 
@@ -129,10 +124,18 @@ public class Attractor : MonoBehaviour
         // IMPORTANT: If we want to make the orbit eliptical, it'll be done here
         if((1.4 < angleSum && angleSum < 1.6) || (0.4 < angleSum && angleSum < 0.6)) {
             
+            Vector2 perpForce;
+
             float forceX = force.x;
             float forceY = force.y;
 
-            Vector2 perpForce = new Vector2(forceY, -forceX);
+            if (playPlanTan - lastPlayPlanTan > 0) {
+                perpForce = new Vector2(forceY, -forceX);
+            }
+            else {
+                perpForce = new Vector2(-forceY, forceX);
+            }
+
             Vector2 orbitVel = perpForce.normalized * orbitVelNum;
             Vector2 difference = vel + ((orbitVel - vel) / 15);
 
@@ -144,8 +147,17 @@ public class Attractor : MonoBehaviour
         return PlayerRB.velocity;   
     }
 
-    float g(float m1, float distance) {
-        return (G * m1) / (distance * distance);
+    float PlayerPlanetTheta() {
+        // Planet Pos
+        float m1X = transform.position.x;
+        float m1Y = transform.position.y;
+
+        // Player Pos
+        float m2X = Player.transform.position.x;
+        float m2Y = Player.transform.position.y;
+
+      
+        return Mathf.Atan2(m2Y - m1Y, m2X - m1X);
     }
 
 }
