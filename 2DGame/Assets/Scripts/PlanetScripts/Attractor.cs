@@ -33,11 +33,12 @@ public class Attractor : MonoBehaviour
 
         float playerTheta = Mathf.Atan2(Player.transform.position.y - lastPlayerPos.y, Player.transform.position.x - lastPlayerPos.x);
 
-        if (dist <= 4) {
+        if (dist <= 4 && PlanetRB.mass > 0.1) {
             //Debug.Log(true);
 
             Vector2 acceleration = (PlayerRB.velocity - lastVelocity) / Time.fixedDeltaTime;
             Orbiting(acceleration, playerTheta, g(PlanetRB.mass, dist), dist);
+
         }
 
         Attract(Player);
@@ -102,11 +103,11 @@ public class Attractor : MonoBehaviour
         PlayerRB.AddForce(force);
     }
 
-    void Orbiting (Vector2 acc, float playTan, float G, float dister) {
+    Vector2 Orbiting (Vector2 acc, float playTan, float G, float dister) {
 
+        Vector2 vel = PlayerRB.velocity;
 
         // Planet Pos
-         // Planet Pos
         float m1X = transform.position.x;
         float m1Y = transform.position.y;
 
@@ -124,39 +125,27 @@ public class Attractor : MonoBehaviour
         float forceMagnitude =  ( (PlanetRB.mass * PlayerRB.mass) / Mathf.Pow(dister, 2));
         Vector2 force = direction.normalized * forceMagnitude;
 
-        // float xComponent = force.x;
-        // float yComponent = force.y;
-
-        //Debug.Log("Not Ready");
-
-        // Checks to see if the player's angle to the planet around 90 degrees
+        // Checks to see if the player's angle to the planet around 90 degrees 
+        // IMPORTANT: If we want to make the orbit eliptical, it'll be done here
         if((1.4 < angleSum && angleSum < 1.6) || (0.4 < angleSum && angleSum < 0.6)) {
             
             float forceX = force.x;
             float forceY = force.y;
+
             Vector2 perpForce = new Vector2(forceY, -forceX);
             Vector2 orbitVel = perpForce.normalized * orbitVelNum;
-            PlayerRB.velocity = orbitVel;
-            //Debug.Log("Perpendicular force: " + perpForce);
-            //Debug.Log("force FLOAT: " + forceX + ", " + forceY);
-        }
+            Vector2 difference = vel + ((orbitVel - vel) / 15);
 
+            if (orbitVel != vel) {
+                Player.GetComponent<Rigidbody2D>().velocity = difference;
+            }
+        }     
 
-            // Vector2 forceApplied = new Vector2(xComponent, yComponent);
-            
-            
-            
-            
-            //PlayerRB.AddForce(forceApplied);
-            
-            //Debug.Log("Ready to Orbit");
-        
+        return PlayerRB.velocity;   
     }
 
     float g(float m1, float distance) {
         return (G * m1) / (distance * distance);
     }
-
-
 
 }
