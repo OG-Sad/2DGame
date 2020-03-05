@@ -37,7 +37,7 @@ public class Attractor : MonoBehaviour
             //Debug.Log(true);
 
             Vector2 acceleration = (PlayerRB.velocity - lastVelocity) / Time.fixedDeltaTime;
-            Orbiting(acceleration, playerTheta, g(PlanetRB.mass, dist));
+            Orbiting(acceleration, playerTheta, g(PlanetRB.mass, dist), dist);
         }
 
         Attract(Player);
@@ -102,7 +102,7 @@ public class Attractor : MonoBehaviour
         PlayerRB.AddForce(force);
     }
 
-    void Orbiting (Vector2 acc, float playTan, float G) {
+    void Orbiting (Vector2 acc, float playTan, float G, float dister) {
 
 
         // Planet Pos
@@ -119,10 +119,10 @@ public class Attractor : MonoBehaviour
         float angleSum = Mathf.Abs(playTan - playPlanTan) / pi;
 
 
-        // Vector2 direction = PlanetRB.position - PlayerRB.position;
+        Vector2 direction = PlanetRB.position - PlayerRB.position;
 
-        // float forceMagnitude =  ( (PlanetRB.mass * PlayerRB.mass) / Mathf.Pow(dist, 2));
-        // Vector2 force = direction.normalized * forceMagnitude;
+        float forceMagnitude =  ( (PlanetRB.mass * PlayerRB.mass) / Mathf.Pow(dister, 2));
+        Vector2 force = direction.normalized * forceMagnitude;
 
         // float xComponent = force.x;
         // float yComponent = force.y;
@@ -132,13 +132,13 @@ public class Attractor : MonoBehaviour
         // Checks to see if the player's angle to the planet around 90 degrees
         if((1.4 < angleSum && angleSum < 1.6) || (0.4 < angleSum && angleSum < 0.6)) {
             
-            // if (dist < lastDist) {
-            //     yComponent = Mathf.Cos(playPlanTan) * force.magnitude * 1.001f;
-            //     xComponent = Mathf.Sin(playPlanTan) * force.magnitude * 1.001f;
-            // }
-            // else if (dist > lastDist) {
-            //     yComponent = Mathf.Cos(playPlanTan) * force.magnitude * .999f;
-            //     xComponent = Mathf.Sin(playPlanTan) * force.magnitude * .999f;
+            float forceX = force.x;
+            float forceY = force.y;
+            Vector2 perpForce = new Vector2(forceY, -forceX);
+            Vector2 orbitVel = perpForce.normalized * orbitVelNum;
+            PlayerRB.velocity = orbitVel;
+            //Debug.Log("Perpendicular force: " + perpForce);
+            //Debug.Log("force FLOAT: " + forceX + ", " + forceY);
         }
 
 
