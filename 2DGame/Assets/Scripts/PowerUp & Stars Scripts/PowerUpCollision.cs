@@ -32,8 +32,6 @@ public class PowerUpCollision : MonoBehaviour
         //Fire.GetComponent<Color>();
         //Fire.startColor = Color.blue;
         // Fire.GetComponent<Material>();
-
-        PowerUps.ChoosePowerUp = 4;
         // power up the player on collision or potential and destroy the power up, 
         if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 1)
         {
