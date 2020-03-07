@@ -15,10 +15,12 @@ public class PowerUps : MonoBehaviour
     public Material GreenTrail, BlueTrail, PurpleTrail, GreyTrail;
     // for changing the trails color
     public TrailRenderer Trail;
+    Material OriginTrial;
 
-    void start()
+    void Start()
     {
-
+        //Trail.material = Trail.materials[0];
+       OriginTrial = Trail.material;
     }
     // Update is called once per frame
     void Update()
@@ -130,16 +132,19 @@ public class PowerUps : MonoBehaviour
     }
      void DuringPowerUp()
     {
-        var v = Trail.material;
+        //var v = Trail.material;
         if (ChoosePowerUp == 1)
         {
             Trail.material = GreenTrail;
-            //Trail.colorGradient = 
+            //Trail.material = Trail.materials[3];
+            //Trail.colorGradient =
+            
         }
 
         if(ChoosePowerUp == 2)
         {
             Trail.material = BlueTrail;
+            //Trail.material = Trail.materials[3];
 
         }
 
@@ -147,11 +152,15 @@ public class PowerUps : MonoBehaviour
         {
             Trail.material = PurpleTrail;
 
+            //Trail.material = Trail.materials[3];
+
         }
 
         if (ChoosePowerUp == 4)
         {
             Trail.material = GreyTrail;
+
+            //Trail.material = Trail.materials[3];
 
         }
         
@@ -167,10 +176,11 @@ public class PowerUps : MonoBehaviour
             //seconds reset
             PlayerPoweredUp = false;
             seconds = 0;
-            Trail.material = v;
+            // Trail.material = Trail.materials[0];
+            Trail.material = OriginTrial;
             //Trail.colorGradient = v;
             //Trail.startColor = default;
-           
+
 
 
         }
@@ -184,7 +194,8 @@ public class PowerUps : MonoBehaviour
             Time.timeScale = 1f;
             PlayerPoweredUp = false;
             seconds = 0;
-            Trail.material = v;
+            Trail.material = OriginTrial;
+            //Trail.material = Trail.materials[0];
             //Trail.colorGradient = v;
 
 
@@ -199,7 +210,8 @@ public class PowerUps : MonoBehaviour
             //seconds reset
             PlayerPoweredUp = false;
             seconds = 0;
-            Trail.material = v;
+            Trail.material = OriginTrial;
+            // Trail.material = Trail.materials[0];
             //Trail.colorGradient = v;
 
 
@@ -220,7 +232,8 @@ public class PowerUps : MonoBehaviour
             PlayerPoweredUp = false;
             Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
-            Trail.material = v;
+            Trail.material = OriginTrial;
+            //Trail.material = Trail.materials[0];
             //Trail.colorGradient = v;
 
         }
