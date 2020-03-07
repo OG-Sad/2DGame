@@ -30,7 +30,7 @@ public class PowerUps : MonoBehaviour
         //Every 10 seconds a power up can spawn
         timer += Time.deltaTime;
         timerForStars += Time.deltaTime;
-        if (timer >= 10 && ScorePower < score)
+        if (timer >= 10 && ScorePower < score && PlayerPoweredUp == false && PlayerPotentialPowerUp == false)
         {
             //1/2 times a power up can spawn, it will spawn
             PowerUpGo = Random.Range(0, 2);
@@ -44,7 +44,7 @@ public class PowerUps : MonoBehaviour
         }
         //Every 20 seconds a Star can spawn
         
-        if (timerForStars >= 20 && score > ScoreStar)
+        if (timerForStars >= 5 && score > ScoreStar)
         {
             
             //1/5 times chance a Star can spawn
@@ -100,7 +100,7 @@ public class PowerUps : MonoBehaviour
     {
         //makes sure only one power up can spawn at a time
         //chooses which power up should spawn randomly
-        ChoosePowerUp = Random.Range(0, 4);
+        ChoosePowerUp = Random.Range(1, 5);
         //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {

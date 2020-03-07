@@ -19,8 +19,8 @@ public class UFOColliders : MonoBehaviour
 
             if (PlayerPulled == true)
             {
-
-                Vector2 Vector = new Vector2(0, 14);
+                Debug.Log("Pulled up");
+                Vector2 Vector = new Vector2(0, 15);
                 Velocity.PlayerRB.AddForce(Vector);
 
                 /*
@@ -29,6 +29,10 @@ public class UFOColliders : MonoBehaviour
                 Player.transform.Translate((UFO.transform.position - Player.transform.position).normalized * 5 * Time.deltaTime, Space.World);
                 */
             }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 

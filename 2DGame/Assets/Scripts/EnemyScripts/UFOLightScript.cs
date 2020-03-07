@@ -13,6 +13,11 @@ public class UFOLightScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Database.gameEnd == true)
+        {
+            Reset();
+
+        }
         
     }
 
@@ -26,10 +31,19 @@ public class UFOLightScript : MonoBehaviour
             PowerUps.RespawnUFO = true;
         }
 
-        if (other.gameObject.CompareTag("Player"))
-        {
-            UFOColliders.PlayerPulled = true;
-        }
+        
+         if (other.gameObject.CompareTag("Player"))
+         {
+
+                UFOColliders.PlayerPulled = true;
+         }
+         
+         if (Database.gameEnd == true)
+         {
+            Destroy(transform.parent.gameObject);
+         }
+        
+   
 
     }
 
@@ -50,5 +64,12 @@ public class UFOLightScript : MonoBehaviour
             }
         }
 
+      
     }
+
+    void Reset()
+    {
+        UFOColliders.PlayerPulled = false;
+    }
+
 }
