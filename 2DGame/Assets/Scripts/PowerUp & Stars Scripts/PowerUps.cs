@@ -134,6 +134,7 @@ public class PowerUps : MonoBehaviour
         if (ChoosePowerUp == 1)
         {
             Trail.material = GreenTrail;
+            //Trail.colorGradient = 
         }
 
         if(ChoosePowerUp == 2)
