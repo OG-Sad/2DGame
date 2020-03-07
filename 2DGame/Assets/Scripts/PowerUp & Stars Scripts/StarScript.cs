@@ -42,7 +42,7 @@ public class StarScript : MonoBehaviour
         }
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
             // if the star collides with the player
             if (other.gameObject.name == "Player")

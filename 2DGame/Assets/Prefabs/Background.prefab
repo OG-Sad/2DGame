@@ -4711,5 +4711,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a879f9916fbd43c791e720fc88f73cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 6345194484402863053, guid: cee9f1ff09cb25641ba2bf8f51cec3a5, type: 3}
+  Camera: {fileID: 0}
   BackgroundType: {fileID: 7348189083787433056}

@@ -11,9 +11,15 @@ public class PowerUps : MonoBehaviour
     public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsStarSpawned = false;
     public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo, ScorePower = 0, ScoreStar = 0;
     public static bool RespawnStar = false;
-   
+    // the different materials of trail colors
+    public Material GreenTrail, BlueTrail, PurpleTrail, GreyTrail;
+    // for changing the trails color
+    public TrailRenderer Trail;
 
+    void start()
+    {
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -85,6 +91,7 @@ public class PowerUps : MonoBehaviour
             SpawnUFO();
             
         }
+
     }
 
     void SpawnPowerUp()
@@ -123,9 +130,36 @@ public class PowerUps : MonoBehaviour
     }
      void DuringPowerUp()
     {
+        var t = Trail.startColor;
+
+        if (ChoosePowerUp == 1)
+        {
+            Trail.material = GreenTrail;
+        }
+
+        if(ChoosePowerUp == 2)
+        {
+            Trail.material = BlueTrail;
+
+        }
+
+        if (ChoosePowerUp == 3)
+        {
+            Trail.material = PurpleTrail;
+
+        }
+
+        if (ChoosePowerUp == 4)
+        {
+            Trail.material = GreyTrail;
+
+        }
+        
+
         //seconds are unscaled because of time power up
         seconds += Time.unscaledDeltaTime;
         // after the power up, the game is restored to before presets
+       
         if (seconds >= 10 && ChoosePowerUp == 1)
         {
             //new power up can spawn
@@ -133,6 +167,10 @@ public class PowerUps : MonoBehaviour
             //seconds reset
             PlayerPoweredUp = false;
             seconds = 0;
+            //Trail.material = default;
+            //Trail.startColor = default;
+            Trail.startColor = t;
+
 
         }
 
@@ -145,10 +183,13 @@ public class PowerUps : MonoBehaviour
             Time.timeScale = 1f;
             PlayerPoweredUp = false;
             seconds = 0;
-            
-            
+            //Trail.material = default;
+            Trail.startColor = t;
+
+
+
         }
-        
+
         if (seconds >= 6 && ChoosePowerUp == 3)
         {
             //new power up can spawn
@@ -156,6 +197,9 @@ public class PowerUps : MonoBehaviour
             //seconds reset
             PlayerPoweredUp = false;
             seconds = 0;
+            //Trail.material = default;
+            Trail.startColor = t;
+
 
         }
 
@@ -173,12 +217,15 @@ public class PowerUps : MonoBehaviour
             PlayerPoweredUp = false;
             Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
-            
-
+            // Trail.material = default;
+            Trail.startColor = t;
         }
+
+       
+
     }
 
-     void SpawnStar()
+    void SpawnStar()
     {
         IsStarSpawned = true;
         // puts the star on screen

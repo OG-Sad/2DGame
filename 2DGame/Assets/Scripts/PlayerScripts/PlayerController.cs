@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
 
-        if (PowerUps.ChoosePowerUp != 1 | PowerUps.PlayerPoweredUp != true)
+        if (!coll.gameObject.CompareTag(("Power")) | PowerUps.PlayerPoweredUp != true)
         {
             Database.gameEnd = true;
         }
