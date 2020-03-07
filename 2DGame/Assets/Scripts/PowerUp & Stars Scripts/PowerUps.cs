@@ -36,7 +36,7 @@ public class PowerUps : MonoBehaviour
         }
         //Every 20 seconds a Star can spawn
         
-        if (timerForStars >= 10 && score > ScoreStar)
+        if (timerForStars >= 20 && score > ScoreStar)
         {
             
             //1/5 times chance a Star can spawn
@@ -55,6 +55,7 @@ public class PowerUps : MonoBehaviour
                 UFOGo = 0;
                 SpawnUFO();
             }
+
             timerForStars = 0;
         }
 
@@ -195,6 +196,7 @@ public class PowerUps : MonoBehaviour
         UFOSpawning = Instantiate(UFO);
         UFOCor = Random.Range(0, 4.5f);
         UFOSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, UFOCor);
+        RespawnUFO = false;
     }
 }
 

@@ -20,7 +20,7 @@ public class UFOColliders : MonoBehaviour
             if (PlayerPulled == true)
             {
 
-                Vector2 Vector = new Vector2(0, 18);
+                Vector2 Vector = new Vector2(0, 14);
                 Velocity.PlayerRB.AddForce(Vector);
 
                 /*
@@ -32,7 +32,6 @@ public class UFOColliders : MonoBehaviour
         }
     }
 
-  
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -42,11 +41,14 @@ public class UFOColliders : MonoBehaviour
             Database.gameEnd = true;
         }
 
-        else if (other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("PowerUp") | other.gameObject.CompareTag("Star"))
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("Power") | other.gameObject.CompareTag("Star"))
         {
             Destroy(gameObject);
             PowerUps.RespawnUFO = true;
         }
-
     }
 }
