@@ -7,6 +7,7 @@ public class cameraMovement : MonoBehaviour
     // Public variable to store a reference to the player game object
     GameObject player;
     bool smoothcamera = false;
+    public bool CameraChange = false;
     float a = 0.01f;
 
     // Private variable to store the offset distance between the player and camera
@@ -23,46 +24,56 @@ public class cameraMovement : MonoBehaviour
     }
 
     // LateUpdate is called after Update each frame
-    void LateUpdate () 
+    void LateUpdate()
     {
-        Debug.Log(smoothcamera);
+        if (CameraChange)
+        {
 
-        if (Attractor.orbittest)
-        {
-            Debug.Log("orbit");
-            smoothcamera = true;
-            // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        }
-        if(Attractor.orbittest == false && smoothcamera)
-        {
-            Debug.Log("in boys");
-            float offsetY = offset.y + (player.transform.position.y * .15f);
-            transform.position = new Vector3(transform.position.x + a, offsetY, transform.position.z);
-            //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            a += .001f;
-            Debug.Log(offset.x);
-            Debug.Log(a);
-            if (player.transform.position.x + offset.x <= transform.position.x)
+
+            Debug.Log(smoothcamera);
+
+            if (Attractor.orbittest)
             {
-               
-                smoothcamera = false;
-                a = .01f;
+                Debug.Log("orbit");
+                smoothcamera = true;
+                // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
             }
+            if (Attractor.orbittest == false && smoothcamera)
+            {
+                Debug.Log("in boys");
+                float offsetY = offset.y + (player.transform.position.y * .15f);
+                transform.position = new Vector3(transform.position.x + a, offsetY, transform.position.z);
+                //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+                a += .001f;
+                Debug.Log(offset.x);
+                Debug.Log(a);
+                if (player.transform.position.x + offset.x <= transform.position.x)
+                {
+
+                    smoothcamera = false;
+                    a = .01f;
+                }
+            }
+
+            else if (Attractor.orbittest == false)
+            {
+
+                Debug.Log("not orbit");
+                float offsetY = offset.y + (player.transform.position.y * 0.15f);
+                // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
+                transform.position = new Vector3(player.transform.position.x + offset.x, offsetY, transform.position.z);
+            }
+            
         }
-
-        else if (Attractor.orbittest == false)
-         {
-
-            Debug.Log("not orbit");
+        else
+        {
             float offsetY = offset.y + (player.transform.position.y * 0.15f);
             // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
             transform.position = new Vector3(player.transform.position.x + offset.x, offsetY, transform.position.z);
-         }
-        // else
-        // {
-            
-            
-        // }
+        }
     }
+
+   
+
 }
 
