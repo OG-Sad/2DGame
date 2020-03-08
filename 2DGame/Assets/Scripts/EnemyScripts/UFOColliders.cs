@@ -20,7 +20,7 @@ public class UFOColliders : MonoBehaviour
             if (PlayerPulled == true)
             {
                 Debug.Log("Pulled up");
-                Vector2 Vector = new Vector2(0, 15);
+                Vector2 Vector = new Vector2(0, 16);
                 Velocity.PlayerRB.AddForce(Vector);
 
                 /*
@@ -52,7 +52,7 @@ public class UFOColliders : MonoBehaviour
         if (other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("Power") | other.gameObject.CompareTag("Star"))
         {
             Destroy(gameObject);
-            PowerUps.RespawnUFO = true;
+            EnemySpawn.RespawnUFO = true;
         }
     }
 }

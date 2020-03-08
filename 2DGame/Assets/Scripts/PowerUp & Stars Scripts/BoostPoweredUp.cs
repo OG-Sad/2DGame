@@ -30,10 +30,21 @@ public class BoostPoweredUp : MonoBehaviour
                 Plan.GetComponent<CircleCollider2D>().enabled = false;
             }
 
-            Meteor.GetComponent<CircleCollider2D>().enabled = false;
-            UFO.GetComponent<PolygonCollider2D>().enabled = false;
-            UFO.GetComponentInChildren<PolygonCollider2D>().enabled = false;
+            foreach (GameObject Met in Meteors)
+            {
+                Met.GetComponent<CircleCollider2D>().enabled = false;
+            }
+
+           foreach (GameObject UFO in UFOs)
+           {
+                UFO.GetComponent<PolygonCollider2D>().enabled = false;
+                UFO.GetComponentInChildren<PolygonCollider2D>().enabled = false;
+           }
+
+
+            
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = false;
+            GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawn>().enabled = false;
             //store old velocity
             OldSpeed = Velocity.speed;
             //change max speed for boost

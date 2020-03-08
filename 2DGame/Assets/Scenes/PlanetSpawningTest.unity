@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 197384494}
   - component: {fileID: 197384495}
   - component: {fileID: 197384496}
+  - component: {fileID: 197384497}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
@@ -252,7 +253,6 @@ MonoBehaviour:
     type: 3}
   Player: {fileID: 973401848}
   Star: {fileID: 6280082290849730344, guid: 5d9e283d1ebd9417f9f19bc94800b7ac, type: 3}
-  UFO: {fileID: 1445843135654381186, guid: dbdbf92535224664caf025cce2104bd8, type: 3}
   GreenTrail: {fileID: 2100000, guid: 927b42085d6764485959bec83e5167b6, type: 2}
   BlueTrail: {fileID: 2100000, guid: 429f49335405e4fb484aefb49557be79, type: 2}
   PurpleTrail: {fileID: 2100000, guid: def6a885c043f4c34bd8434f6ac35463, type: 2}
@@ -271,6 +271,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Meteor: {fileID: 5892543755393815934, guid: 99563fd821bf112489134c8a408acc4b, type: 3}
+  UFO: {fileID: 1445843135654381186, guid: dbdbf92535224664caf025cce2104bd8, type: 3}
+--- !u!114 &197384497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197384492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bb4baafcb66404d802870fb69312cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   UFO: {fileID: 1445843135654381186, guid: dbdbf92535224664caf025cce2104bd8, type: 3}
 --- !u!1 &519420028
 GameObject:

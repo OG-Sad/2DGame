@@ -28,7 +28,7 @@ public class UFOLightScript : MonoBehaviour
         {
             Destroy(transform.parent.gameObject);
             // could put a delay using coroutine
-            PowerUps.RespawnUFO = true;
+            EnemySpawn.RespawnUFO = true;
         }
 
         

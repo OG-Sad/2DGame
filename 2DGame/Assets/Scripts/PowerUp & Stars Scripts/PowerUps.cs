@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star, UFO;
-    public static Transform PowerUp, StarSpawning, UFOSpawning;
+    public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star;
+    public static Transform PowerUp, StarSpawning;
     float yPos = 0, timer = 0, seconds = 0, timerForStars;
-    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, RespawnUFO = false, IsStarSpawned = false;
-    public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, UFOGo, ScorePower = 0, ScoreStar = 0;
+    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, IsStarSpawned = false;
+    public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, ScorePower = 0, ScoreStar = 0;
     public static bool RespawnStar = false;
     // the different materials of trail colors
     public Material GreenTrail, BlueTrail, PurpleTrail, GreyTrail;
@@ -49,7 +49,6 @@ public class PowerUps : MonoBehaviour
             
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
-            UFOGo = Random.Range(0, 2);
             timerForStars = 0;
             ScoreStar += 5;
             if (StarGo == 1 && IsStarSpawned == false)
@@ -58,11 +57,6 @@ public class PowerUps : MonoBehaviour
                 SpawnStar();
             }
             //UFO spawns 1/3 times every twenty seconds
-            if(UFOGo == 1)
-            {
-                UFOGo = 0;
-                SpawnUFO();
-            }
 
             timerForStars = 0;
         }
@@ -87,12 +81,7 @@ public class PowerUps : MonoBehaviour
             SpawnStar();
         }
         // If the UFO spawned touching a planet or in one
-        if (RespawnUFO == true)
-        {
-            RespawnUFO = false;
-            SpawnUFO();
-            
-        }
+       
 
     }
 
@@ -223,9 +212,8 @@ public class PowerUps : MonoBehaviour
         {
             // finds all the planets and enables the gravity
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
+            GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawn>().enabled = true;
 
-
-            
             foreach (GameObject Plan in BoostPoweredUp.Planets)
              {
                Plan.GetComponent<CircleCollider2D>().enabled = true;
@@ -238,11 +226,11 @@ public class PowerUps : MonoBehaviour
 
             foreach (GameObject UFO in BoostPoweredUp.UFOs)
             {
-                UFO.GetComponent<PolygonCollider2D>().enabled = true;
-                UFO.GetComponentInChildren<PolygonCollider2D>().enabled = true;
+
+               UFO.GetComponent<PolygonCollider2D>().enabled = true;
+               UFO.GetComponentInChildren<PolygonCollider2D>().enabled = true;
             }
 
-            
             // player not powered up
             // velocity before boost set to the player
             //seconds reset and power up can spawn
@@ -267,15 +255,6 @@ public class PowerUps : MonoBehaviour
         StarSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, yPoss);
 
     }
-    public void SpawnUFO()
-    {
-        // puts the ufo on screen
-        float UFOCor = 0;
-        //EditorApplication.isPaused = true;
-        UFOSpawning = Instantiate(UFO);
-        UFOCor = Random.Range(0, 4.5f);
-        UFOSpawning.localPosition = new Vector2(GameObject.FindGameObjectWithTag("Player").transform.position.x + 20f, UFOCor);
-        RespawnUFO = false;
-    }
+   
 }
 
