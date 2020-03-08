@@ -21,7 +21,7 @@ public class EnemySpawn : MonoBehaviour
     {
         UFOTime += Time.deltaTime;
         float score = GameObject.Find("Score").GetComponent<ScoreScript>().Score;
-        if (UFOTime >= 5 && score > EnemyScoreSpawn)
+        if (UFOTime >= 30 && score > EnemyScoreSpawn)
         {
 
             //1/5 times chance a Star can spawn
