@@ -45,16 +45,8 @@ public class StarScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
             // if the star collides with the player
-            if (other.gameObject.name == "Player")
-            {
-                //adds 1 star to the current number of stars and destroys the star
-                PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 1);
-                Destroy(gameObject);
-                PowerUps.IsStarSpawned = false;
-
-
-        }
-        if (other.gameObject.tag == "Planet")
+     
+        if (other.gameObject.CompareTag("Planet"))
         {
             // if the star collides with the planet, then respawn the star
             Destroy(gameObject);
@@ -63,5 +55,20 @@ public class StarScript : MonoBehaviour
 
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            //adds 1 star to the current number of stars and destroys the star
+            PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 1);
+            Destroy(gameObject);
+            PowerUps.IsStarSpawned = false;
+
+
+        }
+
+
+    }
+
+
 }

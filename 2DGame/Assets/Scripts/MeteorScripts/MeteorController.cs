@@ -38,7 +38,7 @@ public class MeteorController : MonoBehaviour
 
         if (coll.gameObject.CompareTag("Player") && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
         {
-            Debug.Log("Poblem is meteor");
+            
         }
 
         else if (coll.gameObject.tag == "Player")

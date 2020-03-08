@@ -44,15 +44,17 @@ public class PowerUps : MonoBehaviour
         }
         //Every 20 seconds a Star can spawn
         
-        if (timerForStars >= 20 && score > ScoreStar)
+        if (timerForStars >= 5 && score > ScoreStar)
         {
             
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
+            StarGo = 1;
             timerForStars = 0;
-            ScoreStar += 75;
+            
             if (StarGo == 1 && IsStarSpawned == false)
             {
+                ScoreStar += 75;
                 //EditorApplication.isPaused = true;
                 SpawnStar();
             }

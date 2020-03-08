@@ -43,9 +43,7 @@ public class PlayerController : MonoBehaviour
 
         if (!coll.gameObject.CompareTag("Power") && !coll.gameObject.CompareTag("Star") && !(PowerUps.ChoosePowerUp == 1 && PowerUps.PlayerPoweredUp == true))
         {
-            Debug.Log(PowerUps.ChoosePowerUp);
-            Debug.Log(PowerUps.PlayerPoweredUp);
-            Debug.Log("Problem is player");
+           
             Database.gameEnd = true;
         }
 

@@ -68,7 +68,6 @@ public class BoostPoweredUp : MonoBehaviour
             Velocity.PlayerRB.AddForce(Velocity.forceVector);
             Velocity.forceVector = new Vector2(0, 300);
             Velocity.PlayerRB.AddForce(Velocity.forceVector);
-            Debug.Log("game is ended");
         }
        // if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
         //{

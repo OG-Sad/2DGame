@@ -11,6 +11,7 @@ public class Attractor : MonoBehaviour
     float orbitVelNum, pi = Mathf.PI, lastPlayPlanTan = 0;
     Vector2 lastVelocity, lastPlayerPos;
     bool firstPlanet = false;
+    public static bool orbittest = false;
 
     GameObject Player;
 
@@ -27,8 +28,8 @@ public class Attractor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
 
+        
         Player = GameObject.FindGameObjectWithTag("Player");
 
         float dist = Vector2.Distance(transform.position, Player.transform.position);
@@ -37,11 +38,19 @@ public class Attractor : MonoBehaviour
 
         if (dist <= 4 && PlanetRB.mass > 0.1) {
             //Debug.Log(true);
-
             Vector2 acceleration = (PlayerRB.velocity - lastVelocity) / Time.fixedDeltaTime;
             Orbiting(acceleration, playerTheta, dist);
 
         }
+
+        if (PlanetRB.mass < .1)
+        {
+            
+                orbittest = false;
+            
+
+        }
+
 
         Attract(Player);
     
@@ -107,7 +116,7 @@ public class Attractor : MonoBehaviour
     }
 
     Vector2 Orbiting (Vector2 acc, float playTan, float dister) {
-
+        orbittest = true;
         Vector2 vel = PlayerRB.velocity;
 
       
@@ -123,7 +132,7 @@ public class Attractor : MonoBehaviour
         // Checks to see if the player's angle to the planet around 90 degrees 
         // IMPORTANT: If we want to make the orbit eliptical, it'll be done here
         if((1.4 < angleSum && angleSum < 1.6) || (0.4 < angleSum && angleSum < 0.6)) {
-            
+
             Vector2 perpForce;
 
             float forceX = force.x;
@@ -131,6 +140,7 @@ public class Attractor : MonoBehaviour
 
             if (playPlanTan - lastPlayPlanTan > 0) {
                 perpForce = new Vector2(forceY, -forceX);
+                
             }
             else {
                 perpForce = new Vector2(-forceY, forceX);
@@ -142,8 +152,8 @@ public class Attractor : MonoBehaviour
             if (orbitVel != vel) {
                 Player.GetComponent<Rigidbody2D>().velocity = difference;
             }
-        }     
-
+        }
+        
         return PlayerRB.velocity;   
     }
 
