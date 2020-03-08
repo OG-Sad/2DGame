@@ -30,12 +30,12 @@ public class PowerUps : MonoBehaviour
         //Every 10 seconds a power up can spawn
         timer += Time.deltaTime;
         timerForStars += Time.deltaTime;
-        if (timer >= 4 && ScorePower < score && PlayerPoweredUp == false && PlayerPotentialPowerUp == false)
+        if (timer >= 15 && ScorePower < score && PlayerPoweredUp == false && PlayerPotentialPowerUp == false)
         {
             //1/2 times a power up can spawn, it will spawn
             PowerUpGo = Random.Range(0, 2);
             timer = 0;
-            ScorePower += 5;
+            ScorePower += 25;
             if (PowerUpGo == 1 && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
             {
                 //EditorApplication.isPaused = true;
@@ -50,7 +50,7 @@ public class PowerUps : MonoBehaviour
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
             timerForStars = 0;
-            ScoreStar += 5;
+            ScoreStar += 75;
             if (StarGo == 1 && IsStarSpawned == false)
             {
                 //EditorApplication.isPaused = true;
@@ -90,7 +90,6 @@ public class PowerUps : MonoBehaviour
         //makes sure only one power up can spawn at a time
         //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(1, 5);
-        ChoosePowerUp = 4;
         //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {
@@ -208,7 +207,7 @@ public class PowerUps : MonoBehaviour
 
         }
 
-        if (seconds >= 2 && ChoosePowerUp == 4)
+        if (seconds >= 4 && ChoosePowerUp == 4)
         {
             // finds all the planets and enables the gravity
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
@@ -241,8 +240,7 @@ public class PowerUps : MonoBehaviour
            
         }
 
-       
-
+      
     }
 
     void SpawnStar()

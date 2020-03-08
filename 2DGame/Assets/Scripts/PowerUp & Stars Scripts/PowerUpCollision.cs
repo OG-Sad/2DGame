@@ -18,10 +18,9 @@ public class PowerUpCollision : MonoBehaviour
 
         }
    
-       
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+   /* private void OnCollisionEnter2D(Collision2D other)
     {
         //Fire.startColor = new Color(0, 0, 255, 1f);
 
@@ -65,6 +64,44 @@ public class PowerUpCollision : MonoBehaviour
 
         }
 
+
+    }
+    */
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 1)
+        {
+            Debug.Log("Powered up");
+            PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
+
+
+        }
+
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
+        {
+            PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
+            // set the time stop power up
+            Time.timeScale = 0f;
+
+        }
+
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 3)
+        {
+            PowerUps.PlayerPotentialPowerUp = true;
+            Destroy(gameObject);
+
+
+
+        }
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
+        {
+            PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
+
+
+        }
 
     }
 }

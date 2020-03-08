@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8636557090713669983}
   - component: {fileID: 497727119287453295}
   - component: {fileID: 2519514839197787149}
-  - component: {fileID: 6139169060426729570}
+  - component: {fileID: 5584304627885610533}
   m_Layer: 0
   m_Name: BoostPowerUp
   m_TagString: Power
@@ -92,7 +92,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d766a0933d54140ed9ff372b422e6476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &6139169060426729570
+--- !u!50 &5584304627885610533
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

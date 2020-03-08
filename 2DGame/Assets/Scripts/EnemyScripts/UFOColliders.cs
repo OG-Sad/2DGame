@@ -19,7 +19,6 @@ public class UFOColliders : MonoBehaviour
 
             if (PlayerPulled == true)
             {
-                Debug.Log("Pulled up");
                 Vector2 Vector = new Vector2(0, 16);
                 Velocity.PlayerRB.AddForce(Vector);
 
