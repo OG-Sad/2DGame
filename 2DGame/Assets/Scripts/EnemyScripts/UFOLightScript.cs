@@ -18,7 +18,11 @@ public class UFOLightScript : MonoBehaviour
             Reset();
 
         }
-        
+        if (UFOColliders.PlayerPulled == true)
+        {
+            Debug.Log("player pulled");
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -56,7 +60,6 @@ public class UFOLightScript : MonoBehaviour
 
             if (other.gameObject.CompareTag("Player"))
             {
-
                 UFOColliders.PlayerPulled = false;
                 float Xspeed = Velocity.PlayerRB.velocity.x;
                 Vector2 VectorTest = new Vector2(Xspeed, 4);
@@ -64,7 +67,14 @@ public class UFOLightScript : MonoBehaviour
             }
         }
 
-      
+        if (Database.gameEnd == true)
+        {
+            UFOColliders.PlayerPulled = false;
+
+        }
+
+
+
     }
 
     void Reset()

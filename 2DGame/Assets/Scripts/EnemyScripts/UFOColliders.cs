@@ -23,6 +23,7 @@ public class UFOColliders : MonoBehaviour
                 Vector2 Vector = new Vector2(0, 16);
                 Velocity.PlayerRB.AddForce(Vector);
 
+                
                 /*
                 Player = GameObject.FindGameObjectWithTag("Player");
                 UFO = GameObject.FindGameObjectWithTag("UFO");
@@ -30,6 +31,7 @@ public class UFOColliders : MonoBehaviour
                 */
             }
         }
+
         else
         {
             Destroy(gameObject);
@@ -41,7 +43,6 @@ public class UFOColliders : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && (!PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp != 1))
         {
-            Destroy(other.gameObject);
             Database.gameEnd = true;
         }
 
