@@ -44,7 +44,7 @@ public class PowerUps : MonoBehaviour
         }
         //Every 20 seconds a Star can spawn
         
-        if (timerForStars >= 5 && score > ScoreStar)
+        if (timerForStars >= 20 && score > ScoreStar)
         {
             
             //1/5 times chance a Star can spawn
@@ -101,6 +101,7 @@ public class PowerUps : MonoBehaviour
         //makes sure only one power up can spawn at a time
         //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(1, 5);
+        ChoosePowerUp = 1;
         //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {
@@ -222,10 +223,26 @@ public class PowerUps : MonoBehaviour
         {
             // finds all the planets and enables the gravity
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
+
+
+            
             foreach (GameObject Plan in BoostPoweredUp.Planets)
-            {
+             {
                Plan.GetComponent<CircleCollider2D>().enabled = true;
+             }
+
+            foreach (GameObject Met in BoostPoweredUp.Meteors)
+            {
+                Met.GetComponent<CircleCollider2D>().enabled = true;
             }
+
+            foreach (GameObject UFO in BoostPoweredUp.UFOs)
+            {
+                UFO.GetComponent<PolygonCollider2D>().enabled = true;
+                UFO.GetComponentInChildren<PolygonCollider2D>().enabled = true;
+            }
+
+            
             // player not powered up
             // velocity before boost set to the player
             //seconds reset and power up can spawn
@@ -233,9 +250,7 @@ public class PowerUps : MonoBehaviour
             Velocity.speed = BoostPoweredUp.OldSpeed;
             seconds = 0;
             Trail.material = OriginTrial;
-            //Trail.material = Trail.materials[0];
-            //Trail.colorGradient = v;
-
+           
         }
 
        
