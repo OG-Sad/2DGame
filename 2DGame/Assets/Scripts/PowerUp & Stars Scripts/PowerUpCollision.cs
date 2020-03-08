@@ -17,9 +17,7 @@ public class PowerUpCollision : MonoBehaviour
             }
 
         }
-
-        
-       
+   
        
     }
 
@@ -35,6 +33,7 @@ public class PowerUpCollision : MonoBehaviour
         // power up the player on collision or potential and destroy the power up, 
         if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 1)
         {
+            Debug.Log("Powered up");
             PowerUps.PlayerPoweredUp = true;
             Destroy(gameObject);
             

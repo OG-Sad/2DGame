@@ -5,8 +5,10 @@ using UnityEngine;
 public class BoostPoweredUp : MonoBehaviour
 {
     public static float OldSpeed;
-    public static GameObject[] Planets;
-    public Transform  PlanetPrefabs;
+    public static GameObject[] Planets, Meteors, UFOs;
+    public Transform  Meteor, UFO;
+    
+   
     // Start is called before the first frame update
 
 
@@ -15,18 +17,28 @@ public class BoostPoweredUp : MonoBehaviour
     {
         //find all planets
         Planets = GameObject.FindGameObjectsWithTag("Planet");
+        Meteors = GameObject.FindGameObjectsWithTag("Meteor");
+        UFOs = GameObject.FindGameObjectsWithTag("UFO");
         // if the boost power up is true and the player is powered up
         if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
         {
+            Debug.Log("Powered up");
             // turn gravity off on all planets and spawning
-            PlanetPrefabs.GetComponent < CircleCollider2D >().enabled = false;
+            foreach (GameObject Plan in Planets)
+            {
+                Plan.GetComponent<CircleCollider2D>().enabled = false;
+            }
+
+            Meteor.GetComponent<CircleCollider2D>().enabled = false;
+            UFO.GetComponent<PolygonCollider2D>().enabled = false;
+            UFO.GetComponentInChildren<PolygonCollider2D>().enabled = false;
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = false;
             //store old velocity
             OldSpeed = Velocity.speed;
             //change max speed for boost
             Velocity.MaxSpeed = 30f;
             //add big boost in the x direction
-            Velocity.forceVector = new Vector2(500, 0);
+            Velocity.forceVector = new Vector2(200, 0);
             Velocity.PlayerRB.AddForce(Velocity.forceVector);
            
 

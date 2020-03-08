@@ -39,7 +39,7 @@ public class UFOColliders : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && (!PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp != 1))
         {
             Destroy(other.gameObject);
             Database.gameEnd = true;
