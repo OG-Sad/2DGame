@@ -34,29 +34,16 @@ public class ShopController : MonoBehaviour
         {1,30},
         {2,50},
         {3,100},
-        {4,250}
+        {4,250},
+        //there isn't meant to be a cost when an item is at level 5
+        {5, 0}
     };
 
     void Start()
     {
-        //will load a save file if there is one
-        try
-        {
-            itemList = SaveSystem.LoadPlayer().itemList;
-        }
-        //if there's an error, the item list will just be the default base item list
-        catch (System.Exception ex)
-        {
-            print("No save file found");
-        }
+        DisplayInitData();
 
-        //loads the correct texts into the cost section of each item
-        for (int i = 0; i < itemList.Count; i++) {
-            string itemName = itemList[i].name;
-            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
-            costText.GetComponent<Text>().text = costDict[itemList[i].upgradeLevel].ToString();
-        }
-
+        //get rid of this later
         PlayerPrefs.SetInt("Stars", 99999999);
         currentStars = PlayerPrefs.GetInt("Stars");
         stars.text = currentStars.ToString();
@@ -70,10 +57,78 @@ public class ShopController : MonoBehaviour
 
     //saves the shop data when the game closes
     private void OnApplicationQuit()
-    { 
+    {
         SaveSystem.SavePlayer(itemList);
     }
 
+    //fetches a save file and displays the data in the file
+    void DisplayInitData() {
+        //will load a save file if there is one
+        try
+        {
+            itemList = SaveSystem.LoadPlayer().itemList;
+        }
+        //if there's an error, the item list will just be the default base item list
+        catch (System.Exception ex)
+        {
+            print("No save file found");
+        }
+
+        //loads the correct texts into the cost section of each item
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            string itemName = itemList[i].name;
+
+            GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
+            if (itemList[i].upgradeLevel < 5)
+            {
+                costText.GetComponent<Text>().text = costDict[itemList[i].upgradeLevel].ToString();
+            }
+            else
+            {
+                costText.GetComponent<Text>().text = "Max Level";
+            }
+
+            GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
+            GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");
+            GameObject bar3 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 3");
+            GameObject bar4 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 4");
+            GameObject bar5 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 5");
+
+            if (itemList[i].upgradeLevel == 1)
+            {
+                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            }
+            else if (itemList[i].upgradeLevel == 2)
+            {
+                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+            }
+            else if (itemList[i].upgradeLevel == 3)
+            {
+                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+            }
+            else if (itemList[i].upgradeLevel == 4)
+            {
+                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar4.GetComponent<Image>().color = new Color(0, 224, 213);
+            }
+            else if (itemList[i].upgradeLevel == 5)
+            {
+                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar4.GetComponent<Image>().color = new Color(0, 224, 213);
+                bar5.GetComponent<Image>().color = new Color(0, 224, 213);
+            }
+        }
+    }
+
+    //switches to the power ups tab
     public void PowerUpsClicked() {
         currentTabSelect = "Power Ups";
 
@@ -86,6 +141,7 @@ public class ShopController : MonoBehaviour
         powerUps.SetActive(true);
     }
 
+    //switches to the skins tab
     public void SkinsClicked()
     {
         currentTabSelect = "Skins";
@@ -99,6 +155,7 @@ public class ShopController : MonoBehaviour
         skins.SetActive(true);
     }
 
+    //switches to the backgrounds tab
     public void BackgroundClicked()
     {
         currentTabSelect = "Skins";
@@ -112,42 +169,89 @@ public class ShopController : MonoBehaviour
         backgorunds.SetActive(true);
     }
 
+    //buys a shop item
     public void BuyShopItem() {
 
         //gets the name of the button that was clicked
         string itemName = EventSystem.current.currentSelectedGameObject.name;
         int itemCost = 0;
         int itemUpgradeLevel = 0;
+        int itemIndex = 0;
         int newItemCost = 0;
 
-        //finds whether or not the item is currently owned and the cost of the item
+        //finds the upgrade level and the cost of the item
         for (int i = 0; i < itemList.Count; i++)
         {
             if (itemList[i].name == itemName)
             {
                 itemCost = costDict[itemList[i].upgradeLevel];
                 itemUpgradeLevel = itemList[i].upgradeLevel;
+                itemIndex = i;
             }
         }
 
         if (currentStars >= itemCost && itemUpgradeLevel < 5) {
 
-            //sets the item's "owned" bool to true
-            for (int i = 0; i < itemList.Count; i++)
-            {
-                if (itemList[i].name == itemName)
-                {
-                    itemList[i].upgradeLevel++;
-                    newItemCost = costDict[itemList[i].upgradeLevel];
-                }
-            }
+            //adds 1 to the upgrade level
+            itemList[itemIndex].upgradeLevel++;
+            //gets new item upgrade level
+            itemUpgradeLevel = itemList[itemIndex].upgradeLevel;
+            newItemCost = costDict[itemUpgradeLevel];
 
             currentStars -= itemCost;
             PlayerPrefs.SetInt("Stars", currentStars);
             stars.text = PlayerPrefs.GetInt("Stars").ToString();
 
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
-            costText.GetComponent<Text>().text = newItemCost.ToString();
+            if (itemUpgradeLevel < 5)
+            {
+                costText.GetComponent<Text>().text = newItemCost.ToString();
+            }
+            else {
+                costText.GetComponent<Text>().text = "Max Level";
+            }
+
+            UpdateUpgradeMeter(itemName, itemUpgradeLevel);
+        }
+    }
+
+    //updates an item's upgradeMeter bar's color
+    void UpdateUpgradeMeter(string itemName, int upgradeLevel) {
+        GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
+        GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");
+        GameObject bar3 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 3");
+        GameObject bar4 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 4");
+        GameObject bar5 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 5");
+
+        if (upgradeLevel == 1)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (upgradeLevel == 2)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (upgradeLevel == 3)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (upgradeLevel == 4)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar4.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (upgradeLevel == 5)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar4.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar5.GetComponent<Image>().color = new Color(0, 224, 213);
         }
     }
 
@@ -162,6 +266,18 @@ public class ShopController : MonoBehaviour
             string itemName = itemList[i].name;
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
             costText.GetComponent<Text>().text = costDict[itemList[i].upgradeLevel].ToString();
+
+            GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
+            GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");
+            GameObject bar3 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 3");
+            GameObject bar4 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 4");
+            GameObject bar5 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 5");
+
+            //the first bar always has a color
+            bar2.GetComponent<Image>().color = new Color(255, 255, 255);
+            bar3.GetComponent<Image>().color = new Color(255, 255, 255);
+            bar4.GetComponent<Image>().color = new Color(255, 255, 255);
+            bar5.GetComponent<Image>().color = new Color(255, 255, 255);
         }
     }
 
