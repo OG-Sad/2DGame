@@ -30,7 +30,7 @@ public class cameraMovement : MonoBehaviour
         {
 
 
-            Debug.Log(smoothcamera);
+            //Debug.Log(smoothcamera);
 
             if (Attractor.orbittest)
             {
