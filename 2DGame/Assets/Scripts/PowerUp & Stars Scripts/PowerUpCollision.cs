@@ -83,7 +83,7 @@ public class PowerUpCollision : MonoBehaviour
             PowerUps.PlayerPoweredUp = true;
             Destroy(gameObject);
             // set the time stop power up
-            Time.timeScale = 0f;
+            Time.timeScale = .3f;
 
         }
 
@@ -101,6 +101,12 @@ public class PowerUpCollision : MonoBehaviour
             Destroy(gameObject);
 
 
+        }
+
+        if(other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("Star"))
+        {
+            Destroy(gameObject);
+            PowerUps.RespawnPower = true;
         }
 
     }

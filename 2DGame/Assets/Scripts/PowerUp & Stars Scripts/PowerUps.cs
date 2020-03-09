@@ -8,7 +8,7 @@ public class PowerUps : MonoBehaviour
     public Transform InvinciblePowerUp, TimePowerUp, StarPowerUp, BoostPowerUp, Player, Star;
     public static Transform PowerUp, StarSpawning;
     float yPos = 0, timer = 0, seconds = 0, timerForStars;
-    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, IsStarSpawned = false;
+    public static bool PowerUpTrue = false, PlayerPoweredUp = false, PlayerPotentialPowerUp = false, IsStarSpawned = false, RespawnPower = false;
     public static int ChoosePowerUp = 0, PowerUpGo = 0, StarGo, ScorePower = 0, ScoreStar = 0;
     public static bool RespawnStar = false;
     // the different materials of trail colors
@@ -25,12 +25,13 @@ public class PowerUps : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         float score = GameObject.Find("Score").GetComponent<ScoreScript>().Score;
 
         //Every 10 seconds a power up can spawn
         timer += Time.deltaTime;
         timerForStars += Time.deltaTime;
-        if (timer >= 15 && ScorePower < score && PlayerPoweredUp == false && PlayerPotentialPowerUp == false)
+        if (timer >= 10 && ScorePower < score && PlayerPoweredUp == false && PlayerPotentialPowerUp == false)
         {
             //1/2 times a power up can spawn, it will spawn
             PowerUpGo = Random.Range(0, 2);
@@ -44,7 +45,7 @@ public class PowerUps : MonoBehaviour
         }
         //Every 20 seconds a Star can spawn
         
-        if (timerForStars >= 5 && score > ScoreStar)
+        if (timerForStars >= 20 && score > ScoreStar)
         {
             
             //1/5 times chance a Star can spawn
@@ -82,8 +83,13 @@ public class PowerUps : MonoBehaviour
             RespawnStar = false;
             SpawnStar();
         }
-        // If the UFO spawned touching a planet or in one
-       
+
+        // If the powerup spawned touching a planet or in one
+        if (RespawnPower)
+        {
+            RespawnPower = false;
+            SpawnPowerUp();
+        }
 
     }
 
@@ -92,6 +98,7 @@ public class PowerUps : MonoBehaviour
         //makes sure only one power up can spawn at a time
         //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(1, 5);
+        //ChoosePowerUp = ;
         //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {

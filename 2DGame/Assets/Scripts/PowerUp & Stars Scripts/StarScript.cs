@@ -42,18 +42,6 @@ public class StarScript : MonoBehaviour
         }
     }
     
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-            // if the star collides with the player
-     
-        if (other.gameObject.CompareTag("Planet"))
-        {
-            // if the star collides with the planet, then respawn the star
-            Destroy(gameObject);
-            PowerUps.RespawnStar = true;
-        }
-
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -66,6 +54,14 @@ public class StarScript : MonoBehaviour
 
 
         }
+
+        if (other.gameObject.CompareTag("Planet"))
+        {
+            // if the star collides with the planet, then respawn the star
+            Destroy(gameObject);
+            PowerUps.RespawnStar = true;
+        }
+
 
 
     }
