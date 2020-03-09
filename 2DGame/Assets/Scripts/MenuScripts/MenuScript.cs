@@ -63,9 +63,9 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(sceneName: "LevelSelect");
     }
 
-    public void Level1Select()
+    public void Tutorial()
     {
-        SceneManager.LoadScene(sceneName: "Level1");
+        SceneManager.LoadScene(sceneName: "Tutorial");
     }
 
     public void Level_1Select()

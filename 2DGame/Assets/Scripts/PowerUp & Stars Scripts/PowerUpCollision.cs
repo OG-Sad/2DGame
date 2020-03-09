@@ -5,49 +5,109 @@ using UnityEngine;
 
 public class PowerUpCollision : MonoBehaviour
 {
-
-    //private static GameObject myPrefabInstances;
-    //public Transform player;
-
-    //public Renderer rend;
+   
     void Update()
     {
-        // if any of the power ups are too far behind the player, destroy them
-        if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+        if(Database.gameEnd == false)
         {
-            Destroy(gameObject);
+            // if any of the power ups are too far behind the player, destroy them
+            if (gameObject.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10f)
+            {
+                Destroy(gameObject);
+            }
+
         }
+   
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+   /* private void OnCollisionEnter2D(Collision2D other)
     {
-        // power up the player on collision or potential and destroy the power up
+        //Fire.startColor = new Color(0, 0, 255, 1f);
+
+
+        //Fire.startColor = TrailColorP;
+        //Fire.GetComponent<Color>();
+        //Fire.startColor = Color.blue;
+        // Fire.GetComponent<Material>();
+        // power up the player on collision or potential and destroy the power up, 
         if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 1)
         {
+            Debug.Log("Powered up");
             PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
+            
 
+        }
 
-
-            if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
             {
                 PowerUps.PlayerPoweredUp = true;
                 Destroy(gameObject);
                 // set the time stop power up
                 Time.timeScale = 0f;
-            }
 
-            if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 3)
+        }
+
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 3)
             {
                 PowerUps.PlayerPotentialPowerUp = true;
                 Destroy(gameObject);
+                
 
-            }
-            if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
+
+        }
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
             {
                 PowerUps.PlayerPoweredUp = true;
                 Destroy(gameObject);
-            }
+               
 
         }
+
+
+    }
+    */
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 1)
+        {
+            Debug.Log("Powered up");
+            PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
+
+
+        }
+
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 2)
+        {
+            PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
+            // set the time stop power up
+            Time.timeScale = .3f;
+
+        }
+
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 3)
+        {
+            PowerUps.PlayerPotentialPowerUp = true;
+            Destroy(gameObject);
+
+
+
+        }
+        if (other.gameObject.name == "Player" && PowerUps.ChoosePowerUp == 4)
+        {
+            PowerUps.PlayerPoweredUp = true;
+            Destroy(gameObject);
+
+
+        }
+
+        if(other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("Star"))
+        {
+            Destroy(gameObject);
+            PowerUps.RespawnPower = true;
+        }
+
     }
 }

@@ -8,9 +8,12 @@ TagManager:
   - gravitySlider
   - Background
   - PowerUp
-  - Star
   - Spawner
   - UFO
+  - Power
+  - Stars
+  - Meteor
+  - Star
   layers:
   - Default
   - TransparentFX

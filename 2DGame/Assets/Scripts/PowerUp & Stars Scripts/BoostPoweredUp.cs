@@ -5,8 +5,11 @@ using UnityEngine;
 public class BoostPoweredUp : MonoBehaviour
 {
     public static float OldSpeed;
-    public static GameObject[] Planets;
-    public Transform  PlanetPrefabs;
+    public static GameObject[] Planets, Meteors, UFOs;
+    public Transform  Meteor, UFO;
+    bool OneTime = true;
+    
+   
     // Start is called before the first frame update
 
 
@@ -15,21 +18,63 @@ public class BoostPoweredUp : MonoBehaviour
     {
         //find all planets
         Planets = GameObject.FindGameObjectsWithTag("Planet");
+        Meteors = GameObject.FindGameObjectsWithTag("Meteor");
+        UFOs = GameObject.FindGameObjectsWithTag("UFO");
         // if the boost power up is true and the player is powered up
-        if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
+        if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4 && OneTime == true)
         {
+            Debug.Log("Powered up");
             // turn gravity off on all planets and spawning
-            PlanetPrefabs.GetComponent < Attractor >().enabled = false;
+            foreach (GameObject Plan in Planets)
+            {
+                Plan.GetComponent<CircleCollider2D>().enabled = false;
+            }
+
+            foreach (GameObject Met in Meteors)
+            {
+                Met.GetComponent<CircleCollider2D>().enabled = false;
+            }
+
+           foreach (GameObject UFO in UFOs)
+           {
+                UFO.GetComponent<PolygonCollider2D>().enabled = false;
+                UFO.GetComponentInChildren<PolygonCollider2D>().enabled = false;
+           }
+
+
+            
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = false;
+            GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawn>().enabled = false;
             //store old velocity
             OldSpeed = Velocity.speed;
             //change max speed for boost
             Velocity.MaxSpeed = 30f;
             //add big boost in the x direction
-            Velocity.forceVector = new Vector2(500, 0);
+            Velocity.forceVector = new Vector2(200, 0);
             Velocity.PlayerRB.AddForce(Velocity.forceVector);
+            OneTime = false;
            
 
         }
+        else
+        {
+            OneTime = true;
+        }
+        //reset game
+        if(Database.gameEnd == true)
+        {
+            Velocity.speed = 0;
+            Velocity.forceVector = new Vector2(-200, 0);
+            Velocity.PlayerRB.AddForce(Velocity.forceVector);
+            Velocity.forceVector = new Vector2(0, 300);
+            Velocity.PlayerRB.AddForce(Velocity.forceVector);
+        }
+       // if (PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
+        //{
+            // turn kill off
+            //PlanetPrefabs.GetComponent<CircleCollider2D>().enabled = false;
+                       
+        //}
+        
     }
 }

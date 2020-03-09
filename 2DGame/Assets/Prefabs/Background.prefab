@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7348189083787433056}
   - component: {fileID: 7348189083787433071}
   - component: {fileID: 7348189083787433070}
-  - component: {fileID: 7348189083787433066}
+  - component: {fileID: 1272744151705877239}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -4699,7 +4699,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &7348189083787433066
+--- !u!114 &1272744151705877239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4708,8 +4708,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7348189083787433068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c04d351d80d5490a81d1285e8ab704b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a879f9916fbd43c791e720fc88f73cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Camera: {fileID: 0}
   BackgroundType: {fileID: 7348189083787433056}
