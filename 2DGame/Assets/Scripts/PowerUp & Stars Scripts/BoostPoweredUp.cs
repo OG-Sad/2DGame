@@ -9,7 +9,10 @@ public class BoostPoweredUp : MonoBehaviour
     public Transform  Meteor, UFO;
     bool OneTime = true;
     
-   
+   void Start()
+    {
+        Application.targetFrameRate = 300;
+    }
     // Start is called before the first frame update
 
 
