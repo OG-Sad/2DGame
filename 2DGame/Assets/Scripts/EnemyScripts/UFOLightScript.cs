@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UFOLightScript : MonoBehaviour
 {
+    float timer;
+    Collider2D UFOlight;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,8 @@ public class UFOLightScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Database.gameEnd == true)
+         timer += Time.unscaledDeltaTime;
+        if (Database.gameEnd == true)
         {
             Reset();
 
@@ -23,7 +26,16 @@ public class UFOLightScript : MonoBehaviour
             Debug.Log("player pulled");
 
         }
+
+        if(timer >= 1)
+        {
+            UFOlight = GetComponent<PolygonCollider2D>();
+            //Here the GameObject's Collider is not a trigger
+            UFOlight.isTrigger = true;
+            timer = 0;
+        } 
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -50,6 +62,7 @@ public class UFOLightScript : MonoBehaviour
    
 
     }
+
 
     private void OnTriggerExit2D(Collider2D other)
     {

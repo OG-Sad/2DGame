@@ -16,6 +16,8 @@ public class PowerUps : MonoBehaviour
     // for changing the trails color
     public TrailRenderer Trail;
     Material OriginTrial;
+    int secs;
+    float faster = .5f;
 
     void Start()
     {
@@ -37,7 +39,7 @@ public class PowerUps : MonoBehaviour
             PowerUpGo = Random.Range(0, 2);
             timer = 0;
             ScorePower += 25;
-            if (PowerUpGo == 1 && PlayerPotentialPowerUp == false)// && PowerUpTrue == false)
+            if (PowerUpGo == 1 && !PlayerPotentialPowerUp && !PlayerPoweredUp)// && PowerUpTrue == false)
             {
                 //EditorApplication.isPaused = true;
                 SpawnPowerUp();
@@ -65,8 +67,9 @@ public class PowerUps : MonoBehaviour
         }
 
         // If the player has the star power up they can tap twice and get powered up
-        if (PlayerPotentialPowerUp == true && (Input.touchCount > 1 | Input.GetMouseButtonDown(1)))
+        if (PlayerPotentialPowerUp == true && Input.touchCount > 0)
         {
+            PlayerPotentialPowerUp = false;
             PlayerPoweredUp = true;
             
         }
@@ -98,7 +101,7 @@ public class PowerUps : MonoBehaviour
         //makes sure only one power up can spawn at a time
         //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(1, 5);
-        //ChoosePowerUp = ;
+        //ChoosePowerUp = 1;
         //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {
@@ -134,6 +137,7 @@ public class PowerUps : MonoBehaviour
         if (ChoosePowerUp == 1)
         {
             Trail.material = GreenTrail;
+            
             //Trail.material = Trail.materials[3];
             //Trail.colorGradient =
             
@@ -161,14 +165,58 @@ public class PowerUps : MonoBehaviour
             //Trail.material = Trail.materials[3];
 
         }
-        
+
+       
 
         //seconds are unscaled because of time power up
         seconds += Time.unscaledDeltaTime;
-        // after the power up, the game is restored to before presets
        
+         secs = (int)(seconds);
+        
+        if (ChoosePowerUp == 1 && seconds >= 6 && seconds <= 10)
+        {
+            if (secs % 2 == 0)
+            {
+                Debug.Log("in");
+                Trail.emitting = false;
+                secs = (int)(seconds + faster);
+                faster += .5f;
+                
+            }
+
+            if (secs % 2 != 0)
+            {
+                Debug.Log("out");
+                Trail.emitting = true;
+                secs = (int)(seconds + faster);
+                faster += .5f;
+            }
+        }
+
+        if ((ChoosePowerUp == 2 | ChoosePowerUp == 3) && seconds >= 3 && seconds <= 6)
+        {
+            if (secs % 2 == 0)
+            {
+                Debug.Log("in");
+                Trail.emitting = false;
+                secs = (int)(seconds + faster);
+                faster += .5f;
+
+            }
+
+            if (secs % 2 != 0)
+            {
+                Debug.Log("out");
+                Trail.emitting = true;
+                secs = (int)(seconds + faster);
+                faster += .5f;
+            }
+        }
+
+        // after the power up, the game is restored to before presets
         if (seconds >= 10 && ChoosePowerUp == 1)
         {
+            Trail.emitting = true;
             //new power up can spawn
             //player is not powered up
             //seconds reset
@@ -183,8 +231,9 @@ public class PowerUps : MonoBehaviour
 
         }
 
-        if (seconds >= 6 &&  ChoosePowerUp == 2)
+        if (seconds >= 6 && ChoosePowerUp == 2)
         {
+            Trail.enabled = true;
             //new power up can spawn
             // time is set to normal
             //player is not powered up
@@ -203,6 +252,7 @@ public class PowerUps : MonoBehaviour
 
         if (seconds >= 6 && ChoosePowerUp == 3)
         {
+            Trail.emitting = true;
             //new power up can spawn
             //player is not powered up
             //seconds reset
@@ -218,6 +268,7 @@ public class PowerUps : MonoBehaviour
 
         if (seconds >= 4 && ChoosePowerUp == 4)
         {
+            Trail.emitting = true;
             // finds all the planets and enables the gravity
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>().enabled = true;
             GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawn>().enabled = true;
