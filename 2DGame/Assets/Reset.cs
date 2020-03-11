@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialController : MonoBehaviour
+public class Reset : MonoBehaviour
 {
-    public GameObject player;
-    GameObject Clone;
+    public static bool  resetGo = false;
     // Start is called before the first frame update
     void Start()
     {
-        Clone = player;
-        Instantiate(Clone);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Reset.resetGo == true)
+        if (TargetController.reset == true)
         {
-           
-            Instantiate(Clone);
-            Reset.resetGo = false;
+            Debug.Log("in");
+            Destroy(gameObject);
+            TargetController.reset = false;
+            resetGo = true;
         }
     }
 }
