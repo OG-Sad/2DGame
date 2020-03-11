@@ -40,10 +40,10 @@ public class PlayerController : MonoBehaviour
     //runs when player collides with anything on the screen
     void OnCollisionEnter2D(Collision2D coll)
     {
+        
 
         if (!coll.gameObject.CompareTag("Power") && !coll.gameObject.CompareTag("Star") && !(PowerUps.ChoosePowerUp == 1 && PowerUps.PlayerPoweredUp == true))
         {
-           
             Database.gameEnd = true;
         }
 
