@@ -48,4 +48,12 @@ public class PlayerController : MonoBehaviour
 
        
     }
+    void OnCollisionEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "target")
+        {
+            Database.targetsHit = Database.targetsHit + 1;
+        }
+
+    }
 }

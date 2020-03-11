@@ -5,11 +5,6 @@ using UnityEngine;
 public class Reset : MonoBehaviour
 {
     public static bool  resetGo = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -20,6 +15,7 @@ public class Reset : MonoBehaviour
             Destroy(gameObject);
             TargetController.reset = false;
             resetGo = true;
+            
         }
     }
 }

@@ -15,6 +15,8 @@ public static class Database
     public static float finalScore;
     public static bool isOrbiting = false;
     public static Vector2 orbitPlanetPos;
+
+    public static int targetsHit = 0;
     
     
 }

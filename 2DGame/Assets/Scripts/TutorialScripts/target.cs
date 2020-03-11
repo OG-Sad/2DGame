@@ -6,9 +6,8 @@ using UnityEngine;
 public class target : MonoBehaviour
 {
     public Transform targetObject;
-    public static bool targetHit = false;
-    public GameObject playerPrefab;
-    GameObject realplayer;
+    //public static bool targetHit = false;
+    //GameObject realplayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +25,10 @@ public class target : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            targetHit = true;
-            Debug.Log("Hit");
-            Destroy(gameObject);
-           
+            //targetHit = true;
+            //Debug.Log("Hit");
+            //Destroy(gameObject);
+            Database.targetsHit = Database.targetsHit + 1;
 
         }
 
