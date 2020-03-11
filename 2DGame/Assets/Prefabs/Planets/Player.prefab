@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8978138889128852599}
   - component: {fileID: 8978138889128852600}
   - component: {fileID: 1155038227741802697}
-  - component: {fileID: 5250758071046473987}
+  - component: {fileID: 2624242056114263338}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -139,7 +139,7 @@ MonoBehaviour:
   player: {fileID: 8978138889128852598}
   MinSpeed: 10
   isLevel: 0
---- !u!114 &5250758071046473987
+--- !u!114 &2624242056114263338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8978138889128852596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08a6360674d3d0c44b9b921ab9307783, type: 3}
+  m_Script: {fileID: 11500000, guid: 49de86825d06f4620a3508c8cb25deed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8978138889243514135
@@ -386,7 +386,8 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 50
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2623115596980814307, guid: 8d86c9a9a7cd33b4388245a6edbdf710, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8d86c9a9a7cd33b4388245a6edbdf710, type: 3}
 --- !u!4 &5174207738894197476 stripped
 Transform:

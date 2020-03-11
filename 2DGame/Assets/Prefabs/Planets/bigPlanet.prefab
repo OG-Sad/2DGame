@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 1695513123766934551}
   - component: {fileID: 7018588484151031948}
   - component: {fileID: 3807747112987617530}
-  - component: {fileID: 2623115596980814307}
   - component: {fileID: 6422777313740979784}
   m_Layer: 0
   m_Name: bigPlanet
@@ -249,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009103199ff01534282c32aa826c7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  G: 1
   zeroRepelForce: -6
 --- !u!58 &3807747112987617530
 CircleCollider2D:
@@ -266,19 +266,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.22
---- !u!114 &2623115596980814307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1115593165521293927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebc3b7fe81af143f7bfd528cf6e603d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlanetPrefabs: {fileID: 2580745651921559551}
 --- !u!114 &6422777313740979784
 MonoBehaviour:
   m_ObjectHideFlags: 0

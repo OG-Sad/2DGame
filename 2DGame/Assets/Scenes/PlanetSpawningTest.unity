@@ -176,7 +176,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &197384492
 GameObject:
@@ -189,6 +189,8 @@ GameObject:
   - component: {fileID: 197384493}
   - component: {fileID: 197384494}
   - component: {fileID: 197384495}
+  - component: {fileID: 197384496}
+  - component: {fileID: 197384497}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
@@ -208,7 +210,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &197384494
 MonoBehaviour:
@@ -449,7 +451,7 @@ PrefabInstance:
     - target: {fileID: 7348189083787433056, guid: fc9fe16498fb047efae55fe49ec12b23,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7348189083787433056, guid: fc9fe16498fb047efae55fe49ec12b23,
         type: 3}
@@ -471,6 +473,11 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 973401848}
+    - target: {fileID: 1272744151705877239, guid: fc9fe16498fb047efae55fe49ec12b23,
+        type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 519420032}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc9fe16498fb047efae55fe49ec12b23, type: 3}
 --- !u!1 &1330894469
@@ -684,6 +691,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978138889128852600, guid: 0a7c00a2ccbfc418c9112e084d73b931,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9aa129b6a1e245f40ad3c7497e39f2d7, type: 3}

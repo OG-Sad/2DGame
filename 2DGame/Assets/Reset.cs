@@ -4,27 +4,22 @@ using UnityEngine;
 
 public class Reset : MonoBehaviour
 {
-    public GameObject playerPrefab;
-   // GameObject realplayer;
+    public static bool  resetGo = false;
     // Start is called before the first frame update
     void Start()
     {
-        //realplayer = playerPrefab;
-        //Instantiate(realplayer);
-        Instantiate(playerPrefab);
+        
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        if (target.targetHit == true)
+        if (TargetController.reset == true)
         {
-            var realplayer = playerPrefab;
-            //  Destroy(realplayer);
-           // Destroy(realplayer);
-            //realplayer = playerPrefab;
-            //Instantiate(playerPrefab);
+            Debug.Log("in");
+            Destroy(gameObject);
+            TargetController.reset = false;
+            resetGo = true;
         }
     }
 }

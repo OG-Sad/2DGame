@@ -20,7 +20,7 @@ public class EndScreenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Database.gameEnd == true) {
+        if (Database.gameEnd == true && Database.finalScore != null) {
             Time.timeScale = 0f;
             endScreen.SetActive(true);
             distanceText.GetComponent<Text>().text = "Distance: " + Database.finalScore;
@@ -40,6 +40,9 @@ public class EndScreenController : MonoBehaviour
         Database.gameEnd = false;
         endScreen.SetActive(false);
         Time.timeScale = 1f;
-        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        SceneManager.LoadScene(currentScene);
     }
 }

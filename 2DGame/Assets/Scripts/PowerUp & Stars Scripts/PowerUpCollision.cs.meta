@@ -3,7 +3,13 @@ guid: d766a0933d54140ed9ff372b422e6476
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - GreenTrail: {fileID: 2100000, guid: 671b807594cf34020b2a8753cec87b10, type: 2}
+  - BlueTrail: {fileID: 2100000, guid: 6ea4d49117fba43eab9d75deb5054d29, type: 2}
+  - PurpleTrail: {fileID: 2100000, guid: d022462305aad4db088ab9a2470b9a6b, type: 2}
+  - GreyTrail: {fileID: 2100000, guid: 822299d80a1d14ef4931d3da9facbce9, type: 2}
+  - NullTrail: {instanceID: 0}
+  - Trail: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

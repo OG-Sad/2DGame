@@ -31,10 +31,16 @@ public class MeteorController : MonoBehaviour
         {
             //do nothing for now
         }
-        if (coll.gameObject.tag == "Player" && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
+        if(coll.gameObject.CompareTag("Player") && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 4)
         {
 
         }
+
+        if (coll.gameObject.CompareTag("Player") && PowerUps.PlayerPoweredUp == true && PowerUps.ChoosePowerUp == 1)
+        {
+            
+        }
+
         else if (coll.gameObject.tag == "Player")
         {
             Database.gameEnd = true;
