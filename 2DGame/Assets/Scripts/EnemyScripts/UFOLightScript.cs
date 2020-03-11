@@ -39,7 +39,6 @@ public class UFOLightScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      
         if (other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("Power")| (other.gameObject.CompareTag("Star")))
         {
             Destroy(transform.parent.gameObject);
