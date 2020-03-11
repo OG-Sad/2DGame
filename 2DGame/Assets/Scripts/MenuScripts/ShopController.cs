@@ -21,13 +21,7 @@ public class ShopController : MonoBehaviour
     public GameObject skins;
     public GameObject backgorunds;
 
-    //dictionary of all power ups; itemList gets set back to this when data is reset
-    Dictionary<string, ShopItem> itemList = new Dictionary<string, ShopItem>() {
-        {"Invincibility", new ShopItem(){ name = "Invincibility", cost = 30, upgradeLevel = 1}},
-        {"Boost", new ShopItem(){ name = "Boost", cost = 30, upgradeLevel = 1}},
-        {"Time", new ShopItem(){ name = "Time", cost = 30, upgradeLevel = 1}},
-        {"Magnet", new ShopItem(){ name = "Magnet", cost = 30, upgradeLevel = 1}}
-    };
+    Dictionary<string, ShopItem> itemList = Database.itemList;
 
     //dictionary of costs of an item based on its upgrade level
     Dictionary<int, int> costDict = new Dictionary<int, int>() {
@@ -68,6 +62,8 @@ public class ShopController : MonoBehaviour
         {
             if (SaveSystem.LoadPlayer().itemList != null) {
                 itemList = SaveSystem.LoadPlayer().itemList;
+                //updates the database's version of itemList
+                Database.itemList = itemList;
             }
         }
         //if there's an error, the item list will just be the default base item list
@@ -205,6 +201,8 @@ public class ShopController : MonoBehaviour
             }
 
             UpdateUpgradeMeter(itemName, itemUpgradeLevel);
+            //updates the database's version of itemList
+            Database.itemList = itemList;
         }
     }
 
@@ -272,6 +270,9 @@ public class ShopController : MonoBehaviour
             bar4.GetComponent<Image>().color = new Color(255, 255, 255);
             bar5.GetComponent<Image>().color = new Color(255, 255, 255);
         }
+
+        //updates the database's version of itemList
+        Database.itemList = itemList;
     }
 
     //goes back to main menu

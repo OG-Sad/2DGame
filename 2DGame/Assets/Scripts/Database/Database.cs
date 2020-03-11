@@ -15,6 +15,13 @@ public static class Database
     public static float finalScore;
     public static bool isOrbiting = false;
     public static Vector2 orbitPlanetPos;
-    
-    
+
+    //dictionary of all power ups; itemList gets set back to this when data is reset
+    public static Dictionary<string, ShopItem> itemList = new Dictionary<string, ShopItem>() {
+        {"Invincibility", new ShopItem(){ name = "Invincibility", cost = 30, upgradeLevel = 1}},
+        {"Boost", new ShopItem(){ name = "Boost", cost = 30, upgradeLevel = 1}},
+        {"Time", new ShopItem(){ name = "Time", cost = 30, upgradeLevel = 1}},
+        {"Star", new ShopItem(){ name = "Star", cost = 30, upgradeLevel = 1}}
+    };
+
 }
