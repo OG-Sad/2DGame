@@ -21,12 +21,12 @@ public class ShopController : MonoBehaviour
     public GameObject skins;
     public GameObject backgorunds;
 
-    //list of all power ups; itemList gets set back to this when data is reset
-    List<ShopItem> itemList = new List<ShopItem>() {
-        new ShopItem(){ name = "Invincibility", cost = 30, upgradeLevel = 1},
-        new ShopItem(){ name = "Boost", cost = 30, upgradeLevel = 1},
-        new ShopItem(){ name = "Time", cost = 30, upgradeLevel = 1},
-        new ShopItem(){ name = "Magnet", cost = 30, upgradeLevel = 1}
+    //dictionary of all power ups; itemList gets set back to this when data is reset
+    Dictionary<string, ShopItem> itemList = new Dictionary<string, ShopItem>() {
+        {"Invincibility", new ShopItem(){ name = "Invincibility", cost = 30, upgradeLevel = 1}},
+        {"Boost", new ShopItem(){ name = "Boost", cost = 30, upgradeLevel = 1}},
+        {"Time", new ShopItem(){ name = "Time", cost = 30, upgradeLevel = 1}},
+        {"Magnet", new ShopItem(){ name = "Magnet", cost = 30, upgradeLevel = 1}}
     };
 
     //dictionary of costs of an item based on its upgrade level
@@ -66,7 +66,9 @@ public class ShopController : MonoBehaviour
         //will load a save file if there is one
         try
         {
-            itemList = SaveSystem.LoadPlayer().itemList;
+            if (SaveSystem.LoadPlayer().itemList != null) {
+                itemList = SaveSystem.LoadPlayer().itemList;
+            }
         }
         //if there's an error, the item list will just be the default base item list
         catch (System.Exception ex)
@@ -75,14 +77,14 @@ public class ShopController : MonoBehaviour
         }
 
         //loads the correct texts into the cost section of each item
-        for (int i = 0; i < itemList.Count; i++)
+        foreach (string key in itemList.Keys)
         {
-            string itemName = itemList[i].name;
+            string itemName = itemList[key].name;
 
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
-            if (itemList[i].upgradeLevel < 5)
+            if (itemList[key].upgradeLevel < 5)
             {
-                costText.GetComponent<Text>().text = costDict[itemList[i].upgradeLevel].ToString();
+                costText.GetComponent<Text>().text = costDict[itemList[key].upgradeLevel].ToString();
             }
             else
             {
@@ -95,29 +97,29 @@ public class ShopController : MonoBehaviour
             GameObject bar4 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 4");
             GameObject bar5 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 5");
 
-            if (itemList[i].upgradeLevel == 1)
+            if (itemList[key].upgradeLevel == 1)
             {
                 bar1.GetComponent<Image>().color = new Color(0, 224, 213);
             }
-            else if (itemList[i].upgradeLevel == 2)
+            else if (itemList[key].upgradeLevel == 2)
             {
                 bar1.GetComponent<Image>().color = new Color(0, 224, 213);
                 bar2.GetComponent<Image>().color = new Color(0, 224, 213);
             }
-            else if (itemList[i].upgradeLevel == 3)
+            else if (itemList[key].upgradeLevel == 3)
             {
                 bar1.GetComponent<Image>().color = new Color(0, 224, 213);
                 bar2.GetComponent<Image>().color = new Color(0, 224, 213);
                 bar3.GetComponent<Image>().color = new Color(0, 224, 213);
             }
-            else if (itemList[i].upgradeLevel == 4)
+            else if (itemList[key].upgradeLevel == 4)
             {
                 bar1.GetComponent<Image>().color = new Color(0, 224, 213);
                 bar2.GetComponent<Image>().color = new Color(0, 224, 213);
                 bar3.GetComponent<Image>().color = new Color(0, 224, 213);
                 bar4.GetComponent<Image>().color = new Color(0, 224, 213);
             }
-            else if (itemList[i].upgradeLevel == 5)
+            else if (itemList[key].upgradeLevel == 5)
             {
                 bar1.GetComponent<Image>().color = new Color(0, 224, 213);
                 bar2.GetComponent<Image>().color = new Color(0, 224, 213);
@@ -176,26 +178,17 @@ public class ShopController : MonoBehaviour
         string itemName = EventSystem.current.currentSelectedGameObject.name;
         int itemCost = 0;
         int itemUpgradeLevel = 0;
-        int itemIndex = 0;
         int newItemCost = 0;
 
-        //finds the upgrade level and the cost of the item
-        for (int i = 0; i < itemList.Count; i++)
-        {
-            if (itemList[i].name == itemName)
-            {
-                itemCost = costDict[itemList[i].upgradeLevel];
-                itemUpgradeLevel = itemList[i].upgradeLevel;
-                itemIndex = i;
-            }
-        }
+        itemCost = costDict[itemList[itemName].upgradeLevel];
+        itemUpgradeLevel = itemList[itemName].upgradeLevel;
 
         if (currentStars >= itemCost && itemUpgradeLevel < 5) {
 
             //adds 1 to the upgrade level
-            itemList[itemIndex].upgradeLevel++;
+            itemList[itemName].upgradeLevel++;
             //gets new item upgrade level
-            itemUpgradeLevel = itemList[itemIndex].upgradeLevel;
+            itemUpgradeLevel = itemList[itemName].upgradeLevel;
             newItemCost = costDict[itemUpgradeLevel];
 
             currentStars -= itemCost;
@@ -259,13 +252,13 @@ public class ShopController : MonoBehaviour
     public void ResetData()
     {
         //redraws all of the items
-        for (int i = 0; i < itemList.Count; i++)
+        foreach (string key in itemList.Keys)
         {
-            itemList[i].upgradeLevel = 1;
+            itemList[key].upgradeLevel = 1;
 
-            string itemName = itemList[i].name;
+            string itemName = itemList[key].name;
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
-            costText.GetComponent<Text>().text = costDict[itemList[i].upgradeLevel].ToString();
+            costText.GetComponent<Text>().text = costDict[itemList[key].upgradeLevel].ToString();
 
             GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
             GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");

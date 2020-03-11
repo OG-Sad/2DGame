@@ -7,9 +7,9 @@ using UnityEngine;
 public class PlayerData
 {
     //list of all power ups
-    public List<ShopItem> itemList;
+    public Dictionary<string, ShopItem> itemList;
 
-    public PlayerData(List<ShopItem> iList) {
+    public PlayerData(Dictionary<string, ShopItem> iList) {
         itemList = iList;
     }
 }
