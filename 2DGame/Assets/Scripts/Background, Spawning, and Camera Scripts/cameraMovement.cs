@@ -28,7 +28,7 @@ public class cameraMovement : MonoBehaviour
     // LateUpdate is called after Update each frame
     void FixedUpdate()
     {
-
+        camera = GameObject.FindGameObjectWithTag("Player");
 
         if (CameraChange)
         {
@@ -94,6 +94,7 @@ public class cameraMovement : MonoBehaviour
             }
             else
             {
+            Debug.Log("testing");
                 float offsetY = offset.y + (camera.transform.position.y * 0.15f);
                 // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
                 transform.position = new Vector3(camera.transform.position.x + offset.x, offsetY, transform.position.z);
