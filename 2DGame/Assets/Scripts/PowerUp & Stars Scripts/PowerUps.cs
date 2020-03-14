@@ -17,7 +17,7 @@ public class PowerUps : MonoBehaviour
     public TrailRenderer Trail;
     Material OriginTrial;
     int secs;
-    float faster = .5f;
+    float faster = 1.5f , fast = 0;
 
     void Start()
     {
@@ -61,7 +61,7 @@ public class PowerUps : MonoBehaviour
                 //EditorApplication.isPaused = true;
                 SpawnStar();
             }
-            //UFO spawns 1/3 times every twenty seconds
+            
 
             timerForStars = 0;
         }
@@ -171,25 +171,32 @@ public class PowerUps : MonoBehaviour
         //seconds are unscaled because of time power up
         seconds += Time.unscaledDeltaTime;
        
-         secs = (int)(seconds);
+         //secs = (int)(seconds);
         
-        if (ChoosePowerUp == 1 && seconds >= 6 && seconds <= 10)
+        if (ChoosePowerUp == 1 && seconds >= 8 && seconds <= 10)
         {
             if (secs % 2 == 0)
             {
-                Debug.Log("in");
                 Trail.emitting = false;
+                //Trail.GetComponent<TrailRenderer>().enabled = false;
+                //secs = (int)(seconds);
                 secs = (int)(seconds + faster);
-                faster += .5f;
+                faster += .1f;
+                fast += .001f;
+                faster += fast;
                 
             }
 
-            if (secs % 2 != 0)
+            else if (secs % 2 != 0)
             {
-                Debug.Log("out");
+                //Debug.Log("out");
                 Trail.emitting = true;
+                //Trail.GetComponent<TrailRenderer>().enabled = true;
+               // secs = (int)(seconds);
                 secs = (int)(seconds + faster);
-                faster += .5f;
+                faster += .1f;
+                fast += .001f;
+                faster += fast;
             }
         }
 
@@ -197,19 +204,28 @@ public class PowerUps : MonoBehaviour
         {
             if (secs % 2 == 0)
             {
-                Debug.Log("in");
                 Trail.emitting = false;
+                //Trail.GetComponent<TrailRenderer>().enabled = false;
+                //secs = (int)(seconds);
                 secs = (int)(seconds + faster);
-                faster += .5f;
+                faster += .1f;
+                fast += .001f;
+                faster += fast;
+
+
 
             }
 
-            if (secs % 2 != 0)
+            else if (secs % 2 != 0)
             {
-                Debug.Log("out");
+                //Debug.Log("out");
                 Trail.emitting = true;
+                //Trail.GetComponent<TrailRenderer>().enabled = true;
+                // secs = (int)(seconds);
                 secs = (int)(seconds + faster);
-                faster += .5f;
+                faster += .1f;
+                fast += .001f;
+                faster += fast;
             }
         }
 

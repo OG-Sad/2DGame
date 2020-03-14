@@ -42,13 +42,11 @@ public class UFOColliders : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && (!PowerUps.PlayerPoweredUp && PowerUps.ChoosePowerUp != 1))
         {
+           
             Database.gameEnd = true;
         }
 
-        if (!PowerUps.PlayerPoweredUp)
-        {
-            Database.gameEnd = true;
-        }
+        
 
     }
 

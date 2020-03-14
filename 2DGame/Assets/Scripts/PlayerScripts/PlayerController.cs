@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
             if (timer >= 5f || Mathf.Abs(yPos) >= 15f)
             {
+
                 Database.gameEnd = true;
             }
 
@@ -44,8 +45,10 @@ public class PlayerController : MonoBehaviour
 
         if (!coll.gameObject.CompareTag("Power") && !coll.gameObject.CompareTag("Star") && !(PowerUps.ChoosePowerUp == 1 && PowerUps.PlayerPoweredUp == true)) { 
             Database.gameEnd = true;
+            
+
         }
 
-       
+
     }
 }
