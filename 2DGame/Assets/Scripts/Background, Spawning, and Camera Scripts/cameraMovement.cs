@@ -24,7 +24,16 @@ public class cameraMovement : MonoBehaviour
         // Calculate and store the offset value by getting the distance between the player's position and camera's position.
         offset = transform.position - camera.transform.position;
     }
-
+    private void LateUpdate()
+    {
+        if ((PowerUps.PlayerPoweredUp && PowerUps.ChoosePowerUp == 4) | (!Attractor.orbittest && !smoothcamera))
+        {
+            Attractor.orbittest = false;
+            float offsetY = offset.y + (camera.transform.position.y * 0.15f);
+            // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
+            transform.position = new Vector3(camera.transform.position.x + offset.x, offsetY, transform.position.z);
+        }
+    }
     // LateUpdate is called after Update each frame
     void FixedUpdate()
     {
@@ -34,10 +43,7 @@ public class cameraMovement : MonoBehaviour
         {
             if ((PowerUps.PlayerPoweredUp && PowerUps.ChoosePowerUp == 4) | (!Attractor.orbittest && !smoothcamera))
             {
-                Attractor.orbittest = false;
-                float offsetY = offset.y + (camera.transform.position.y * 0.15f);
-                // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-                transform.position = new Vector3(camera.transform.position.x + offset.x, offsetY, transform.position.z);
+               
             }
 
             

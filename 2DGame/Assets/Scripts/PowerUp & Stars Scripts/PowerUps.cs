@@ -52,12 +52,12 @@ public class PowerUps : MonoBehaviour
             
             //1/5 times chance a Star can spawn
             StarGo = Random.Range(0, 4);
-            StarGo = 1;
             timerForStars = 0;
             
             if (StarGo == 1 && IsStarSpawned == false)
             {
                 ScoreStar += 75;
+                StarGo = 0;
                 //EditorApplication.isPaused = true;
                 SpawnStar();
             }
@@ -101,7 +101,7 @@ public class PowerUps : MonoBehaviour
         //makes sure only one power up can spawn at a time
         //chooses which power up should spawn randomly
         ChoosePowerUp = Random.Range(1, 5);
-        //ChoosePowerUp = 1;
+        //ChoosePowerUp = 4;
         //Power Up Spawned with random y position or not depending on ypos
         if (ChoosePowerUp == 1)
         {
