@@ -12,7 +12,7 @@ public class Attractor : MonoBehaviour
     Rigidbody2D PlanetRB, PlayerRB;
     float orbitVelNum, pi = Mathf.PI, lastPlayPlanTan = 0;
     Vector2 lastVelocity, lastPlayerPos;
-    bool firstPlanet = false;
+    bool firstPlanet = false, isOrbiting = false;
     public static bool orbittest = false;
 
     GameObject Player;
@@ -45,11 +45,11 @@ public class Attractor : MonoBehaviour
             Orbiting(acceleration, playerTheta, dist);
 
         }
-
-        if (PlanetRB.mass < .1)
-        {
-            orbittest = false;
+        else {
+            isOrbiting = false;
         }
+
+        
 
         if (dist <= 5)
         {
@@ -62,6 +62,9 @@ public class Attractor : MonoBehaviour
         lastVelocity = PlayerRB.velocity;
         lastPlayerPos = Player.transform.position;
         lastPlayPlanTan = PlayerPlanetTheta();
+
+        
+        Debug.Log(Database.isOrbiting);
     }
 
     void Attract(GameObject objToAttract)
@@ -140,12 +143,12 @@ public class Attractor : MonoBehaviour
             Vector2 difference = vel + ((orbitVel - vel) / 15);
 
             if (orbitVel != vel && Mathf.Abs(orbitVel.magnitude - vel.magnitude) <= 1) {
-                orbittest = true;
+                isOrbiting = true;
                 Player.GetComponent<Rigidbody2D>().velocity = difference;
             }
             else
             {
-                orbittest = false;
+                isOrbiting = false;
             }
         }
 
