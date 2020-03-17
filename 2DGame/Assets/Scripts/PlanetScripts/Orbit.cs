@@ -13,14 +13,18 @@ public class Orbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //turns gravity back on for the other planets once orbitting is finished
-        if (Database.isOrbiting == false)
+        bool isOrbitTrue = false;
+
+        Orbit[] Planets = FindObjectsOfType<Orbit>();
+        foreach (Orbit Planet in Planets)
         {
-            Orbit[] Planets = FindObjectsOfType<Orbit>();
-            foreach (Orbit Planet in Planets)
-            {
-                Planet.GetComponent<Attractor>().enabled = true;
+            if(Planet.GetComponent<Attractor>().isOrbiting) {
+                isOrbitTrue = true;
             }
         }
+        
+        Database.isOrbiting = isOrbitTrue ? true : false;
+
+        Debug.Log(Database.isOrbiting);
     }
 }

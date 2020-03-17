@@ -12,7 +12,7 @@ public class Attractor : MonoBehaviour
     Rigidbody2D PlanetRB, PlayerRB;
     float orbitVelNum, pi = Mathf.PI, lastPlayPlanTan = 0;
     Vector2 lastVelocity, lastPlayerPos;
-    bool firstPlanet = false, isOrbiting = false;
+    public bool firstPlanet = false, isOrbiting = false;
     public static bool orbittest = false;
 
     GameObject Player;
