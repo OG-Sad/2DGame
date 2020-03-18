@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
 
-    public static void SavePlayer(List<ShopItem> iList) {
+    public static void SavePlayer(Dictionary<string, ShopItem> iList) {
         BinaryFormatter formatter = new BinaryFormatter();
         //the location path for where the data will stay
         string path = Application.persistentDataPath + "/player.data";

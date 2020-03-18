@@ -230,7 +230,8 @@ public class PowerUps : MonoBehaviour
         }
 
         // after the power up, the game is restored to before presets
-        if (seconds >= 10 && ChoosePowerUp == 1)
+       
+        if (seconds >= GetPowerUpDuration(1) && ChoosePowerUp == 1)
         {
             Trail.emitting = true;
             //new power up can spawn
@@ -247,7 +248,7 @@ public class PowerUps : MonoBehaviour
 
         }
 
-        if (seconds >= 6 && ChoosePowerUp == 2)
+        if (seconds >= GetPowerUpDuration(2) &&  ChoosePowerUp == 2)
         {
             Trail.enabled = true;
             //new power up can spawn
@@ -266,7 +267,7 @@ public class PowerUps : MonoBehaviour
 
         }
 
-        if (seconds >= 6 && ChoosePowerUp == 3)
+        if (seconds >= GetPowerUpDuration(3) && ChoosePowerUp == 3)
         {
             Trail.emitting = true;
             //new power up can spawn
@@ -282,7 +283,7 @@ public class PowerUps : MonoBehaviour
 
         }
 
-        if (seconds >= 4 && ChoosePowerUp == 4)
+        if (seconds >= GetPowerUpDuration(4) && ChoosePowerUp == 4)
         {
             Trail.emitting = true;
             // finds all the planets and enables the gravity
@@ -317,6 +318,75 @@ public class PowerUps : MonoBehaviour
         }
 
       
+    }
+
+    //gets the time duration of an activated power up
+    private int GetPowerUpDuration(int powerUpNumber) {
+        Dictionary<string, ShopItem> itemList = Database.itemList;
+
+        //dictionary of time duration of invincibility based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> invincibilityTime = new Dictionary<int, int>() {
+            {1, 5},
+            {2, 7},
+            {3, 10},
+            {4, 14},
+            {5, 19}
+        };
+
+        //dictionary of time duration of the time powerup based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> timeTime = new Dictionary<int, int>() {
+            {1, 2},
+            {2, 4},
+            {3, 6},
+            {4, 9},
+            {5, 12}
+        };
+
+        //dictionary of time duration of the star power up based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> starTime = new Dictionary<int, int>() {
+            {1, 2},
+            {2, 4},
+            {3, 6},
+            {4, 9},
+            {5, 12}
+        };
+
+        //dictionary of time duration of the boost based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> boostTime = new Dictionary<int, int>() {
+            {1, 2},
+            {2, 4},
+            {3, 6},
+            {4, 9},
+            {5, 12}
+        };
+
+        if (powerUpNumber == 1)
+        {
+            int upgradeLevel = itemList["Invincibility"].upgradeLevel;
+            return invincibilityTime[upgradeLevel];
+        }
+        else if (powerUpNumber == 2)
+        {
+            int upgradeLevel = itemList["Time"].upgradeLevel;
+            return timeTime[upgradeLevel];
+        }
+        else if (powerUpNumber == 3)
+        {
+            int upgradeLevel = itemList["Star"].upgradeLevel;
+            return starTime[upgradeLevel];
+        }
+        else if (powerUpNumber == 2)
+        {
+            int upgradeLevel = itemList["Boost"].upgradeLevel;
+            return boostTime[upgradeLevel];
+        }
+        else {
+            return 0;
+        }
     }
 
     void SpawnStar()
