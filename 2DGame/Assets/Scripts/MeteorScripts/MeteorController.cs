@@ -11,7 +11,7 @@ public class MeteorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        StartCoroutine(Despawn());
     }
 
     // Update is called once per frame
@@ -23,6 +23,12 @@ public class MeteorController : MonoBehaviour
 
         //rotate meteor
         //transform.Rotate(new Vector3(60, 0, -10) * Time.deltaTime);
+    }
+
+    IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(15f);
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D coll)
