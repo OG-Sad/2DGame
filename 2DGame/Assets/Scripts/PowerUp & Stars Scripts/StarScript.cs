@@ -47,8 +47,7 @@ public class StarScript : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            //adds 1 star to the current number of stars and destroys the star
-            PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 1);
+            CollectStar();
             Destroy(gameObject);
             PowerUps.IsStarSpawned = false;
 
@@ -66,5 +65,38 @@ public class StarScript : MonoBehaviour
 
     }
 
+    //adds to the star counter depending on if the star powerup is actiavted and what level it is upgraded to
+    private void CollectStar() {
+        Dictionary<string, ShopItem> itemList = Database.itemList;
+        int upgradeLevel = itemList["Star"].upgradeLevel;
+
+        //if the star power up is currently activated
+        if (PowerUps.ChoosePowerUp == 3)
+        {
+            if (upgradeLevel == 1)
+            {
+                PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 2);
+            }
+            else if (upgradeLevel == 2)
+            {
+                PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 4);
+            }
+            else if (upgradeLevel == 3)
+            {
+                PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 7);
+            }
+            else if (upgradeLevel == 4)
+            {
+                PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 11);
+            }
+            else if (upgradeLevel == 5)
+            {
+                PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 16);
+            }
+        }
+        else {
+            PlayerPrefs.SetInt("Stars", PlayerPrefs.GetInt("Stars") + 1);
+        }
+    }
 
 }
