@@ -20,10 +20,16 @@ public class EndScreenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Database.gameEnd == true && Database.finalScore != null) {
+        if (Database.gameEnd == true) {
             Time.timeScale = 0f;
             endScreen.SetActive(true);
-            distanceText.GetComponent<Text>().text = "Distance: " + Database.finalScore;
+            distanceText.GetComponent<Text>().text = "Distance: " + ScoreScript.scoreGlobal;
+
+            if (ScoreScript.scoreGlobal > PlayerPrefs.GetFloat("High Score"))
+            {
+                PlayerPrefs.SetFloat("High Score", ScoreScript.scoreGlobal);
+            }
+
             highScoreText.GetComponent<Text>().text = "High Score: " + PlayerPrefs.GetFloat("High Score");
         }
     }

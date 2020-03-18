@@ -9,7 +9,9 @@ public class ScoreScript : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
     public Transform PlayerPos;
-    public float Score = 0 , OldScore, NewScore;
+    public float Score, OldScore, NewScore = 0;
+    //same thing as "Score" but static so that it can be accessed from other scripts
+    public static float scoreGlobal = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,15 +23,7 @@ public class ScoreScript : MonoBehaviour
     void Update()
     {  
         Score = Mathf.Round(PlayerPos.position.x) > Score ? Mathf.Round(PlayerPos.position.x) : Score;
+        scoreGlobal = Score;
         ScoreText.text = Score.ToString();
-
-        if (Database.gameEnd == true) {
-            Database.finalScore = Score;
-
-            if (Score > PlayerPrefs.GetFloat("High Score"))
-            {
-                PlayerPrefs.SetFloat("High Score", Score);
-            }
-        }
     }
 }

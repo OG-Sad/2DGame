@@ -10,10 +10,8 @@ public static class Database
     //public static int highestCurrentLevel = PlayerPrefs.GetInt("highestCurrentLevel");
     public static bool currentLevelEnded;
 
+    //false if the game is in progress; true when the player loses and displays the end screen
     public static bool gameEnd = false;
-    //the score when the player dies
-    public static float finalScore;
-    
     
     public static bool isOrbiting = false;
     public static Vector2 orbitPlanetPos;
