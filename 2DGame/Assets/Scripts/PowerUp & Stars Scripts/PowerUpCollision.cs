@@ -103,7 +103,7 @@ public class PowerUpCollision : MonoBehaviour
 
         }
 
-        if(other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("Star"))
+        if(other.gameObject.CompareTag("Planet") | other.gameObject.CompareTag("Star") | other.gameObject.CompareTag("UFO") | other.gameObject.name == "UFO")
         {
             Destroy(gameObject);
             PowerUps.RespawnPower = true;
