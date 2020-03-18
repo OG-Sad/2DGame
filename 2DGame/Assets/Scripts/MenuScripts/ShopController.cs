@@ -76,53 +76,22 @@ public class ShopController : MonoBehaviour
         foreach (string key in itemList.Keys)
         {
             string itemName = itemList[key].name;
+            int upgradeLevel = itemList[key].upgradeLevel;
 
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
             if (itemList[key].upgradeLevel < 5)
             {
-                costText.GetComponent<Text>().text = costDict[itemList[key].upgradeLevel].ToString();
+                costText.GetComponent<Text>().text = costDict[upgradeLevel].ToString();
             }
             else
             {
                 costText.GetComponent<Text>().text = "Max Level";
             }
 
-            GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
-            GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");
-            GameObject bar3 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 3");
-            GameObject bar4 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 4");
-            GameObject bar5 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 5");
+            GameObject durationText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Duration");
+            durationText.GetComponent<Text>().text = "Duration: " + GetPowerUpDuration(itemName, upgradeLevel).ToString() + "sec";
 
-            if (itemList[key].upgradeLevel == 1)
-            {
-                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
-            }
-            else if (itemList[key].upgradeLevel == 2)
-            {
-                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
-            }
-            else if (itemList[key].upgradeLevel == 3)
-            {
-                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar3.GetComponent<Image>().color = new Color(0, 224, 213);
-            }
-            else if (itemList[key].upgradeLevel == 4)
-            {
-                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar3.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar4.GetComponent<Image>().color = new Color(0, 224, 213);
-            }
-            else if (itemList[key].upgradeLevel == 5)
-            {
-                bar1.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar2.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar3.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar4.GetComponent<Image>().color = new Color(0, 224, 213);
-                bar5.GetComponent<Image>().color = new Color(0, 224, 213);
-            }
+            InitUpgradeMeter(itemName, key);
         }
     }
 
@@ -200,9 +169,52 @@ public class ShopController : MonoBehaviour
                 costText.GetComponent<Text>().text = "Max Level";
             }
 
+            GameObject durationText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Duration");
+            durationText.GetComponent<Text>().text = "Duration: " + GetPowerUpDuration(itemName, itemUpgradeLevel).ToString() + "sec";
+
             UpdateUpgradeMeter(itemName, itemUpgradeLevel);
             //updates the database's version of itemList
             Database.itemList = itemList;
+        }
+    }
+
+    //displays the intial state of the upgrade meter of an item
+    void InitUpgradeMeter(string itemName, string key) {
+        GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
+        GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");
+        GameObject bar3 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 3");
+        GameObject bar4 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 4");
+        GameObject bar5 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 5");
+
+        if (itemList[key].upgradeLevel == 1)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (itemList[key].upgradeLevel == 2)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (itemList[key].upgradeLevel == 3)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (itemList[key].upgradeLevel == 4)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar4.GetComponent<Image>().color = new Color(0, 224, 213);
+        }
+        else if (itemList[key].upgradeLevel == 5)
+        {
+            bar1.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar2.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar3.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar4.GetComponent<Image>().color = new Color(0, 224, 213);
+            bar5.GetComponent<Image>().color = new Color(0, 224, 213);
         }
     }
 
@@ -246,6 +258,71 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    //gets the time duration of an activated power up
+    private int GetPowerUpDuration(string itemName, int upgradeLevel)
+    {
+        //dictionary of time duration of invincibility based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> invincibilityTime = new Dictionary<int, int>() {
+            {1, 5},
+            {2, 7},
+            {3, 10},
+            {4, 14},
+            {5, 19}
+        };
+
+        //dictionary of time duration of the time powerup based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> timeTime = new Dictionary<int, int>() {
+            {1, 2},
+            {2, 4},
+            {3, 6},
+            {4, 9},
+            {5, 12}
+        };
+
+        //dictionary of time duration of the star power up based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> starTime = new Dictionary<int, int>() {
+            {1, 2},
+            {2, 4},
+            {3, 6},
+            {4, 9},
+            {5, 12}
+        };
+
+        //dictionary of time duration of the boost based on its upgrade level
+        //upgrade level is the first number, the duration is the second number
+        Dictionary<int, int> boostTime = new Dictionary<int, int>() {
+            {1, 2},
+            {2, 4},
+            {3, 6},
+            {4, 9},
+            {5, 12}
+        };
+
+        if (itemName == "Invincibility")
+        {
+            return invincibilityTime[upgradeLevel];
+        }
+        else if (itemName == "Time")
+        {
+            return timeTime[upgradeLevel];
+        }
+        else if (itemName == "Star")
+        {
+            return starTime[upgradeLevel];
+        }
+        else if (itemName == "Boost")
+        {
+            return boostTime[upgradeLevel];
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     //resets all item ownership data
     public void ResetData()
     {
@@ -257,6 +334,9 @@ public class ShopController : MonoBehaviour
             string itemName = itemList[key].name;
             GameObject costText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Cost");
             costText.GetComponent<Text>().text = costDict[itemList[key].upgradeLevel].ToString();
+
+            GameObject durationText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Duration");
+            durationText.GetComponent<Text>().text = "Duration: " + GetPowerUpDuration(itemName, 1).ToString() + "sec";
 
             GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
             GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");
