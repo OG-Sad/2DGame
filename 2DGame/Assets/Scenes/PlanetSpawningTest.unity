@@ -388,6 +388,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2626786994485652181, guid: be815d6cfe6fa10409df9f6a204f0956,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2626786994485652181, guid: be815d6cfe6fa10409df9f6a204f0956,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009590533757155427, guid: be815d6cfe6fa10409df9f6a204f0956,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009590533757155427, guid: be815d6cfe6fa10409df9f6a204f0956,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009590533757155427, guid: be815d6cfe6fa10409df9f6a204f0956,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be815d6cfe6fa10409df9f6a204f0956, type: 3}
 --- !u!4 &973401848 stripped
@@ -497,7 +522,7 @@ GameObject:
   - component: {fileID: 1330894471}
   - component: {fileID: 1330894470}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,7 +537,8 @@ AudioSource:
   m_GameObject: {fileID: 1330894469}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 63e8a3a3afc8cdd40a8e53519076ce29,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0058355cd454542479e3ec18a39f8f49, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
