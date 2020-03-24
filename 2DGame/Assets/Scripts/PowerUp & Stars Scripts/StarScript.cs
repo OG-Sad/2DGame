@@ -71,6 +71,7 @@ public class StarScript : MonoBehaviour
         int upgradeLevel = itemList["Star"].upgradeLevel;
 
         //if the star power up is currently activated
+        //whatever changes in here must also change in ShopController.cs
         if (PowerUps.ChoosePowerUp == 3)
         {
             if (upgradeLevel == 1)

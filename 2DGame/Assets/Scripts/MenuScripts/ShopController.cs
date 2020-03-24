@@ -91,6 +91,11 @@ public class ShopController : MonoBehaviour
             GameObject durationText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Duration");
             durationText.GetComponent<Text>().text = "Duration: " + GetPowerUpDuration(itemName, upgradeLevel).ToString() + "sec";
 
+            if (itemName == "Star") {
+                GameObject multiplierText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Multiplier");
+                multiplierText.GetComponent<Text>().text = "Multiplier: " + GetStarMultiplier(upgradeLevel) + "x";
+            }
+
             InitUpgradeMeter(itemName, key);
         }
     }
@@ -171,6 +176,12 @@ public class ShopController : MonoBehaviour
 
             GameObject durationText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Duration");
             durationText.GetComponent<Text>().text = "Duration: " + GetPowerUpDuration(itemName, itemUpgradeLevel).ToString() + "sec";
+
+            if (itemName == "Star")
+            {
+                GameObject multiplierText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Multiplier");
+                multiplierText.GetComponent<Text>().text = "Multiplier: " + GetStarMultiplier(itemUpgradeLevel) + "x";
+            }
 
             UpdateUpgradeMeter(itemName, itemUpgradeLevel);
             //updates the database's version of itemList
@@ -258,6 +269,21 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    //returns the multiplier of the star power up based on the upgrade level
+    //whatever changes in here must also change in StarScript.cs
+    private int GetStarMultiplier(int upgradeLevel) {
+        //upgrade level is the first number, the multiplier is the second number
+        Dictionary<int, int> multiplierDict = new Dictionary<int, int>() {
+            {1, 2},
+            {2, 4},
+            {3, 7},
+            {4, 11},
+            {5, 16}
+        };
+
+        return multiplierDict[upgradeLevel];
+    }
+
     //gets the time duration of an activated power up
     private int GetPowerUpDuration(string itemName, int upgradeLevel)
     {
@@ -337,6 +363,12 @@ public class ShopController : MonoBehaviour
 
             GameObject durationText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Duration");
             durationText.GetComponent<Text>().text = "Duration: " + GetPowerUpDuration(itemName, 1).ToString() + "sec";
+
+            if (itemName == "Star")
+            {
+                GameObject multiplierText = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Multiplier");
+                multiplierText.GetComponent<Text>().text = "Multiplier: " + GetStarMultiplier(1) + "x";
+            }
 
             GameObject bar1 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 1");
             GameObject bar2 = GameObject.Find("Canvas/Panel/Power Ups/" + itemName + "/Upgrade Meter/Bar 2");
